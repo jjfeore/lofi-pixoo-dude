@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "pixoo-pets",
+  "version": "0.1.0",
+  "description": "Create 64x64 animated pet packs for Divoom Pixoo displays and the local Rust Codex bridge.",
+  "keywords": ["pixoo", "pixel-art", "pets", "codex"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Pixoo Pets",
+        "shortDescription": "Create 64x64 pets and animated scenes"
+      }
+    }
+  }
+}

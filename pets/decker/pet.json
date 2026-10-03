@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "id": "cyberpunk-decker",
+  "canvas_size": 64,
+  "background": "#000000",
+  "default_animation": "idle",
+  "animations": {
+    "idle": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "previews/idle-sprite.png",
+        "columns": 4,
+        "frame_count": 8
+      },
+      "frame_duration_ms": 83,
+      "loop": true
+    },
+    "working": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "previews/working-sprite.png",
+        "columns": 4,
+        "frame_count": 8
+      },
+      "frame_duration_ms": 83,
+      "loop": true,
+      "entry": "working-enter"
+    },
+    "needs-input": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "previews/needs-input-sprite.png",
+        "columns": 4,
+        "frame_count": 8
+      },
+      "frame_duration_ms": 83,
+      "loop": true
+    },
+    "working-enter": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "previews/working-enter-sprite.png",
+        "columns": 4,
+        "frame_count": 8
+      },
+      "frame_duration_ms": 83,
+      "loop": false
+    },
+    "finished": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "previews/finished-sprite.png",
+        "columns": 4,
+        "frame_count": 8
+      },
+      "frame_duration_ms": 83,
+      "loop": false
+    },
+    "compacting-working": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "previews/compacting-working-sprite.png",
+        "columns": 4,
+        "frame_count": 8
+      },
+      "frame_duration_ms": 83,
+      "loop": true
+    },
+    "compacting-idle": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "previews/compacting-idle-sprite.png",
+        "columns": 4,
+        "frame_count": 8
+      },
+      "frame_duration_ms": 83,
+      "loop": true
+    },
+    "delegating": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "previews/delegating-sprite.png",
+        "columns": 4,
+        "frame_count": 8
+      },
+      "frame_duration_ms": 83,
+      "loop": true
+    },
+    "compacting": {
+      "source": {
+        "type": "image",
+        "path": "working-base.png"
+      },
+      "variants": {
+        "idle": "compacting-idle",
+        "working": "compacting-working"
+      }
+    },
+    "interrupted": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "previews/interrupted-sprite.png",
+        "columns": 4,
+        "frame_count": 8
+      },
+      "frame_duration_ms": 83,
+      "loop": false
+    }
+  }
+}

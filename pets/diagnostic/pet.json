@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "id": "diagnostic",
+  "canvas_size": 64,
+  "background": "#000000",
+  "default_animation": "idle",
+  "animations": {
+    "compacting": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "compacting.png",
+        "columns": 4,
+        "frame_count": 4
+      },
+      "frame_duration_ms": 100,
+      "loop": true
+    },
+    "delegating": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "delegating.png",
+        "columns": 4,
+        "frame_count": 4
+      },
+      "frame_duration_ms": 100,
+      "loop": true
+    },
+    "finished": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "finished.png",
+        "columns": 4,
+        "frame_count": 4
+      },
+      "frame_duration_ms": 100,
+      "loop": false
+    },
+    "idle": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "idle.png",
+        "columns": 4,
+        "frame_count": 4
+      },
+      "frame_duration_ms": 100,
+      "loop": true
+    },
+    "interrupted": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "interrupted.png",
+        "columns": 4,
+        "frame_count": 4
+      },
+      "frame_duration_ms": 100,
+      "loop": false
+    },
+    "needs-input": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "needs-input.png",
+        "columns": 4,
+        "frame_count": 4
+      },
+      "frame_duration_ms": 100,
+      "loop": true
+    },
+    "working": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "working.png",
+        "columns": 4,
+        "frame_count": 4
+      },
+      "frame_duration_ms": 100,
+      "loop": true,
+      "entry": "working-enter"
+    },
+    "working-enter": {
+      "source": {
+        "type": "sprite_sheet",
+        "path": "working-enter.png",
+        "columns": 4,
+        "frame_count": 4
+      },
+      "frame_duration_ms": 100,
+      "loop": false
+    }
+  }
+}

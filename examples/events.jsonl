@@ -1,0 +1,12 @@
+{"hook_event_name":"SessionStart","session_id":"chat-a"}
+{"hook_event_name":"UserPromptSubmit","session_id":"chat-a","turn_id":"turn-a"}
+{"hook_event_name":"SubagentStart","session_id":"chat-a","turn_id":"turn-a","agent_id":"helper-a"}
+{"hook_event_name":"PreCompact","session_id":"chat-a","turn_id":"turn-a","trigger":"auto"}
+{"hook_event_name":"PermissionRequest","session_id":"chat-a","turn_id":"turn-a","tool_name":"Bash"}
+{"hook_event_name":"PostToolUse","session_id":"chat-a","turn_id":"turn-a","tool_name":"Bash"}
+{"hook_event_name":"PostCompact","session_id":"chat-a","turn_id":"turn-a","trigger":"auto"}
+{"hook_event_name":"SubagentStop","session_id":"chat-a","turn_id":"turn-a","agent_id":"helper-a"}
+{"type":"agent-turn-complete","thread-id":"chat-a","turn-id":"turn-a"}
+{"hook_event_name":"UserPromptSubmit","session_id":"chat-a","turn_id":"turn-b"}
+{"hook_event_name":"Interrupt","session_id":"chat-a","turn_id":"turn-b"}
+{"hook_event_name":"SessionEnd","session_id":"chat-a","reason":"other"}

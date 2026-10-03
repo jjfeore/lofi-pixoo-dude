@@ -1,0 +1,25 @@
+version = 1
+pack = "../pets/decker"
+pipe = '\\.\pipe\pixoo-pet'
+dry_run = false
+# If Codex already has a notify command, copy its complete array here before
+# replacing it with this bridge's notify adapter. The JSON argument is appended.
+notification_forward = []
+
+[device]
+address = "192.168.1.123" # change to your own Pixoo's IP or hostname
+# Optional on firmware that expects LocalToken. Keep real credentials local.
+# local_token = 123456
+# brightness = 35  # omit to preserve the current brightness
+max_frames = 40
+timeout_ms = 3000
+frame_upload_interval_ms = 150
+switch_interval_ms = 1000
+# Calibrate visible-start delay on your hardware if host one-shot timing needs it.
+playback_start_delay_ms = 0
+
+[animations]
+# Names default to the logical state name. Missing clips are skipped.
+# Use a different clip name to remap a state, or "" to disable it.
+# compacting = "compacting"
+# delegating = "delegating"

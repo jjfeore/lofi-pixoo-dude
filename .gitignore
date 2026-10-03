@@ -1,1 +1,5 @@
 .planning/
+/target/
+/dist/
+/local/
+*.log
