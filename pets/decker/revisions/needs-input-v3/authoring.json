@@ -1,0 +1,261 @@
+{
+  "id": "decker-needs-input-v3",
+  "base": "../../base-v3.png",
+  "approved_pack": "../compaction-v2/review",
+  "palette_from": "../compaction-v2/review/working-native.gif",
+  "frames": 32,
+  "frame_ms": 83,
+  "rear_area": [
+    35,
+    40,
+    11,
+    7
+  ],
+  "traffic_mask": [
+    [
+      25,
+      7,
+      35,
+      9
+    ],
+    [
+      34,
+      16,
+      26,
+      1
+    ]
+  ],
+  "cars": {
+    "cyan": "../idle-v4/combined/cyan-car-sprite.png",
+    "magenta": "../idle-v4/combined/magenta-car-sprite.png",
+    "cyan-far": "../idle-v4/combined/cyan-far-car-sprite.png"
+  },
+  "traffic": {
+    "needs-input": [
+      {
+        "sprite": "cyan-far",
+        "lane": 8,
+        "start_x": 18,
+        "end_x": 64,
+        "passes": 1,
+        "phase": 0.2,
+        "mirror": false
+      },
+      {
+        "sprite": "magenta",
+        "lane": 14,
+        "start_x": 64,
+        "end_x": 18,
+        "passes": 1,
+        "phase": 0.6,
+        "mirror": true
+      }
+    ]
+  },
+  "idle_colors": [
+    [
+      47,
+      194,
+      217
+    ],
+    [
+      150,
+      55,
+      220
+    ]
+  ],
+  "working_colors": [
+    [
+      54,
+      244,
+      253
+    ],
+    [
+      237,
+      58,
+      240
+    ]
+  ],
+  "attention": {
+    "main_aperture": [
+      [
+        55,
+        29,
+        49
+      ],
+      [
+        56,
+        29,
+        49
+      ],
+      [
+        57,
+        28,
+        50
+      ],
+      [
+        58,
+        28,
+        50
+      ],
+      [
+        59,
+        28,
+        50
+      ],
+      [
+        60,
+        28,
+        50
+      ],
+      [
+        61,
+        27,
+        51
+      ],
+      [
+        62,
+        27,
+        51
+      ],
+      [
+        63,
+        27,
+        51
+      ]
+    ],
+    "visor_area": [
+      20,
+      25,
+      11,
+      6
+    ],
+    "visor_pixels": [
+      [
+        25,
+        27
+      ],
+      [
+        26,
+        27
+      ],
+      [
+        27,
+        27
+      ],
+      [
+        28,
+        27
+      ],
+      [
+        29,
+        27
+      ],
+      [
+        24,
+        28
+      ],
+      [
+        25,
+        28
+      ],
+      [
+        26,
+        28
+      ],
+      [
+        27,
+        28
+      ],
+      [
+        28,
+        28
+      ],
+      [
+        29,
+        28
+      ],
+      [
+        30,
+        28
+      ],
+      [
+        25,
+        29
+      ],
+      [
+        26,
+        29
+      ],
+      [
+        29,
+        29
+      ],
+      [
+        24,
+        29
+      ]
+    ],
+    "finger_pixels": [
+      [
+        43,
+        54
+      ],
+      [
+        44,
+        54
+      ],
+      [
+        44,
+        55
+      ],
+      [
+        45,
+        55
+      ],
+      [
+        46,
+        56
+      ],
+      [
+        44,
+        58
+      ],
+      [
+        45,
+        58
+      ],
+      [
+        46,
+        58
+      ],
+      [
+        44,
+        59
+      ],
+      [
+        45,
+        59
+      ],
+      [
+        46,
+        59
+      ],
+      [
+        45,
+        60
+      ],
+      [
+        46,
+        60
+      ]
+    ],
+    "pause_typing": false,
+    "amber": [
+      255,
+      174,
+      44
+    ],
+    "symbol": "warning_triangle"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "fixed_pixel_count": 3468,
+  "clips": {
+    "idle": {
+      "native_frames": 32,
+      "unique_frames": 30,
+      "frame_duration_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 11,
+      "window_traffic_patterns": 27,
+      "fingertip_poses": 12,
+      "fixed_pixels_palms_and_bezels_preserved": true,
+      "sheet_matches_numbered_frames": true
+    },
+    "working-enter": {
+      "native_frames": 32,
+      "unique_frames": 31,
+      "frame_duration_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 24,
+      "window_traffic_patterns": 27,
+      "fingertip_poses": 12,
+      "fixed_pixels_palms_and_bezels_preserved": true,
+      "sheet_matches_numbered_frames": true
+    },
+    "working": {
+      "native_frames": 32,
+      "unique_frames": 32,
+      "frame_duration_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 16,
+      "window_traffic_patterns": 29,
+      "fingertip_poses": 12,
+      "fixed_pixels_palms_and_bezels_preserved": true,
+      "sheet_matches_numbered_frames": true
+    },
+    "finished": {
+      "native_frames": 32,
+      "unique_frames": 32,
+      "frame_duration_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 30,
+      "window_traffic_patterns": 29,
+      "fingertip_poses": 12,
+      "fixed_pixels_palms_and_bezels_preserved": true,
+      "sheet_matches_numbered_frames": true
+    }
+  },
+  "approved_idle_rgb_preserved": true,
+  "canonical_transition_endpoints_match": true,
+  "endpoint_note": "Endpoints match canonical frame zero. Actual hook changes can occur at any working/idle phase; hardware upload timing is approximate.",
+  "shared_gif_palette_fixed_colors": true,
+  "cycle_frames": 160,
+  "cycle_duration_ms": 13280,
+  "visual_review": "Native full-scene and head contacts inspected; owner review pending.",
+  "device_activation": "No upload or active-pack change for this revision."
+}

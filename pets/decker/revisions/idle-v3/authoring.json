@@ -1,0 +1,32 @@
+{
+  "id": "decker-idle-v3",
+  "base": "../../base-v3.png",
+  "poses": "../idle-v2/sources/typing-frames",
+  "car": "../idle-v2/sources/flying-car.png",
+  "pose_schedule": [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15],
+  "neutral_poses": [0,4,8,12,15],
+  "fingers": [
+    {
+      "anchor": [36,55,3,2], "area": [43,54,4,3],
+      "pixels": [[43,54],[44,54],[44,55],[45,55],[46,56]],
+      "poses": [1,2,3,9,10,11]
+    },
+    {
+      "anchor": [36,59,4,3], "area": [44,58,3,3],
+      "pixels": [[44,58],[45,58],[46,58],[44,59],[45,59],[46,59],[45,60],[46,60]],
+      "poses": [5,6,7,13,14]
+    }
+  ],
+  "monitor": [56,31,5,16],
+  "waveform": {"source": "sources/oscilloscope-wave.png", "area": [35,40,11,7]},
+  "car_clip": [25,10,35,2],
+  "car_size": [4,2],
+  "car_start_x": 18,
+  "car_end_x": 64,
+  "car_y": 10,
+  "second_car": {
+    "clip": [25,14,35,2], "size": [4,2],
+    "start_x": 64, "end_x": 18, "y": 14, "mirror": true
+  },
+  "frame_ms": 83
+}

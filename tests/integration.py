@@ -190,6 +190,31 @@ class Integration(unittest.TestCase):
         probe = json.loads(cli("probe", "-c", f.config).stdout)
         self.assertEqual(probe["firmware"], "mock-1")
 
+    def test_delegation_entry_loop_and_exit_use_first_and_last_child(self):
+        path = self.pack / "pet.json"
+        manifest = json.loads(path.read_text())
+        animations = manifest["animations"]
+        animations["delegating-start"] = dict(animations["working-enter"])
+        animations["delegating-finished"] = dict(animations["finished"])
+        animations["delegating"]["entry"] = "delegating-start"
+        animations["delegating"]["exit"] = "delegating-finished"
+        path.write_text(json.dumps(manifest), encoding="utf-8")
+        f = self.fixture()
+        f.emit("UserPromptSubmit")
+        f.uploaded("working-enter")
+        f.uploaded("working")
+        f.emit("SubagentStart", agent_id="one")
+        f.uploaded("delegating-start")
+        f.emit("SubagentStart", agent_id="two")
+        f.uploaded("delegating")
+        f.emit("SubagentStop", agent_id="one")
+        f.wait(lambda s: s.get("state", {}).get("observed_children") == 1)
+        self.assertEqual(f.state()["desired_clip"], "delegating")
+        f.emit("SubagentStop", agent_id="two")
+        f.uploaded("delegating-finished")
+        f.uploaded("working")
+        self.assertEqual(f.state()["state"]["working"], 1)
+
     def test_dry_run_and_concurrent_emitters(self):
         f = self.fixture(dry=True)
         def send(index):

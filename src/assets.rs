@@ -42,6 +42,8 @@ pub struct ClipSpec {
     pub r#loop: bool,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub entry: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub exit: Option<String>,
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub variants: BTreeMap<String, String>,
 }
@@ -71,12 +73,30 @@ pub struct Clip {
     pub frame_ms: u32,
     pub looping: bool,
     pub entry: Option<String>,
+    pub exit: Option<String>,
     pub variants: BTreeMap<String, String>,
 }
 impl Clip {
     pub fn duration_ms(&self) -> u64 {
         self.frames.len() as u64 * self.frame_ms as u64
     }
+}
+
+fn validate_references(clips: &BTreeMap<String, Arc<Clip>>) -> Result<()> {
+    for clip in clips.values() {
+        for target in clip.entry.iter().chain(clip.exit.iter()).chain(clip.variants.values()) {
+            ensure!(clips.contains_key(target), "clip {} references missing clip {target}", clip.name);
+        }
+        if let Some(entry) = &clip.entry {
+            ensure!(!clips[entry].looping, "entry clip {entry} must have loop=false");
+            ensure!(entry != &clip.name, "clip cannot be its own entry");
+        }
+        if let Some(exit) = &clip.exit {
+            ensure!(!clips[exit].looping, "exit clip {exit} must have loop=false");
+            ensure!(exit != &clip.name, "clip cannot be its own exit");
+        }
+    }
+    Ok(())
 }
 
 pub fn preview(
@@ -436,26 +456,12 @@ impl Pack {
                     frame_ms,
                     looping: spec.r#loop,
                     entry: spec.entry.clone(),
+                    exit: spec.exit.clone(),
                     variants: spec.variants.clone(),
                 }),
             );
         }
-        for clip in clips.values() {
-            for target in clip.entry.iter().chain(clip.variants.values()) {
-                ensure!(
-                    clips.contains_key(target),
-                    "clip {} references missing clip {target}",
-                    clip.name
-                );
-            }
-            if let Some(entry) = &clip.entry {
-                ensure!(
-                    !clips[entry].looping,
-                    "entry clip {entry} must have loop=false"
-                );
-                ensure!(entry != &clip.name, "clip cannot be its own entry");
-            }
-        }
+        validate_references(&clips)?;
         if let Some(default) = &manifest.default_animation {
             ensure!(
                 clips.contains_key(default),
@@ -593,12 +599,13 @@ pub fn import_directory(directory: &Path, id: &str, frame_ms: u32, force: bool) 
                 _ => continue,
             }
         };
-        let looping = !matches!(name.as_str(), "finished" | "interrupted" | "working-enter");
+        let looping = !matches!(name.as_str(), "finished" | "interrupted" | "working-enter" | "delegating-start" | "delegating-finished");
         let spec = ClipSpec {
             source,
             frame_duration_ms: Some(frame_ms),
             r#loop: looping,
             entry: None,
+            exit: None,
             variants: BTreeMap::new(),
         };
         ensure!(
@@ -610,6 +617,12 @@ pub fn import_directory(directory: &Path, id: &str, frame_ms: u32, force: bool) 
         && let Some(working) = animations.get_mut("working")
     {
         working.entry = Some("working-enter".into());
+    }
+    let delegation_entry = animations.contains_key("delegating-start");
+    let delegation_exit = animations.contains_key("delegating-finished");
+    if let Some(delegating) = animations.get_mut("delegating") {
+        delegating.entry = delegation_entry.then(|| "delegating-start".into());
+        delegating.exit = delegation_exit.then(|| "delegating-finished".into());
     }
     let manifest = Manifest {
         schema_version: 1,
@@ -627,6 +640,33 @@ pub fn import_directory(directory: &Path, id: &str, frame_ms: u32, force: bool) 
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn delegation_exit_reference_must_exist_be_distinct_and_not_loop() {
+        let clip = |name: &str, exit: Option<&str>, looping: bool| Arc::new(Clip {
+            name: name.into(), frames: vec!["frame".into()], frame_ms: 83, looping,
+            entry: None, exit: exit.map(str::to_owned), variants: Default::default(),
+        });
+        let mut clips = BTreeMap::from([
+            ("delegating".into(), clip("delegating", Some("return"), true)),
+            ("return".into(), clip("return", None, false)),
+        ]);
+        assert!(validate_references(&clips).is_ok());
+        clips.insert("return".into(), clip("return", None, true));
+        assert!(validate_references(&clips).unwrap_err().to_string().contains("loop=false"));
+        clips.remove("return");
+        assert!(validate_references(&clips).unwrap_err().to_string().contains("missing clip"));
+        clips.insert("delegating".into(), clip("delegating", Some("delegating"), false));
+        assert!(validate_references(&clips).unwrap_err().to_string().contains("own exit"));
+    }
+
+    #[test]
+    fn delegation_exit_is_optional_in_existing_manifests() {
+        let old: ClipSpec = serde_json::from_str(r#"{"source":{"type":"image","path":"idle.png"}}"#).unwrap();
+        assert!(old.exit.is_none());
+        assert!(serde_json::to_value(&old).unwrap().get("exit").is_none());
+        let new: ClipSpec = serde_json::from_str(r#"{"source":{"type":"image","path":"matrix.png"},"exit":"return"}"#).unwrap();
+        assert_eq!(new.exit.as_deref(), Some("return"));
+    }
     #[test]
     fn alpha_is_composited_and_optional_clips_are_valid() {
         let root = tempfile::tempdir().unwrap();

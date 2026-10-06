@@ -1,0 +1,9 @@
+# Single controlled lower-forehead visor pose
+
+Tool: built-in imagegen; transparent background. Reference: cd-cells/000.png. A four-cell travel edit repeated endpoints and is retained as an unused attempt.
+
+Edit the supplied SINGLE complete pixel-art character pose into ONE tiny in-between visor-lowering pose. Keep all character pixels and framing as close to the supplied image as possible: same head/ear/hair/face/shoulder/torso, broad purple-band sleeve, foreground forearm/wrist/cuff and stationary far keyboard hand. Do NOT make a sheet or multiple poses. Exactly one square transparent RGBA image, same square viewport/margins/scale, entire character.
+
+The hand already grips the near temple housing. Move/rotate the chunky cyan visor ONLY a small partway down from its currently parked forehead position. New cyan lens should be across the LOWER FOREHEAD, immediately above the eyebrow, angled diagonally downward a little toward the nose. It is NOT YET over the eye. The eye/eyebrow should still peek out beneath the descending cyan lens. This is about one third of the small first tilt toward the eye, not the completed eye visor state. Imagine cyan lens center moving downward about 20 pixels in the supplied 512x512 viewport (about 2 native LED pixels); corresponding 40px in 1024 output. The near housing remains at the same temple hinge, hand maintains contact and wrist remains BELOW the palm in front of the cheek. No wrist or fingers coming from behind/above the head.
+
+There is ONE visor. Remove the original parked cyan shape as it shifts to the new position; vacated forehead pixels become dark hair/mount. No second light/glow up on forehead. Preserve bulky visor housing and thick upper sleeve/purple stripe. No hand skeleton, arm thinning or face/scale change. Match hard pixel-grid style, no soft edges or halo. Keep background truly transparent, no lighting gradients, labels, room or ground.

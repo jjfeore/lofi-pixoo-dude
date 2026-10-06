@@ -1,0 +1,63 @@
+{
+  "method": "Existing approved base, fingertip animation and visor layers; motorized foreshortening only.",
+  "accepted_idle_v3_and_working_v4_rgb_preserved": true,
+  "unchanged_prior_loop_gif_bytes": true,
+  "canonical_endpoints_match": true,
+  "fixed_scene_pixels": 3248,
+  "fixed_body_pixels_outside_visor_and_fingertips": 2105,
+  "fixed_hand_wrist_palm_pixels": 208,
+  "typing_matches_accepted_fingertip_frames": true,
+  "minimum_visor_height": 3,
+  "different_visor_bounds": 11,
+  "lowered_visor_has_no_extra_forehead_glow": true,
+  "raised_visor_restores_canonical_eye_region": true,
+  "finish_inverts_only_visor_and_state_progress": true,
+  "ambient_timeline": "Forward in both clips: render() passes increasing frame index to screens and traffic.",
+  "clips": {
+    "idle": {
+      "frames": 32,
+      "unique_full_frames": 30,
+      "frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "typing_patterns": 12,
+      "rear_monitor_patterns": 11,
+      "traffic_patterns": 26
+    },
+    "working-enter": {
+      "frames": 32,
+      "unique_full_frames": 31,
+      "frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "typing_patterns": 12,
+      "rear_monitor_patterns": 25,
+      "traffic_patterns": 25
+    },
+    "working": {
+      "frames": 32,
+      "unique_full_frames": 32,
+      "frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "typing_patterns": 12,
+      "rear_monitor_patterns": 16,
+      "traffic_patterns": 27
+    },
+    "finished": {
+      "frames": 32,
+      "unique_full_frames": 32,
+      "frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "typing_patterns": 12,
+      "rear_monitor_patterns": 30,
+      "traffic_patterns": 27
+    }
+  },
+  "animated_working_glass_pixels": 209,
+  "cycle_frames": 160,
+  "cycle_duration_ms": 13280,
+  "review": "Native full-scene/head contacts and halfway-flip poster inspected; owner review pending.",
+  "activation": "Separate review pack; no hardware upload or active configuration change."
+}

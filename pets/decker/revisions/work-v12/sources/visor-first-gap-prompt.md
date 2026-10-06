@@ -1,0 +1,11 @@
+# Focused four-pose study inside the first visor-travel gap
+
+Tool: built-in imagegen; transparent background. References: cd-cells/000.png and 001.png.
+
+Make a tightly controlled FOUR-pose pixel-art in-between study between the TWO attached nearly identical foreground visor-grip character cells. Reference1 has the cyan visor still at forehead; reference2 has it just partly lowered. This is only their SMALL first travel gap, NOT the complete lowering to eyes and NOT arm raising/lowering.
+
+Output a 2x2 grid of equal square transparent RGBA cells (1024x1024 preferred, 512x512 each), read top-left, top-right, bottom-left, bottom-right. Four NEW intermediate positions, evenly spaced strictly between these references. Preserve identical head/ear/hair/shoulder/sleeve/band/torso/far hand geometry, EXACT cell camera and scale. Do not zoom or reposition. Each cell is a whole complete character with foreground hand connected to foreground wrist and cuff, in front of cheek.
+
+The raised cyan lens in reference1 is around y110 in a 512-square cell, and the partly lowered one in reference2 around y165. The four intermediate lens centers should progress approximately y122, y133, y144, y155, with slight rotation between the same temple hinges. Every step only about ten source pixels, corresponding to about ONE LED pixel. They MUST NOT jump immediately to eye-level or repeat reference2. The NEAR fingers maintain contact with the near housing/hinge, moving and rotating with it. The cuff stays immediately beneath the palm. The moving forearm stays completely foreground, not behind ear/head. Same broad jacket sleeves and thick purple stripe; stationary far keyboard hand and arm lower right.
+
+Exactly one cyan lens per cell. As it vacates any forehead pixels, those pixels return to dark hair/mount. Do NOT keep a second cyan light on top of head after lowering. No frame should show both a parked bright lens and an eye lens. No hand hovering short of the visor, no unconnected wrist, no extra hand. Keep the little motion genuinely progressive; do not draw four copies of the lowered endpoint. Hard pixel clusters identical to references, no smoothing. True transparency outside silhouette with NO halos/gradients, labels, dividers, room or ground.

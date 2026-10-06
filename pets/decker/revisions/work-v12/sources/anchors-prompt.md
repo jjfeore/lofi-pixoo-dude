@@ -1,0 +1,21 @@
+# Foreground-depth anchor study
+
+The built-in image tool uses the approved work-v9 study, idle-v3 base preview and accepted work-v4 working poster as references. Five action anchors occupy the first five cells; cell 6 repeats the rest pose for comparison.
+
+```text
+Use case: illustration-story. Asset type: transparent whole-character key-pose study for a 64x64 pixel-art animation.
+
+Reference 1 is the approved four-pose scene study. Its COMPLETE character anatomy and thick foreground arm are the main reference. Reference 2 is the approved idle room/character. Reference 3 is the accepted working endpoint with lowered chunky cyan visor. Keep this SAME adult male decker, side profile facing right, hair/beard, broad dark jacket with thick purple band on the NEAR upper arm, warm outlined skin, chunky hinged cyan visor. Camera, head, shoulders, body and stationary far arm are anchored consistently. Do not use the previously rejected hand reaching behind the head.
+
+Draw a borderless 3-column by 2-row atlas of SIX equal SQUARE cells. Every cell represents the same full room-camera viewport as the references, but draw ONLY the complete character and make all room, desk, keyboard, monitor and window pixels TRANSPARENT. Keep the character at the same relative location and scale as in the full scene, with empty transparent room space above and to the right; do not zoom each figure to fill its cell. Crown around native y13, face around x24/y26, shoulders around x12/y41, keyboard hands around x40/y56-61. Include both complete arms and hands from crown to bottom edge. No per-pose recentering. No text or grid lines.
+
+READING ORDER:
+1 / top left: START. Both hands rest typing. Foreground hand is the LOWER, NEARER keyboard hand, attached to the purple-banded nearer sleeve. Far hand is the UPPER keyboard hand, farther from camera. Chunky visor parked on forehead. Match approved idle pose.
+2 / top middle: HAND RISING. That same LOWER/NEAR foreground hand has left the keyboard and lifted to chest height, slightly forward of the torso. The far arm and UPPER keyboard hand remain exactly in place. Clear the old near keyboard hand; do not leave a spare hand. Foreground cuff and palm stay IN FRONT of the stationary far arm. Visor remains parked.
+3 / top right: FOREHEAD GRIP. Same foreground arm bends at its real shoulder and elbow, palm in front of the near cheek/temple, fingertips gripping the LEFT/NEAR temple-side hinge of the raised visor. The fingers touch the side of the visor, not its front tip. The wrist is DIRECTLY BELOW the palm, joined visibly to its cuff. The forearm runs up IN FRONT OF THE CHEEK to that wrist. The arm must not pass behind the head/ear then hook around the head. Do not put the palm above the crown. Head/face may be partly occluded by this closest hand/forearm. The hand stays in front of the head. Visor still raised above exposed eye.
+4 / bottom left: EYE GRIP. Same foreground hand and same left-edge grip, after lowering the SAME chunky visor to cover the eyes. Wrist still directly below palm; cuff attached; forearm and palm still occlude the near cheek in front. Full shoulder and purple band stay broad. There is NO extra visor or cyan glow remaining on the forehead. The far arm/upper keyboard hand stay stationary.
+5 / bottom middle: END. Return the foreground hand to its ORIGINAL lower keyboard position and restore EXACTLY the same arm/body posture as cell 1. Visor is now down over the eyes. The only pose difference from cell 1 is visor position, with only that visor lit. Both hands typing.
+6 / bottom right: repeat START cell 1, exactly the same resting arm/body posture and raised visor. This is only a comparison cell.
+
+Most important: the SAME nearest arm moves throughout, always in the FOREGROUND. It cannot become the far arm on departure/return. The stationary far hand must remain behind it. In raised poses, the foreground sleeve/cuff/wrist/palm form one uninterrupted chain overlapping the near cheek; never disappear behind the ear or emerge from behind the head. Keep correct depth and broad anatomy even if some of the face is hidden. Exactly TWO hands and ONE visor in each cell. The purple band keeps its original thickness, shoulder seam is the true upper-arm attachment. Same crisp hard pixel style, navy/indigo/purple/cyan synthwave palette. True transparency, no halo.
+```

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "decker-whole-character-pose-study",
+  "canvas_size": 64,
+  "background": "#000000",
+  "default_animation": "pose-study",
+  "animations": {
+    "pose-study": {
+      "source": {
+        "type": "frames",
+        "paths": ["poses/000.png", "poses/001.png", "poses/002.png", "poses/003.png"]
+      },
+      "frame_duration_ms": 750,
+      "loop": true
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "animations": {
+    "finished": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "finished-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle": {
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "idle-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "working": {
+      "entry": "working-enter",
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "working-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "working-enter": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "working-enter-sprite.png",
+        "type": "sprite_sheet"
+      }
+    }
+  },
+  "background": "#000000",
+  "canvas_size": 64,
+  "default_animation": "idle",
+  "id": "decker-work-v12-anchors",
+  "schema_version": 1
+}

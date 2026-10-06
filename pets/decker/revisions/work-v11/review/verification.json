@@ -1,0 +1,343 @@
+{
+  "method": "Complete generated character poses with additional grip/travel cells; fixed registration per source atlas, no articulated arm sprites.",
+  "accepted_idle_and_working_rgb_and_gif_bytes_preserved": true,
+  "canonical_transition_endpoints_match": true,
+  "fixed_native_pixels": 946,
+  "projection_size": [
+    48,
+    56
+  ],
+  "projection_origin": [
+    0,
+    8
+  ],
+  "additional_atlas_projections": [
+    {
+      "source": "sources/visor-travel.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        2,
+        10
+      ]
+    },
+    {
+      "source": "sources/forehead-contact.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        2,
+        10
+      ]
+    },
+    {
+      "source": "sources/middle-inbetweens.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        2,
+        10
+      ]
+    },
+    {
+      "source": "sources/small-step.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        2,
+        10
+      ]
+    }
+  ],
+  "generated_source_poses": 44,
+  "selected_source_poses": 30,
+  "character_action_reversed_for_finish": true,
+  "ambient_timeline_forward_for_both_actions": true,
+  "old_character_skin_replaced_with_reconstructed_room": true,
+  "forehead_glow_counts_by_source_pose": [
+    3,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    3,
+    4,
+    4,
+    4,
+    4,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    6,
+    11,
+    12,
+    10,
+    8,
+    0,
+    0,
+    0,
+    4,
+    0,
+    0,
+    2
+  ],
+  "lowered_pose_count_with_no_forehead_glow": 19,
+  "keyboard_region_skin_pixels_min_max": [
+    34,
+    82
+  ],
+  "violet_sleeve_region_pixels_min_max": [
+    33,
+    56
+  ],
+  "anatomy_note": "Coverage checks guard obvious loss of hand/band pixels. They do not count anatomical hands or prove consistent transverse band width. Native contacts require visual review.",
+  "clips": {
+    "idle": {
+      "frames": 32,
+      "unique_frames": 30,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 11,
+      "window_traffic_patterns": 26,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    },
+    "working-enter": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 27,
+      "window_traffic_patterns": 25,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    },
+    "working": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 16,
+      "window_traffic_patterns": 27,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    },
+    "finished": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 29,
+      "window_traffic_patterns": 27,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    }
+  },
+  "contact_and_travel": {
+    "entry_phases": {
+      "reach": [
+        1,
+        9
+      ],
+      "forehead_contact_hold": [
+        10,
+        11
+      ],
+      "held_lowering": [
+        12,
+        20
+      ],
+      "eye_contact": [
+        21,
+        21
+      ],
+      "release_and_return": [
+        22,
+        30
+      ],
+      "canonical_work": [
+        31,
+        31
+      ]
+    },
+    "finish_phases": {
+      "reach": [
+        1,
+        9
+      ],
+      "eye_contact": [
+        10,
+        10
+      ],
+      "held_raising": [
+        11,
+        19
+      ],
+      "forehead_contact_hold": [
+        20,
+        21
+      ],
+      "release_and_return": [
+        22,
+        30
+      ],
+      "canonical_idle": [
+        31,
+        31
+      ]
+    },
+    "travel": [
+      {
+        "entry_frame": 11,
+        "finish_frame": 20,
+        "source_pose": 40,
+        "cyan_lens_center": [
+          28.75,
+          19.25
+        ],
+        "cyan_pixels": 4
+      },
+      {
+        "entry_frame": 12,
+        "finish_frame": 19,
+        "source_pose": 33,
+        "cyan_lens_center": [
+          27.0,
+          21.0
+        ],
+        "cyan_pixels": 11
+      },
+      {
+        "entry_frame": 13,
+        "finish_frame": 18,
+        "source_pose": 34,
+        "cyan_lens_center": [
+          27.166666666666668,
+          21.333333333333332
+        ],
+        "cyan_pixels": 12
+      },
+      {
+        "entry_frame": 14,
+        "finish_frame": 17,
+        "source_pose": 35,
+        "cyan_lens_center": [
+          27.846153846153847,
+          22.46153846153846
+        ],
+        "cyan_pixels": 13
+      },
+      {
+        "entry_frame": 15,
+        "finish_frame": 16,
+        "source_pose": 36,
+        "cyan_lens_center": [
+          28.071428571428573,
+          23.285714285714285
+        ],
+        "cyan_pixels": 14
+      },
+      {
+        "entry_frame": 16,
+        "finish_frame": 15,
+        "source_pose": 43,
+        "cyan_lens_center": [
+          27.846153846153847,
+          24.53846153846154
+        ],
+        "cyan_pixels": 13
+      },
+      {
+        "entry_frame": 17,
+        "finish_frame": 14,
+        "source_pose": 41,
+        "cyan_lens_center": [
+          28.0,
+          26.0
+        ],
+        "cyan_pixels": 13
+      },
+      {
+        "entry_frame": 18,
+        "finish_frame": 13,
+        "source_pose": 37,
+        "cyan_lens_center": [
+          27.833333333333332,
+          25.916666666666668
+        ],
+        "cyan_pixels": 12
+      },
+      {
+        "entry_frame": 19,
+        "finish_frame": 12,
+        "source_pose": 38,
+        "cyan_lens_center": [
+          28.214285714285715,
+          27.0
+        ],
+        "cyan_pixels": 14
+      },
+      {
+        "entry_frame": 20,
+        "finish_frame": 11,
+        "source_pose": 39,
+        "cyan_lens_center": [
+          28.333333333333332,
+          26.933333333333334
+        ],
+        "cyan_pixels": 15
+      },
+      {
+        "entry_frame": 21,
+        "finish_frame": 10,
+        "source_pose": 19,
+        "cyan_lens_center": [
+          28.92,
+          27.72
+        ],
+        "cyan_pixels": 25
+      }
+    ],
+    "largest_vertical_lens_step_px": 1.75,
+    "lens_vertical_travel_px": 8.469999999999999,
+    "note": "Lens centroids measure spacing, not anatomical contact. Whole-character head/hand contacts require visual review.",
+    "previous_largest_vertical_lens_step_px": 8.25
+  },
+  "original_resolution_rgba_cell_extraction_exact": true,
+  "main_glass_animated_pixels": 209,
+  "cycle_frames": 160,
+  "cycle_duration_ms": 13280,
+  "review": "Native full-scene/head contacts and raised-hand posters inspected; owner review pending.",
+  "activation": "Separate review pack; no device upload or active config change."
+}

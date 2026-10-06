@@ -1,0 +1,98 @@
+{
+  "clips": {
+    "finished": {
+      "frames": 32,
+      "gif_duration_ms": 2650,
+      "native_duration_ms": 2656,
+      "unique_frames": 32
+    },
+    "idle": {
+      "frames": 32,
+      "gif_duration_ms": 2650,
+      "native_duration_ms": 2656,
+      "unique_frames": 30
+    },
+    "working": {
+      "frames": 32,
+      "gif_duration_ms": 2650,
+      "native_duration_ms": 2656,
+      "unique_frames": 32
+    },
+    "working-enter": {
+      "frames": 32,
+      "gif_duration_ms": 2650,
+      "native_duration_ms": 2656,
+      "unique_frames": 31
+    }
+  },
+  "cycle_duration_ms": 13280,
+  "cycle_frames": 160,
+  "fixed_scene_matches_base": true,
+  "global_gif_palette": true,
+  "rear_monitor": "idle green waveform; working magenta-cyan circuit pattern",
+  "traffic_profiles": {
+    "finished": [
+      {
+        "end_x": 18,
+        "lane": 10,
+        "mirror": true,
+        "passes": 1,
+        "sprite": "magenta",
+        "start_x": 64
+      },
+      {
+        "end_x": 64,
+        "lane": 15,
+        "mirror": false,
+        "passes": 2,
+        "sprite": "cyan",
+        "start_x": 18
+      }
+    ],
+    "working": [
+      {
+        "end_x": 64,
+        "lane": 11,
+        "mirror": false,
+        "passes": 1,
+        "sprite": "cyan",
+        "start_x": 18
+      },
+      {
+        "end_x": 18,
+        "lane": 15,
+        "mirror": true,
+        "passes": 1,
+        "sprite": "magenta",
+        "start_x": 64
+      },
+      {
+        "end_x": 18,
+        "lane": 7,
+        "mirror": true,
+        "passes": 2,
+        "sprite": "cyan-far",
+        "start_x": 64
+      }
+    ],
+    "working-enter": [
+      {
+        "end_x": 64,
+        "lane": 10,
+        "mirror": false,
+        "passes": 1,
+        "sprite": "cyan",
+        "start_x": 18
+      },
+      {
+        "end_x": 18,
+        "lane": 14,
+        "mirror": true,
+        "passes": 1,
+        "sprite": "magenta",
+        "start_x": 64
+      }
+    ]
+  },
+  "transition_endpoints_match": true
+}

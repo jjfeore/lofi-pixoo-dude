@@ -1,0 +1,2802 @@
+[
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 20
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 14
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 8
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 2
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": -4
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": -10
+      }
+    ],
+    "expression": null,
+    "frame": 0,
+    "glitch_shift": 0,
+    "lowered": 1.0,
+    "mouth_stage": 0,
+    "phase": "working",
+    "pulse": 1.0,
+    "rear_stop_strength": 0.0,
+    "red_amount": 0.0,
+    "shock_ray_count": 0,
+    "source": "working",
+    "source_frame": 0,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 1,
+        "x": 22
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 16
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 10
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 4
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": -2
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": -8
+      }
+    ],
+    "expression": null,
+    "frame": 1,
+    "glitch_shift": 0,
+    "lowered": 1.0,
+    "mouth_stage": 1,
+    "phase": "dumpshock",
+    "pulse": 0.75,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "working",
+    "source_frame": 1,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 5,
+        "x": 24
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 18
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 12
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 6
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 0
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": -6
+      }
+    ],
+    "expression": null,
+    "frame": 2,
+    "glitch_shift": 3,
+    "lowered": 1.0,
+    "mouth_stage": 2,
+    "phase": "dumpshock",
+    "pulse": 1.0,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 3,
+    "source": "working",
+    "source_frame": 2,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 26
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 20
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 14
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 8
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 2
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": -4
+      }
+    ],
+    "expression": null,
+    "frame": 3,
+    "glitch_shift": -2,
+    "lowered": 1.0,
+    "mouth_stage": 3,
+    "phase": "dumpshock",
+    "pulse": 0.800000011920929,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "working",
+    "source_frame": 3,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 28
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 1,
+        "x": 22
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 16
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 10
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 4
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": -2
+      }
+    ],
+    "expression": null,
+    "frame": 4,
+    "glitch_shift": 3,
+    "lowered": 1.0,
+    "mouth_stage": 3,
+    "phase": "dumpshock",
+    "pulse": 1.0,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 3,
+    "source": "working",
+    "source_frame": 4,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 31
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 25
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 19
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 13
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 7
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 1
+      }
+    ],
+    "expression": null,
+    "frame": 5,
+    "glitch_shift": -2,
+    "lowered": 1.0,
+    "mouth_stage": 3,
+    "phase": "dumpshock",
+    "pulse": 0.8199999928474426,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "working",
+    "source_frame": 5,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 33
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 27
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 21
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 15
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 9
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 3
+      }
+    ],
+    "expression": null,
+    "frame": 6,
+    "glitch_shift": 3,
+    "lowered": 1.0,
+    "mouth_stage": 3,
+    "phase": "dumpshock",
+    "pulse": 0.9599999785423279,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 3,
+    "source": "working",
+    "source_frame": 6,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 35
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 29
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 3,
+        "x": 23
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 17
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 11
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 5
+      }
+    ],
+    "expression": null,
+    "frame": 7,
+    "glitch_shift": 0,
+    "lowered": 1.0,
+    "mouth_stage": 2,
+    "phase": "dumpshock",
+    "pulse": 0.8999999761581421,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "working",
+    "source_frame": 7,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 37
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 31
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 25
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 19
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 13
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 7
+      }
+    ],
+    "expression": null,
+    "frame": 8,
+    "glitch_shift": 0,
+    "lowered": 1.0,
+    "mouth_stage": 1,
+    "phase": "warning-hold",
+    "pulse": 0.8799999952316284,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 0,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 39
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 33
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 27
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 21
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 15
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 9
+      }
+    ],
+    "expression": null,
+    "frame": 9,
+    "glitch_shift": 0,
+    "lowered": 1.0,
+    "mouth_stage": 0,
+    "phase": "warning-hold",
+    "pulse": 0.8845672011375427,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 1,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 41
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 35
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 29
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 3,
+        "x": 23
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 17
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 11
+      }
+    ],
+    "expression": null,
+    "frame": 10,
+    "glitch_shift": 0,
+    "lowered": 1.0,
+    "mouth_stage": 0,
+    "phase": "warning-hold",
+    "pulse": 0.8975735902786255,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 2,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 43
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 37
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 31
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 25
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 19
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 13
+      }
+    ],
+    "expression": null,
+    "frame": 11,
+    "glitch_shift": 0,
+    "lowered": 1.0,
+    "mouth_stage": 0,
+    "phase": "warning-hold",
+    "pulse": 0.9170390367507935,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 3,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 45
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 39
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 33
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 27
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 21
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 15
+      }
+    ],
+    "expression": null,
+    "frame": 12,
+    "glitch_shift": 0,
+    "lowered": 1.0,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9399999976158142,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 4,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 47
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 41
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 35
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 29
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 3,
+        "x": 23
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 17
+      }
+    ],
+    "expression": null,
+    "frame": 13,
+    "glitch_shift": 0,
+    "lowered": 0.98876953125,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9629610180854797,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 5,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 49
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 43
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 37
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 31
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 25
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 19
+      }
+    ],
+    "expression": null,
+    "frame": 14,
+    "glitch_shift": 0,
+    "lowered": 0.95703125,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9824264049530029,
+    "rear_stop_strength": 1.0,
+    "red_amount": 1.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 6,
+    "visor_bounds": [
+      20,
+      25,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 52
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 46
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 40
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 34
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 28
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 1,
+        "x": 22
+      }
+    ],
+    "expression": null,
+    "frame": 15,
+    "glitch_shift": 0,
+    "lowered": 0.90771484375,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9954327940940857,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.9927499890327454,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 7,
+    "visor_bounds": [
+      20,
+      24,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 54
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 48
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 42
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 36
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 30
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 5,
+        "x": 24
+      }
+    ],
+    "expression": null,
+    "frame": 16,
+    "glitch_shift": 0,
+    "lowered": 0.84375,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 1.0,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.972000002861023,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 8,
+    "visor_bounds": [
+      20,
+      24,
+      11,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 6,
+        "x": 56
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 50
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 44
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 38
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 32
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 26
+      }
+    ],
+    "expression": null,
+    "frame": 17,
+    "glitch_shift": 0,
+    "lowered": 0.76806640625,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9954327344894409,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.9392499923706055,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 9,
+    "visor_bounds": [
+      20,
+      24,
+      11,
+      5
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 3,
+        "x": 58
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 52
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 46
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 40
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 34
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 28
+      }
+    ],
+    "expression": null,
+    "frame": 18,
+    "glitch_shift": 0,
+    "lowered": 0.68359375,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9824264049530029,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.8960000276565552,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 10,
+    "visor_bounds": [
+      20,
+      23,
+      10,
+      5
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 60
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 54
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 48
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 42
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 36
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 30
+      }
+    ],
+    "expression": null,
+    "frame": 19,
+    "glitch_shift": 0,
+    "lowered": 0.59326171875,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9629610180854797,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.84375,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 11,
+    "visor_bounds": [
+      20,
+      23,
+      10,
+      4
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 62
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 56
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 50
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 44
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 38
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 32
+      }
+    ],
+    "expression": null,
+    "frame": 20,
+    "glitch_shift": 0,
+    "lowered": 0.5,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9399999976158142,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.7839999794960022,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 12,
+    "visor_bounds": [
+      21,
+      23,
+      10,
+      3
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 64
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 3,
+        "x": 58
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 52
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 46
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 40
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 34
+      }
+    ],
+    "expression": null,
+    "frame": 21,
+    "glitch_shift": 0,
+    "lowered": 0.40673828125,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9170389771461487,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.718250036239624,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 13,
+    "visor_bounds": [
+      21,
+      22,
+      10,
+      4
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 66
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 60
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 54
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 48
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 42
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 36
+      }
+    ],
+    "expression": null,
+    "frame": 22,
+    "glitch_shift": 0,
+    "lowered": 0.31640625,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.8975735902786255,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.6480000019073486,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 14,
+    "visor_bounds": [
+      21,
+      20,
+      10,
+      5
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 68
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 62
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 56
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 50
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 44
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 38
+      }
+    ],
+    "expression": null,
+    "frame": 23,
+    "glitch_shift": 0,
+    "lowered": 0.23193359375,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.8845672011375427,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.5747500658035278,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 15,
+    "visor_bounds": [
+      21,
+      19,
+      9,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 70
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 64
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 3,
+        "x": 58
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 52
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 46
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 40
+      }
+    ],
+    "expression": null,
+    "frame": 24,
+    "glitch_shift": 0,
+    "lowered": 0.15625,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.8799999952316284,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.5,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 16,
+    "visor_bounds": [
+      21,
+      19,
+      9,
+      6
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 73
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 67
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 61
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 55
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 49
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 43
+      }
+    ],
+    "expression": null,
+    "frame": 25,
+    "glitch_shift": 0,
+    "lowered": 0.09228515625,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.8845672607421875,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.42524999380111694,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 17,
+    "visor_bounds": [
+      21,
+      18,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 75
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 69
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 63
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 5,
+        "x": 57
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 51
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 45
+      }
+    ],
+    "expression": null,
+    "frame": 26,
+    "glitch_shift": 0,
+    "lowered": 0.04296875,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.8975735902786255,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.35199999809265137,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 18,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 77
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 71
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 65
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 1,
+        "x": 59
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 53
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 47
+      }
+    ],
+    "expression": null,
+    "frame": 27,
+    "glitch_shift": 0,
+    "lowered": 0.01123046875,
+    "mouth_stage": 0,
+    "phase": "motorized-jack-out",
+    "pulse": 0.9170390367507935,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.2817500829696655,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 19,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 79
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 73
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 67
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 61
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 55
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 49
+      }
+    ],
+    "expression": null,
+    "frame": 28,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.940000057220459,
+    "rear_stop_strength": 1.0,
+    "red_amount": 0.2160000205039978,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 20,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 81
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 75
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 69
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 63
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 5,
+        "x": 57
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 51
+      }
+    ],
+    "expression": null,
+    "frame": 29,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.9629610180854797,
+    "rear_stop_strength": 0.972000002861023,
+    "red_amount": 0.15625,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 21,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 83
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 77
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 71
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 65
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 1,
+        "x": 59
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 53
+      }
+    ],
+    "expression": null,
+    "frame": 30,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.9824264049530029,
+    "rear_stop_strength": 0.8960000276565552,
+    "red_amount": 0.10399997234344482,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 22,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 85
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 79
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 73
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 67
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 61
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 6,
+        "x": 55
+      }
+    ],
+    "expression": null,
+    "frame": 31,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.9954327940940857,
+    "rear_stop_strength": 0.7839999794960022,
+    "red_amount": 0.06075000762939453,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 23,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 87
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 81
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 75
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 69
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 63
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 5,
+        "x": 57
+      }
+    ],
+    "expression": null,
+    "frame": 32,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 1.0,
+    "rear_stop_strength": 0.6480000019073486,
+    "red_amount": 0.028000056743621826,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 24,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 89
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 83
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 77
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 71
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 65
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 1,
+        "x": 59
+      }
+    ],
+    "expression": null,
+    "frame": 33,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.9954327344894409,
+    "rear_stop_strength": 0.5,
+    "red_amount": 0.007250010967254639,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 25,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 91
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 85
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 79
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 73
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 67
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 61
+      }
+    ],
+    "expression": null,
+    "frame": 34,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.9824264049530029,
+    "rear_stop_strength": 0.35199999809265137,
+    "red_amount": 0.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 26,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 94
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 88
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 82
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 76
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 70
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 64
+      }
+    ],
+    "expression": null,
+    "frame": 35,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.962960958480835,
+    "rear_stop_strength": 0.2160000205039978,
+    "red_amount": 0.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 27,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 96
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 90
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 84
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 78
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 72
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 66
+      }
+    ],
+    "expression": null,
+    "frame": 36,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.9399999976158142,
+    "rear_stop_strength": 0.10399997234344482,
+    "red_amount": 0.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 28,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 98
+      },
+      {
+        "beacon": "blue",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 92
+      },
+      {
+        "beacon": "red",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 86
+      },
+      {
+        "beacon": "blue",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 80
+      },
+      {
+        "beacon": "red",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 74
+      },
+      {
+        "beacon": "blue",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 68
+      }
+    ],
+    "expression": null,
+    "frame": 37,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.9170389771461487,
+    "rear_stop_strength": 0.028000056743621826,
+    "red_amount": 0.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 29,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 100
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 94
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 88
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 82
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 76
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 70
+      }
+    ],
+    "expression": null,
+    "frame": 38,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.8975735902786255,
+    "rear_stop_strength": 0.0,
+    "red_amount": 0.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 30,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  },
+  {
+    "chase": [
+      {
+        "beacon": "none",
+        "id": "getaway",
+        "lane": 8,
+        "police": false,
+        "visible_pixels": 0,
+        "x": 102
+      },
+      {
+        "beacon": "red",
+        "id": "police-1",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 96
+      },
+      {
+        "beacon": "blue",
+        "id": "police-2",
+        "lane": 11,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 90
+      },
+      {
+        "beacon": "red",
+        "id": "police-3",
+        "lane": 14,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 84
+      },
+      {
+        "beacon": "blue",
+        "id": "police-4",
+        "lane": 8,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 78
+      },
+      {
+        "beacon": "red",
+        "id": "police-5",
+        "lane": 12,
+        "police": true,
+        "visible_pixels": 0,
+        "x": 72
+      }
+    ],
+    "expression": null,
+    "frame": 39,
+    "glitch_shift": 0,
+    "lowered": 0.0,
+    "mouth_stage": 0,
+    "phase": "recover-to-idle",
+    "pulse": 0.8845672011375427,
+    "rear_stop_strength": 0.0,
+    "red_amount": 0.0,
+    "shock_ray_count": 0,
+    "source": "finished",
+    "source_frame": 31,
+    "visor_bounds": [
+      21,
+      17,
+      9,
+      7
+    ]
+  }
+]

@@ -1,0 +1,382 @@
+{
+  "method": "Five whole-character anchors, separate interval studies and focused sub-gap studies; fixed registration per atlas, no articulated arm sprites.",
+  "accepted_idle_and_working_rgb_and_gif_bytes_preserved": true,
+  "accepted_rgb_references": {
+    "idle": "idle-v3/review/frames",
+    "working": "work-v4/review/working"
+  },
+  "unchanged_gif_reference": "work-v11/review (common working-palette exports)",
+  "canonical_transition_endpoints_match": true,
+  "fixed_native_pixels": 946,
+  "projection_size": [
+    48,
+    56
+  ],
+  "projection_origin": [
+    0,
+    8
+  ],
+  "additional_atlas_projections": [
+    {
+      "source": "sources/interval-ab.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        1,
+        10
+      ]
+    },
+    {
+      "source": "sources/interval-bc.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        1,
+        10
+      ]
+    },
+    {
+      "source": "sources/interval-cd.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        1,
+        10
+      ]
+    },
+    {
+      "source": "sources/interval-de.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        1,
+        10
+      ]
+    },
+    {
+      "source": "sources/return-gap.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        1,
+        10
+      ]
+    },
+    {
+      "source": "sources/lift-gap.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        1,
+        10
+      ]
+    },
+    {
+      "source": "sources/visor-lower-forehead.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        1,
+        9
+      ]
+    },
+    {
+      "source": "sources/visor-early-gap.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        1,
+        9
+      ]
+    },
+    {
+      "source": "sources/visor-first-tilt.png",
+      "size": [
+        48,
+        54
+      ],
+      "origin": [
+        1,
+        9
+      ]
+    }
+  ],
+  "generated_source_poses": 42,
+  "selected_source_poses": 30,
+  "character_action_reversed_for_finish": true,
+  "ambient_timeline_forward_for_both_actions": true,
+  "old_character_skin_replaced_with_reconstructed_room": true,
+  "forehead_glow_counts_by_source_pose": [
+    5,
+    5,
+    4,
+    0,
+    0,
+    5,
+    4,
+    5,
+    4,
+    5,
+    6,
+    5,
+    3,
+    4,
+    5,
+    5,
+    6,
+    5,
+    5,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4,
+    4,
+    5,
+    4,
+    3,
+    7,
+    0,
+    2
+  ],
+  "lowered_pose_count_with_no_forehead_glow": 12,
+  "cyan_definition": "Saturated cyan LED pixels; pale hardware highlights are not treated as glowing lenses.",
+  "keyboard_region_skin_pixels_min_max": [
+    21,
+    60
+  ],
+  "violet_sleeve_region_pixels_min_max": [
+    45,
+    59
+  ],
+  "anatomy_note": "Coverage checks guard obvious loss of hand/band pixels. They do not count anatomical hands or prove consistent transverse band width. Native contacts require visual review.",
+  "clips": {
+    "idle": {
+      "frames": 32,
+      "unique_frames": 30,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 11,
+      "window_traffic_patterns": 26,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    },
+    "working-enter": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 27,
+      "window_traffic_patterns": 25,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    },
+    "working": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 16,
+      "window_traffic_patterns": 27,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    },
+    "finished": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 28,
+      "window_traffic_patterns": 27,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    }
+  },
+  "contact_and_travel": {
+    "entry_phases": {
+      "reach": [
+        1,
+        11
+      ],
+      "forehead_contact": [
+        12,
+        13
+      ],
+      "held_lowering": [
+        14,
+        19
+      ],
+      "eye_contact": [
+        20,
+        20
+      ],
+      "release_and_return": [
+        21,
+        30
+      ],
+      "canonical_work": [
+        31,
+        31
+      ]
+    },
+    "finish_phases": {
+      "reach": [
+        1,
+        10
+      ],
+      "eye_contact": [
+        11,
+        11
+      ],
+      "held_raising": [
+        12,
+        17
+      ],
+      "forehead_contact": [
+        18,
+        19
+      ],
+      "release_and_return": [
+        20,
+        30
+      ],
+      "canonical_idle": [
+        31,
+        31
+      ]
+    },
+    "travel": [
+      {
+        "entry_frame": 12,
+        "finish_frame": 19,
+        "source_pose": 2,
+        "cyan_lens_center": [
+          26.0,
+          20.0
+        ],
+        "cyan_pixels": 3
+      },
+      {
+        "entry_frame": 13,
+        "finish_frame": 18,
+        "source_pose": 18,
+        "cyan_lens_center": [
+          26.2,
+          21.2
+        ],
+        "cyan_pixels": 5
+      },
+      {
+        "entry_frame": 14,
+        "finish_frame": 17,
+        "source_pose": 41,
+        "cyan_lens_center": [
+          25.5,
+          22.0
+        ],
+        "cyan_pixels": 2
+      },
+      {
+        "entry_frame": 15,
+        "finish_frame": 16,
+        "source_pose": 39,
+        "cyan_lens_center": [
+          27.285714285714285,
+          23.428571428571427
+        ],
+        "cyan_pixels": 14
+      },
+      {
+        "entry_frame": 16,
+        "finish_frame": 15,
+        "source_pose": 38,
+        "cyan_lens_center": [
+          26.75,
+          23.875
+        ],
+        "cyan_pixels": 8
+      },
+      {
+        "entry_frame": 17,
+        "finish_frame": 14,
+        "source_pose": 40,
+        "cyan_lens_center": [
+          27.375,
+          25.25
+        ],
+        "cyan_pixels": 8
+      },
+      {
+        "entry_frame": 18,
+        "finish_frame": 13,
+        "source_pose": 40,
+        "cyan_lens_center": [
+          27.375,
+          25.25
+        ],
+        "cyan_pixels": 8
+      },
+      {
+        "entry_frame": 19,
+        "finish_frame": 12,
+        "source_pose": 19,
+        "cyan_lens_center": [
+          28.727272727272727,
+          27.181818181818183
+        ],
+        "cyan_pixels": 11
+      },
+      {
+        "entry_frame": 20,
+        "finish_frame": 11,
+        "source_pose": 3,
+        "cyan_lens_center": [
+          27.583333333333332,
+          28.333333333333332
+        ],
+        "cyan_pixels": 12
+      }
+    ],
+    "largest_vertical_lens_step_px": 1.9318181818181834,
+    "lens_vertical_travel_px": 8.333333333333332,
+    "note": "Lens centroids measure spacing, not anatomical contact. Whole-character head/hand contacts require visual review."
+  },
+  "original_resolution_rgba_cell_extraction_exact": true,
+  "checked_original_rgba_extracts": 40,
+  "main_glass_animated_pixels": 209,
+  "cycle_frames": 160,
+  "cycle_duration_ms": 13280,
+  "review": "Native full-scene/head contacts, forehead/eye contact posters and original foreground grip cells inspected; cuff joins the palm from below and foreground arm overlaps cheek. Generated detail and keyboard-join drift remain for owner review.",
+  "activation": "Separate review pack; no device upload or active config change."
+}

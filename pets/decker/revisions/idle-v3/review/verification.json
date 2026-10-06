@@ -1,0 +1,40 @@
+{
+  "method": "Independent read-only Pillow decode of saved PNG frames and both GIFs; writes this JSON only.",
+  "base_matches_user_selected_cell_004": true,
+  "native_dimensions": [
+    64,
+    64
+  ],
+  "preview_dimensions": [
+    512,
+    512
+  ],
+  "frames": 32,
+  "unique_complete_frames": 30,
+  "frame_ms": 83,
+  "native_loop_duration_ms": 2656,
+  "gif_duration_ms": 2650,
+  "fixed_pixel_count": 3786,
+  "all_fixed_png_pixels_match_selected_base": true,
+  "head_face_and_visor_match_base": true,
+  "palm_anchors_and_inactive_hand_match_base": true,
+  "all_fixed_decoded_gif_pixels_match_first_frame": true,
+  "enlarged_gif_samples_match_native_gif": true,
+  "first_and_last_fingertips_match_base": true,
+  "both_cars_outside_window_at_both_loop_endpoints": true,
+  "second_car_sprite_is_exact_horizontal_mirror": true,
+  "car_paths_run_in_opposite_directions": true,
+  "waveform_present_in_all_frames": true,
+  "waveform_unique_phases": 11,
+  "last_to_first_changes_confined_to_screen_interiors": true,
+  "last_to_first_changed_pixels": 110,
+  "bridge_validation": {
+    "result": "passed",
+    "frames": 32,
+    "prepared_bytes": 524288
+  },
+  "authoring_clippy": "passed with warnings denied",
+  "previous_idle_v2_regression": "All 32 previous frames reproduced identically.",
+  "device_playback": "All 32 frame commands accepted on 2026-10-03; owner subsequently approved physical appearance and animation, choosing this as the new baseline.",
+  "device_upload_ms": 10671
+}

@@ -1,0 +1,623 @@
+{
+  "id": "decker-work-v5",
+  "base": "../../base-v3.png",
+  "idle": "../idle-v3/review/frames",
+  "forehead": "../work-v3/sources/forehead-64.png",
+  "visor": "../work-v4/sources/chunky-visor.png",
+  "main_screen": "../work-v3/sources/main-screen.png",
+  "processing": "../work-v3/sources/processing.png",
+  "waveform": "../idle-v3/review/waveform-sprite.png",
+  "cyan_car": "../idle-v3/review/car-sprite.png",
+  "magenta_car": "../work-v3/sources/magenta-car.png",
+  "frames": 32,
+  "frame_ms": 83,
+  "main_area": [
+    55,
+    27,
+    9,
+    25
+  ],
+  "main_aperture": [
+    [
+      55,
+      29,
+      49
+    ],
+    [
+      56,
+      29,
+      49
+    ],
+    [
+      57,
+      28,
+      50
+    ],
+    [
+      58,
+      28,
+      50
+    ],
+    [
+      59,
+      28,
+      50
+    ],
+    [
+      60,
+      28,
+      50
+    ],
+    [
+      61,
+      27,
+      51
+    ],
+    [
+      62,
+      27,
+      51
+    ],
+    [
+      63,
+      27,
+      51
+    ]
+  ],
+  "rear_area": [
+    35,
+    40,
+    11,
+    7
+  ],
+  "visor_up": [
+    21,
+    17,
+    9,
+    7
+  ],
+  "visor_down": [
+    20,
+    25,
+    11,
+    6
+  ],
+  "visor_mask": [
+    [
+      27,
+      17
+    ],
+    [
+      28,
+      17
+    ],
+    [
+      29,
+      17
+    ],
+    [
+      23,
+      18
+    ],
+    [
+      24,
+      18
+    ],
+    [
+      21,
+      19
+    ],
+    [
+      22,
+      19
+    ],
+    [
+      23,
+      19
+    ],
+    [
+      24,
+      19
+    ],
+    [
+      25,
+      19
+    ],
+    [
+      26,
+      19
+    ],
+    [
+      27,
+      19
+    ],
+    [
+      21,
+      20
+    ],
+    [
+      22,
+      20
+    ],
+    [
+      23,
+      20
+    ],
+    [
+      24,
+      20
+    ],
+    [
+      25,
+      20
+    ],
+    [
+      26,
+      20
+    ],
+    [
+      27,
+      20
+    ],
+    [
+      21,
+      21
+    ],
+    [
+      22,
+      21
+    ],
+    [
+      23,
+      21
+    ],
+    [
+      24,
+      21
+    ],
+    [
+      25,
+      21
+    ],
+    [
+      26,
+      21
+    ],
+    [
+      27,
+      21
+    ],
+    [
+      28,
+      21
+    ],
+    [
+      29,
+      21
+    ],
+    [
+      21,
+      22
+    ],
+    [
+      22,
+      22
+    ],
+    [
+      23,
+      22
+    ],
+    [
+      24,
+      22
+    ],
+    [
+      25,
+      22
+    ],
+    [
+      26,
+      22
+    ],
+    [
+      27,
+      22
+    ],
+    [
+      28,
+      22
+    ],
+    [
+      29,
+      22
+    ],
+    [
+      22,
+      23
+    ],
+    [
+      23,
+      23
+    ],
+    [
+      24,
+      23
+    ],
+    [
+      25,
+      23
+    ],
+    [
+      26,
+      23
+    ],
+    [
+      27,
+      23
+    ]
+  ],
+  "finger_pixels": [
+    [
+      43,
+      54
+    ],
+    [
+      44,
+      54
+    ],
+    [
+      44,
+      55
+    ],
+    [
+      45,
+      55
+    ],
+    [
+      46,
+      56
+    ],
+    [
+      44,
+      58
+    ],
+    [
+      45,
+      58
+    ],
+    [
+      46,
+      58
+    ],
+    [
+      44,
+      59
+    ],
+    [
+      45,
+      59
+    ],
+    [
+      46,
+      59
+    ],
+    [
+      45,
+      60
+    ],
+    [
+      46,
+      60
+    ]
+  ],
+  "traffic": {
+    "working-enter": [
+      {
+        "sprite": "cyan",
+        "lane": 10,
+        "start_x": 18,
+        "end_x": 64,
+        "passes": 1,
+        "mirror": false
+      },
+      {
+        "sprite": "magenta",
+        "lane": 14,
+        "start_x": 64,
+        "end_x": 18,
+        "passes": 1,
+        "mirror": true
+      }
+    ],
+    "working": [
+      {
+        "sprite": "cyan",
+        "lane": 11,
+        "start_x": 18,
+        "end_x": 64,
+        "passes": 1,
+        "mirror": false
+      },
+      {
+        "sprite": "magenta",
+        "lane": 15,
+        "start_x": 64,
+        "end_x": 18,
+        "passes": 1,
+        "mirror": true
+      },
+      {
+        "sprite": "cyan-far",
+        "lane": 7,
+        "start_x": 64,
+        "end_x": 18,
+        "passes": 2,
+        "mirror": true
+      }
+    ],
+    "finished": [
+      {
+        "sprite": "magenta",
+        "lane": 10,
+        "start_x": 64,
+        "end_x": 18,
+        "passes": 1,
+        "mirror": true
+      },
+      {
+        "sprite": "cyan",
+        "lane": 15,
+        "start_x": 18,
+        "end_x": 64,
+        "passes": 2,
+        "mirror": false
+      }
+    ],
+    "interrupted": [
+      {
+        "sprite": "magenta",
+        "lane": 11,
+        "start_x": 64,
+        "end_x": 18,
+        "passes": 1,
+        "mirror": true
+      },
+      {
+        "sprite": "cyan",
+        "lane": 14,
+        "start_x": 18,
+        "end_x": 64,
+        "passes": 2,
+        "mirror": false
+      }
+    ]
+  },
+  "gesture": {
+    "source": "../work-v4/sources/far-arm-poses.png",
+    "clean": "../work-v4/sources/far-arm-clean-64.png",
+    "source_shoulder": [
+      14,
+      44
+    ],
+    "shoulder": [
+      24,
+      44
+    ],
+    "times": [
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      29,
+      30
+    ],
+    "enter_hands": [
+      [
+        38,
+        55
+      ],
+      [
+        38,
+        49
+      ],
+      [
+        37,
+        42
+      ],
+      [
+        36,
+        36
+      ],
+      [
+        34,
+        28
+      ],
+      [
+        33,
+        25
+      ],
+      [
+        33,
+        26
+      ],
+      [
+        33,
+        27
+      ],
+      [
+        33,
+        29
+      ],
+      [
+        33,
+        31
+      ],
+      [
+        33,
+        32
+      ],
+      [
+        36,
+        34
+      ],
+      [
+        38,
+        42
+      ],
+      [
+        39,
+        49
+      ],
+      [
+        39,
+        54
+      ],
+      [
+        38,
+        55
+      ]
+    ],
+    "exit_hands": [
+      [
+        38,
+        55
+      ],
+      [
+        38,
+        50
+      ],
+      [
+        37,
+        44
+      ],
+      [
+        36,
+        38
+      ],
+      [
+        34,
+        34
+      ],
+      [
+        33,
+        32
+      ],
+      [
+        33,
+        31
+      ],
+      [
+        33,
+        29
+      ],
+      [
+        33,
+        27
+      ],
+      [
+        33,
+        26
+      ],
+      [
+        33,
+        25
+      ],
+      [
+        35,
+        29
+      ],
+      [
+        37,
+        37
+      ],
+      [
+        38,
+        45
+      ],
+      [
+        38.5,
+        50
+      ],
+      [
+        38,
+        55
+      ]
+    ],
+    "removal_regions": [
+      [
+        26,
+        50,
+        10,
+        6
+      ],
+      [
+        34,
+        52,
+        14,
+        5
+      ]
+    ],
+    "removal_pixels": [
+      [
+        36,
+        57
+      ],
+      [
+        37,
+        57
+      ]
+    ],
+    "arm_area": [
+      17,
+      16,
+      32,
+      42
+    ],
+    "interrupted": true,
+    "rig": {
+      "upper": "sources/upper-sleeve.png",
+      "fore": "sources/fore-sleeve.png",
+      "hand": "sources/grip-hand.png",
+      "upper_length": 12,
+      "fore_length": 15,
+      "sleeve_width": 5,
+      "hand_size": [
+        7,
+        7
+      ],
+      "hand_pivot": [
+        3,
+        6
+      ],
+      "hand_angles": [
+        90,
+        75,
+        50,
+        25,
+        10,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        10,
+        30,
+        60,
+        80,
+        90
+      ]
+    }
+  },
+  "palette_from": "../work-v4/review/working-native.gif"
+}

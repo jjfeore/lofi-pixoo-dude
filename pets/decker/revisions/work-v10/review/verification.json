@@ -1,0 +1,114 @@
+{
+  "method": "Complete generated character poses projected once into the scene; no articulated arm sprites.",
+  "accepted_idle_and_working_rgb_and_gif_bytes_preserved": true,
+  "canonical_transition_endpoints_match": true,
+  "fixed_native_pixels": 946,
+  "projection_size": [
+    48,
+    56
+  ],
+  "projection_origin": [
+    0,
+    8
+  ],
+  "generated_source_poses": 32,
+  "selected_source_poses": 27,
+  "character_action_reversed_for_finish": true,
+  "ambient_timeline_forward_for_both_actions": true,
+  "old_character_skin_replaced_with_reconstructed_room": true,
+  "forehead_glow_counts_by_source_pose": [
+    3,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    3,
+    4,
+    4,
+    4,
+    4,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "lowered_pose_count_with_no_forehead_glow": 19,
+  "keyboard_region_skin_pixels_min_max": [
+    51,
+    82
+  ],
+  "violet_sleeve_region_pixels_min_max": [
+    33,
+    47
+  ],
+  "anatomy_note": "Coverage checks guard obvious loss of hand/band pixels. They do not count anatomical hands or prove consistent transverse band width. Native contacts require visual review.",
+  "clips": {
+    "idle": {
+      "frames": 32,
+      "unique_frames": 30,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 11,
+      "window_traffic_patterns": 26,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    },
+    "working-enter": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 25,
+      "window_traffic_patterns": 25,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    },
+    "working": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 16,
+      "window_traffic_patterns": 27,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    },
+    "finished": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_frame_ms": 83,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650,
+      "rear_monitor_patterns": 25,
+      "window_traffic_patterns": 27,
+      "sheet_order_matches_frames": true,
+      "fixed_scene_and_main_bezel_preserved": true
+    }
+  },
+  "main_glass_animated_pixels": 209,
+  "cycle_frames": 160,
+  "cycle_duration_ms": 13280,
+  "review": "Native full-scene/head contacts and raised-hand posters inspected; owner review pending.",
+  "activation": "Separate review pack; no device upload or active config change."
+}

@@ -1,0 +1,19 @@
+{
+  "animations": {
+    "idle": {
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "idle-sprite.png",
+        "type": "sprite_sheet"
+      }
+    }
+  },
+  "background": "#000000",
+  "canvas_size": 64,
+  "default_animation": "idle",
+  "id": "decker-idle-v2",
+  "schema_version": 1
+}

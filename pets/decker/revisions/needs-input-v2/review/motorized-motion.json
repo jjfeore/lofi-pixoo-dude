@@ -1,0 +1,793 @@
+{
+  "background_timeline": "forward in both clips; only visor/state progress inverts",
+  "canonical_endpoints_override": [
+    0,
+    31
+  ],
+  "config": {
+    "flip_frames": [
+      4,
+      20
+    ],
+    "minimum_height": 3,
+    "screen_frames": [
+      10,
+      26
+    ]
+  },
+  "frames": {
+    "finished": [
+      {
+        "frame": 0,
+        "lowered": 1.0,
+        "typing_source_frame": 0,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 1,
+        "lowered": 1.0,
+        "typing_source_frame": 2,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 2,
+        "lowered": 1.0,
+        "typing_source_frame": 4,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 3,
+        "lowered": 1.0,
+        "typing_source_frame": 6,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 4,
+        "lowered": 1.0,
+        "typing_source_frame": 8,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 5,
+        "lowered": 0.98876953125,
+        "typing_source_frame": 10,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 6,
+        "lowered": 0.95703125,
+        "typing_source_frame": 12,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 7,
+        "lowered": 0.90771484375,
+        "typing_source_frame": 14,
+        "visor_bounds": [
+          20,
+          24,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 8,
+        "lowered": 0.84375,
+        "typing_source_frame": 16,
+        "visor_bounds": [
+          20,
+          24,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 9,
+        "lowered": 0.76806640625,
+        "typing_source_frame": 18,
+        "visor_bounds": [
+          20,
+          24,
+          11,
+          5
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 10,
+        "lowered": 0.68359375,
+        "typing_source_frame": 20,
+        "visor_bounds": [
+          20,
+          23,
+          10,
+          5
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 11,
+        "lowered": 0.59326171875,
+        "typing_source_frame": 22,
+        "visor_bounds": [
+          20,
+          23,
+          10,
+          4
+        ],
+        "work_mix": 0.98876953125
+      },
+      {
+        "frame": 12,
+        "lowered": 0.5,
+        "typing_source_frame": 24,
+        "visor_bounds": [
+          21,
+          23,
+          10,
+          3
+        ],
+        "work_mix": 0.95703125
+      },
+      {
+        "frame": 13,
+        "lowered": 0.40673828125,
+        "typing_source_frame": 26,
+        "visor_bounds": [
+          21,
+          22,
+          10,
+          4
+        ],
+        "work_mix": 0.90771484375
+      },
+      {
+        "frame": 14,
+        "lowered": 0.31640625,
+        "typing_source_frame": 28,
+        "visor_bounds": [
+          21,
+          20,
+          10,
+          5
+        ],
+        "work_mix": 0.84375
+      },
+      {
+        "frame": 15,
+        "lowered": 0.23193359375,
+        "typing_source_frame": 30,
+        "visor_bounds": [
+          21,
+          19,
+          9,
+          6
+        ],
+        "work_mix": 0.76806640625
+      },
+      {
+        "frame": 16,
+        "lowered": 0.15625,
+        "typing_source_frame": 0,
+        "visor_bounds": [
+          21,
+          19,
+          9,
+          6
+        ],
+        "work_mix": 0.68359375
+      },
+      {
+        "frame": 17,
+        "lowered": 0.09228515625,
+        "typing_source_frame": 2,
+        "visor_bounds": [
+          21,
+          18,
+          9,
+          7
+        ],
+        "work_mix": 0.59326171875
+      },
+      {
+        "frame": 18,
+        "lowered": 0.04296875,
+        "typing_source_frame": 18,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.5
+      },
+      {
+        "frame": 19,
+        "lowered": 0.01123046875,
+        "typing_source_frame": 19,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.40673828125
+      },
+      {
+        "frame": 20,
+        "lowered": 0.0,
+        "typing_source_frame": 20,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.31640625
+      },
+      {
+        "frame": 21,
+        "lowered": 0.0,
+        "typing_source_frame": 21,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.23193359375
+      },
+      {
+        "frame": 22,
+        "lowered": 0.0,
+        "typing_source_frame": 22,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.15625
+      },
+      {
+        "frame": 23,
+        "lowered": 0.0,
+        "typing_source_frame": 23,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.09228515625
+      },
+      {
+        "frame": 24,
+        "lowered": 0.0,
+        "typing_source_frame": 24,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.04296875
+      },
+      {
+        "frame": 25,
+        "lowered": 0.0,
+        "typing_source_frame": 25,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.01123046875
+      },
+      {
+        "frame": 26,
+        "lowered": 0.0,
+        "typing_source_frame": 26,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 27,
+        "lowered": 0.0,
+        "typing_source_frame": 27,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 28,
+        "lowered": 0.0,
+        "typing_source_frame": 28,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 29,
+        "lowered": 0.0,
+        "typing_source_frame": 29,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 30,
+        "lowered": 0.0,
+        "typing_source_frame": 30,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 31,
+        "lowered": 0.0,
+        "typing_source_frame": 0,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      }
+    ],
+    "working-enter": [
+      {
+        "frame": 0,
+        "lowered": 0.0,
+        "typing_source_frame": 0,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 1,
+        "lowered": 0.0,
+        "typing_source_frame": 1,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 2,
+        "lowered": 0.0,
+        "typing_source_frame": 2,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 3,
+        "lowered": 0.0,
+        "typing_source_frame": 3,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 4,
+        "lowered": 0.0,
+        "typing_source_frame": 4,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 5,
+        "lowered": 0.01123046875,
+        "typing_source_frame": 5,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 6,
+        "lowered": 0.04296875,
+        "typing_source_frame": 6,
+        "visor_bounds": [
+          21,
+          17,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 7,
+        "lowered": 0.09228515625,
+        "typing_source_frame": 7,
+        "visor_bounds": [
+          21,
+          18,
+          9,
+          7
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 8,
+        "lowered": 0.15625,
+        "typing_source_frame": 8,
+        "visor_bounds": [
+          21,
+          19,
+          9,
+          6
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 9,
+        "lowered": 0.23193359375,
+        "typing_source_frame": 9,
+        "visor_bounds": [
+          21,
+          19,
+          9,
+          6
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 10,
+        "lowered": 0.31640625,
+        "typing_source_frame": 10,
+        "visor_bounds": [
+          21,
+          20,
+          10,
+          5
+        ],
+        "work_mix": 0.0
+      },
+      {
+        "frame": 11,
+        "lowered": 0.40673828125,
+        "typing_source_frame": 11,
+        "visor_bounds": [
+          21,
+          22,
+          10,
+          4
+        ],
+        "work_mix": 0.01123046875
+      },
+      {
+        "frame": 12,
+        "lowered": 0.5,
+        "typing_source_frame": 12,
+        "visor_bounds": [
+          21,
+          23,
+          10,
+          3
+        ],
+        "work_mix": 0.04296875
+      },
+      {
+        "frame": 13,
+        "lowered": 0.59326171875,
+        "typing_source_frame": 13,
+        "visor_bounds": [
+          20,
+          23,
+          10,
+          4
+        ],
+        "work_mix": 0.09228515625
+      },
+      {
+        "frame": 14,
+        "lowered": 0.68359375,
+        "typing_source_frame": 14,
+        "visor_bounds": [
+          20,
+          23,
+          10,
+          5
+        ],
+        "work_mix": 0.15625
+      },
+      {
+        "frame": 15,
+        "lowered": 0.76806640625,
+        "typing_source_frame": 15,
+        "visor_bounds": [
+          20,
+          24,
+          11,
+          5
+        ],
+        "work_mix": 0.23193359375
+      },
+      {
+        "frame": 16,
+        "lowered": 0.84375,
+        "typing_source_frame": 16,
+        "visor_bounds": [
+          20,
+          24,
+          11,
+          6
+        ],
+        "work_mix": 0.31640625
+      },
+      {
+        "frame": 17,
+        "lowered": 0.90771484375,
+        "typing_source_frame": 17,
+        "visor_bounds": [
+          20,
+          24,
+          11,
+          6
+        ],
+        "work_mix": 0.40673828125
+      },
+      {
+        "frame": 18,
+        "lowered": 0.95703125,
+        "typing_source_frame": 18,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 0.5
+      },
+      {
+        "frame": 19,
+        "lowered": 0.98876953125,
+        "typing_source_frame": 6,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 0.59326171875
+      },
+      {
+        "frame": 20,
+        "lowered": 1.0,
+        "typing_source_frame": 8,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 0.68359375
+      },
+      {
+        "frame": 21,
+        "lowered": 1.0,
+        "typing_source_frame": 10,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 0.76806640625
+      },
+      {
+        "frame": 22,
+        "lowered": 1.0,
+        "typing_source_frame": 12,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 0.84375
+      },
+      {
+        "frame": 23,
+        "lowered": 1.0,
+        "typing_source_frame": 14,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 0.90771484375
+      },
+      {
+        "frame": 24,
+        "lowered": 1.0,
+        "typing_source_frame": 16,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 0.95703125
+      },
+      {
+        "frame": 25,
+        "lowered": 1.0,
+        "typing_source_frame": 18,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 0.98876953125
+      },
+      {
+        "frame": 26,
+        "lowered": 1.0,
+        "typing_source_frame": 20,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 27,
+        "lowered": 1.0,
+        "typing_source_frame": 22,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 28,
+        "lowered": 1.0,
+        "typing_source_frame": 24,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 29,
+        "lowered": 1.0,
+        "typing_source_frame": 26,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 30,
+        "lowered": 1.0,
+        "typing_source_frame": 28,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      },
+      {
+        "frame": 31,
+        "lowered": 1.0,
+        "typing_source_frame": 0,
+        "visor_bounds": [
+          20,
+          25,
+          11,
+          6
+        ],
+        "work_mix": 1.0
+      }
+    ]
+  },
+  "method": "approved typing character; existing visor layers only; foreshortened motorized flip"
+}

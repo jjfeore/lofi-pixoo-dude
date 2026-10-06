@@ -1,0 +1,17 @@
+{
+  "source_grid": "../idle-v2/sources/typing-poses.png",
+  "source_grid_dimensions": [
+    1254,
+    1254
+  ],
+  "selected_column_one_based": 1,
+  "selected_row_one_based": 2,
+  "selected_index_zero_based": 4,
+  "extraction": "Nearest-neighbor resize of the complete 4x4 grid to 256x256, then extract native 64x64 cell 004. No creative regeneration of the selected base.",
+  "native_base": "../../base-v3.png",
+  "native_dimensions": [
+    64,
+    64
+  ],
+  "native_base_matches_previously_extracted_cell": true
+}

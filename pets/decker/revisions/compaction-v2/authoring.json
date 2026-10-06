@@ -1,0 +1,28 @@
+{
+  "id": "decker-compaction-v2",
+  "base": "../../base-v3.png",
+  "approved_pack": "../idle-v4/combined",
+  "palette_from": "../idle-v4/combined/working-native.gif",
+  "frames": 32,
+  "frame_ms": 83,
+  "rear_area": [35, 40, 11, 7],
+  "traffic_mask": [[25, 7, 35, 9], [34, 16, 26, 1]],
+  "cars": {
+    "cyan": "../idle-v4/combined/cyan-car-sprite.png",
+    "magenta": "../idle-v4/combined/magenta-car-sprite.png",
+    "cyan-far": "../idle-v4/combined/cyan-far-car-sprite.png"
+  },
+  "traffic": {
+    "compacting-idle": [
+      {"sprite": "cyan", "lane": 10, "start_x": 18, "end_x": 64, "passes": 1, "phase": 0.0, "mirror": false},
+      {"sprite": "cyan-far", "lane": 14, "start_x": 64, "end_x": 18, "passes": 1, "phase": 0.35, "mirror": true}
+    ],
+    "compacting-working": [
+      {"sprite": "cyan-far", "lane": 7, "start_x": 64, "end_x": 18, "passes": 2, "phase": 0.2, "mirror": true},
+      {"sprite": "cyan", "lane": 11, "start_x": 18, "end_x": 64, "passes": 2, "phase": 0.0, "mirror": false},
+      {"sprite": "magenta", "lane": 15, "start_x": 64, "end_x": 18, "passes": 1, "phase": 0.4, "mirror": true}
+    ]
+  },
+  "idle_colors": [[47, 194, 217], [150, 55, 220]],
+  "working_colors": [[54, 244, 253], [237, 58, 240]]
+}

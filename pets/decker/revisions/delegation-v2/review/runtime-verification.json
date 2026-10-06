@@ -1,0 +1,22 @@
+{
+  "artwork_release_build": "Passed offline locked release build of delegation_revision.",
+  "bridge_release_build": "Passed offline locked release build of pixoo-pet at target/release/pixoo-pet.exe.",
+  "initial_full_unit_run": {"passed": 20, "filesystem_failures_due_to_access_denied": 4},
+  "final_unit_run": {"passed": 21, "failed": 0, "known_directory_access_blocked_tests_filtered_out": 4},
+  "blocked_filesystem_tests": [
+    "assets::tests::alpha_is_composited_and_optional_clips_are_valid",
+    "assets::tests::directory_import_preserves_sources_and_refuses_accidental_overwrite",
+    "assets::tests::gif_variable_timing_requires_deliberate_normalization",
+    "runtime::tests::missing_reactions_do_not_block_completion_or_idle"
+  ],
+  "python_and_powershell_syntax": "Passed.",
+  "rustfmt": "Attempted; Access is denied (os error 5).",
+  "artwork_and_runtime_clippy": "Attempted with warnings denied; failed to read CARGO_MANIFEST_DIR as a directory (os error 5).",
+  "cli_pack_validation": "Attempted with updated executable; pack directory not found because directory access is denied (os error 5).",
+  "mock_delegation_integration": "Attempted; fixture setup could not run the example command because directory access is denied (os error 5). No mock bridge run reached.",
+  "external_checks": [
+    ".\\scripts\\check-artwork.ps1 -Example delegation_revision -Pack pets/decker/revisions/delegation-v2/review -Format",
+    "python tests/integration.py Integration.test_delegation_entry_loop_and_exit_use_first_and_last_child"
+  ],
+  "activation": "No live configuration/hook change, bridge restart, Pixoo upload or commit."
+}

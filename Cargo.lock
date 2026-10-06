@@ -614,6 +614,7 @@ dependencies = [
  "anyhow",
  "base64 0.22.1",
  "clap",
+ "gif",
  "image",
  "reqwest",
  "serde",

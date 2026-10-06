@@ -1,0 +1,63 @@
+{
+  "method": "Independent read-only native PNG, source projection, masks, motion, sprites and GIF checks.",
+  "clips": {
+    "delegating-start": {
+      "frames": 40,
+      "unique_frames": 40,
+      "native_duration_ms": 3320,
+      "gif_duration_ms": 3320
+    },
+    "delegating": {
+      "frames": 32,
+      "unique_frames": 32,
+      "native_duration_ms": 2656,
+      "gif_duration_ms": 2650
+    },
+    "delegating-finished": {
+      "frames": 40,
+      "unique_frames": 40,
+      "native_duration_ms": 3320,
+      "gif_duration_ms": 3320
+    }
+  },
+  "minimum_exact_source_pixels_per_frame": 3599,
+  "working_body_visor_typing_and_entire_main_glass_preserved": true,
+  "animated_glass_pixels": 209,
+  "fixed_bezel_pixels": 214,
+  "typing_pixels": 13,
+  "generated_drone_projection_verified": true,
+  "drone_size": [
+    17,
+    8
+  ],
+  "opaque_drone_pixels": 79,
+  "drone_always_behind_window_and_monitors": true,
+  "stationary_transfer_hover": true,
+  "rise_dispatch_received_light_rightward_departure_verified": true,
+  "return_from_right_download_light_off_bottom_departure_verified": true,
+  "finish_descent_exactly_reverses_dispatch_ascent": true,
+  "delegation_loop_png_gif_motion_and_manifest_unchanged": true,
+  "dispatch_changes_only_indicator_color": true,
+  "neon_green_indicator_exact_in_native_and_preview_gif": true,
+  "finish_changes_only_indicator_and_old_and_new_drone_footprints": true,
+  "finish_arrival_hover_download_light_typing_and_monitors_preserved": true,
+  "prior_preview_palette_preserved": true,
+  "no_car_traffic_in_transfer_clips": true,
+  "three_distinct_loop_traffic_profiles": true,
+  "matrix_black_background_green_falling_heads_and_tails": true,
+  "pulsing_arrow_shapes_fixed": true,
+  "rear_transition_endpoints_match_loop_or_working_pattern": true,
+  "prior_native_frames_preserved": 264,
+  "prior_individual_gifs_preserved": 16,
+  "all_prior_png_gif_assets_manifest_selections_and_motion_records_preserved": true,
+  "sprite_order_and_native_enlarged_gif_matching": true,
+  "static_gif_colors_stable": true,
+  "prepared_base64_bytes_including_aliases": 6684672,
+  "context_preview_frames": 112,
+  "review": "Native dispatch/return window and full-scene contacts inspected; owner review pending.",
+  "activation": "Separate review pack; no live device or hook/configuration changes.",
+  "offline_helper_release_build": "passed",
+  "previous_v2_export_regression_files_byte_identical": 461,
+  "bridge_cli_validation": "Sandbox-blocked: pack directory not found: Access is denied (OS error 5).",
+  "rustfmt_and_clippy": "Previously sandbox-blocked; not rerun for this artwork refinement."
+}

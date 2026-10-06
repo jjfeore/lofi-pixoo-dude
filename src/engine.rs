@@ -24,6 +24,8 @@ pub struct Engine {
 #[derive(Debug, Default)]
 pub struct Outcome {
     pub entered_work: bool,
+    pub entered_delegation: bool,
+    pub finished_delegation: bool,
     pub reaction: Option<&'static str>,
 }
 
@@ -44,6 +46,9 @@ impl Engine {
     pub fn attention(&self) -> bool {
         self.sessions.values().any(|s| !s.approvals.is_empty())
     }
+    pub fn delegating(&self) -> bool {
+        self.sessions.values().any(|s| !s.children.is_empty())
+    }
     pub fn candidates(&self) -> Vec<&'static str> {
         let mut candidates = Vec::with_capacity(5);
         if self.attention() {
@@ -52,7 +57,7 @@ impl Engine {
         if self.sessions.values().any(|s| s.compacting) {
             candidates.push("compacting");
         }
-        if self.sessions.values().any(|s| !s.children.is_empty()) {
+        if self.delegating() {
             candidates.push("delegating");
         }
         candidates.push(if self.busy() { "working" } else { "idle" });
@@ -74,6 +79,7 @@ impl Engine {
     }
     pub fn apply(&mut self, event: &Event) -> Outcome {
         let was_busy = self.busy();
+        let was_delegating = self.delegating();
         if event.kind == Kind::SessionEnd {
             self.sessions.remove(&event.session_id);
             return Outcome::default();
@@ -173,6 +179,8 @@ impl Engine {
         }
         Outcome {
             entered_work: !was_busy && self.busy(),
+            entered_delegation: !was_delegating && self.delegating(),
+            finished_delegation: event.kind == Kind::AgentStop && was_delegating && !self.delegating(),
             reaction,
         }
     }
@@ -245,14 +253,47 @@ mod tests {
         let mut engine = Engine::default();
         let mut e = event(Kind::AgentStart, "a", "1", 1);
         e.agent_id = Some("child".into());
-        engine.apply(&e);
+        assert!(engine.apply(&e).entered_delegation);
         assert_eq!(engine.candidates()[0], "delegating");
         e.kind = Kind::AgentStop;
-        engine.apply(&e);
+        assert!(engine.apply(&e).finished_delegation);
         assert_eq!(engine.candidates()[0], "working");
         e.kind = Kind::Interrupt;
         assert_eq!(engine.apply(&e).reaction, Some("interrupted"));
         assert!(!engine.busy());
+    }
+    #[test]
+    fn delegation_edges_follow_first_and_last_child_across_chats() {
+        let mut engine = Engine::default();
+        let mut a = event(Kind::AgentStart, "a", "1", 1);
+        a.agent_id = Some("child-a".into());
+        let mut b = event(Kind::AgentStart, "b", "2", 2);
+        b.agent_id = Some("child-b".into());
+        assert!(engine.apply(&a).entered_delegation);
+        assert!(!engine.apply(&a).entered_delegation);
+        assert!(!engine.apply(&b).entered_delegation);
+        a.kind = Kind::AgentStop;
+        assert!(!engine.apply(&a).finished_delegation);
+        b.kind = Kind::AgentStop;
+        b.agent_id = Some("unknown".into());
+        assert!(!engine.apply(&b).finished_delegation);
+        b.agent_id = Some("child-b".into());
+        assert!(engine.apply(&b).finished_delegation);
+        assert!(!engine.apply(&b).finished_delegation);
+        assert!(engine.busy());
+    }
+    #[test]
+    fn clearing_children_on_parent_interrupt_is_not_delegation_finish() {
+        let mut engine = Engine::default();
+        let mut e = event(Kind::AgentStart, "a", "1", 1);
+        e.agent_id = Some("child".into());
+        engine.apply(&e);
+        e.kind = Kind::Interrupt;
+        let outcome = engine.apply(&e);
+        assert!(!outcome.finished_delegation);
+        assert_eq!(outcome.reaction, Some("interrupted"));
+        e.kind = Kind::AgentStop;
+        assert!(!engine.apply(&e).finished_delegation);
     }
     #[test]
     fn only_matching_tool_resumes_observed_approval() {

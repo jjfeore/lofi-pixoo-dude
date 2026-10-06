@@ -1,0 +1,41 @@
+{
+  "method": "Read-only native PNG/GIF comparisons against the accepted working pose and combined pack.",
+  "frames": 32,
+  "unique_complete_frames": 32,
+  "frame_ms": 83,
+  "native_duration_ms": 2656,
+  "gif_duration_ms": 2650,
+  "fixed_pixels_match_corresponding_working_frame": 3440,
+  "body_and_resting_hands_match_working_first_frame": 2257,
+  "fingertips_paused": 13,
+  "animated_main_glass_pixels": 209,
+  "glass_pixels_with_content_motion_after_removing_pulse": 209,
+  "fixed_bezel_pixels": 214,
+  "amber_visor_indicator_pixels": 16,
+  "fixed_visor_housing_pixels": 50,
+  "forehead_has_no_duplicate_powered_visor_glow": true,
+  "readable_symbol_pixels": 12,
+  "symbol_never_disappears": true,
+  "pulse_range": [
+    0.6399999856948853,
+    1.0
+  ],
+  "traffic_types": [
+    "cyan-far",
+    "magenta"
+  ],
+  "traffic_lane_patterns": {
+    "8": 27,
+    "14": 28
+  },
+  "all_previous_clips_manifests_metadata_and_previews_preserved": true,
+  "fixed_decoded_gif_pixels_stable_across_loop": true,
+  "native_and_enlarged_gif_pixels_match": true,
+  "palette": "One newly fitted global palette for amber needs-input preview only; accepted GIFs copied unchanged.",
+  "review": "Native full-scene contact and poster inspected; owner review pending.",
+  "activation": "Separate review pack; no device upload or bridge/configuration changes.",
+  "offline_example_compilation": "passed; release example built offline and exported successfully",
+  "previous_compaction_regression": "192 native PNG frames and 12 individual GIF files reproduced exactly, together with sprites, posters, contacts, manifest, motion metadata and cycle previews",
+  "formatting_clippy_and_bridge_validation": "attempted; blocked by sandbox directory-access errors; not marked passed",
+  "external_helper": "scripts/check-artwork.ps1 -Example compaction_revision -Pack pets/decker/revisions/needs-input-v2/review -Format"
+}

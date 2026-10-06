@@ -1,6 +1,6 @@
 # Pack format, schema 1
 
-A pack directory contains `pet.json` and relative artwork files. Frames are exactly 64x64. Paths cannot escape the directory, including symlinks. All logical states are optional; malformed supplied clips, entry references, or defaults are rejected.
+A pack directory contains `pet.json` and relative artwork files. Frames are exactly 64x64. Paths cannot escape the directory, including symlinks. All logical states are optional; malformed supplied clips, entry/exit references, or defaults are rejected.
 
 ```json
 {
@@ -35,7 +35,19 @@ Source types:
 - `frames`: explicit ordered `paths`, each exact 64x64.
 - `gif`: `path`, full canvas exact 64x64. Constant timing is retained if no override is set. Variable timing requires an explicit `frame_duration_ms` to normalize it; the Pixoo transport has a single speed per clip.
 
-`loop` defaults to true; frame duration defaults to 83 ms except retained GIF timing. Durations are 10-10000 ms. A static clip is valid. `entry` names an existing non-looping clip. `variants` maps `idle` and/or `working` to an existing clip, for example on `compacting`:
+`loop` defaults to true; frame duration defaults to 83 ms except retained GIF timing. Durations are 10-10000 ms. A static clip is valid. `entry` and optional `exit` name existing non-looping clips and cannot refer to the clip itself. The runtime uses working entry when aggregate work starts, delegation entry when the first observed child starts, and delegation exit when the final observed child stops. For delegation:
+
+```json
+"delegating": {
+  "source": { "type": "sprite_sheet", "path": "delegating-sprite.png", "columns": 4, "frame_count": 32 },
+  "frame_duration_ms": 83,
+  "loop": true,
+  "entry": "delegating-start",
+  "exit": "delegating-finished"
+}
+```
+
+Declare each referenced transition as its own complete non-looping clip. Both references are optional. Needs-input and compaction can preempt transfers; an early final-child stop or a new child can replace an unfinished transition. Parent interruption/completion does not synthesize a delegation return. A stopped child may subsequently continue, so these transitions represent observed hooks rather than guaranteed task completion. The new `exit` field requires the updated bridge executable; existing packs without it remain supported. `variants` maps `idle` and/or `working` to an existing clip, for example on `compacting`:
 
 ```json
 "variants": { "idle": "compacting-idle", "working": "compacting-working" }
@@ -56,7 +68,7 @@ PowerShell examples (adjust the executable and output paths):
 
 `prepare` accepts a square raster and saves a nearest-neighbor 64x64 RGB PNG; `--background '#000000'` composites alpha. Its optional preview is 512x512. It refuses accidental overwrites. This conversion is a mechanical export; it does not fix a badly composed scene.
 
-`import` recognizes state-named PNGs/GIFs and folders of lexically sorted PNG frames. Zero-pad numbered frames. PNG grids are treated as full grids; write the manifest directly if the last row contains unused cells. The importer marks `finished`, `interrupted`, and `working-enter` non-looping and links an available working entry. Other filenames remain usable custom clip names. It validates before writing and requires `--force` to replace an existing manifest. Re-run `validate` after manual edits.
+`import` recognizes state-named PNGs/GIFs and folders of lexically sorted PNG frames. Zero-pad numbered frames. PNG grids are treated as full grids; write the manifest directly if the last row contains unused cells. The importer marks `finished`, `interrupted`, `working-enter`, `delegating-start`, and `delegating-finished` non-looping. It links an available working entry and available delegation entry/exit clips. Other filenames remain usable custom clip names. It validates before writing and requires `--force` to replace an existing manifest. Re-run `validate` after manual edits.
 
 
 ## Generated grids and stable backgrounds

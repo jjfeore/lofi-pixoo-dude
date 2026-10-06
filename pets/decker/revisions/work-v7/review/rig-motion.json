@@ -1,0 +1,1661 @@
+{
+  "finished": [
+    {
+      "elbow": [
+        17.050188064575195,
+        58.656795501708984
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 2,
+      "hand_angle_degrees": 90.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        60.0
+      ]
+    },
+    {
+      "elbow": [
+        17.548866271972656,
+        58.32545471191406
+      ],
+      "fore_length": 18.0,
+      "frame": 3,
+      "hand_angle_degrees": 87.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999998092651367,
+      "wrist": [
+        35.5,
+        57.0
+      ]
+    },
+    {
+      "elbow": [
+        18.384716033935547,
+        57.70158386230469
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 4,
+      "hand_angle_degrees": 85.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        36.0,
+        54.0
+      ]
+    },
+    {
+      "elbow": [
+        19.447587966918945,
+        56.763267517089844
+      ],
+      "fore_length": 18.0,
+      "frame": 5,
+      "hand_angle_degrees": 72.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        36.5,
+        51.0
+      ]
+    },
+    {
+      "elbow": [
+        20.626609802246094,
+        55.47744369506836
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 6,
+      "hand_angle_degrees": 60.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        37.0,
+        48.0
+      ]
+    },
+    {
+      "elbow": [
+        21.281349182128906,
+        54.61211395263672
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 7,
+      "hand_angle_degrees": 47.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000001907348633,
+      "wrist": [
+        36.5,
+        45.0
+      ]
+    },
+    {
+      "elbow": [
+        22.056842803955078,
+        53.383689880371094
+      ],
+      "fore_length": 18.0,
+      "frame": 8,
+      "hand_angle_degrees": 35.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        36.0,
+        42.0
+      ]
+    },
+    {
+      "elbow": [
+        22.836597442626953,
+        51.792118072509766
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 9,
+      "hand_angle_degrees": 25.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000001907348633,
+      "wrist": [
+        35.5,
+        39.0
+      ]
+    },
+    {
+      "elbow": [
+        23.498519897460938,
+        49.846153259277344
+      ],
+      "fore_length": 18.0,
+      "frame": 10,
+      "hand_angle_degrees": 15.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        35.0,
+        36.0
+      ]
+    },
+    {
+      "elbow": [
+        23.777618408203125,
+        48.57331466674805
+      ],
+      "fore_length": 18.0,
+      "frame": 11,
+      "hand_angle_degrees": 7.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999998092651367,
+      "wrist": [
+        35.0,
+        34.5
+      ]
+    },
+    {
+      "elbow": [
+        23.951122283935547,
+        47.209938049316406
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 12,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        33.0
+      ]
+    },
+    {
+      "elbow": [
+        23.982032775878906,
+        46.733917236328125
+      ],
+      "fore_length": 18.0,
+      "frame": 13,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999998092651367,
+      "wrist": [
+        35.0,
+        32.5
+      ]
+    },
+    {
+      "elbow": [
+        23.99797821044922,
+        46.246246337890625
+      ],
+      "fore_length": 18.0,
+      "frame": 14,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        32.0
+      ]
+    },
+    {
+      "elbow": [
+        23.99136734008789,
+        45.49113845825195
+      ],
+      "fore_length": 18.0,
+      "frame": 15,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        35.0,
+        31.25
+      ]
+    },
+    {
+      "elbow": [
+        23.943939208984375,
+        44.704349517822266
+      ],
+      "fore_length": 18.0,
+      "frame": 16,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        35.0,
+        30.5
+      ]
+    },
+    {
+      "elbow": [
+        23.878700256347656,
+        44.096248626708984
+      ],
+      "fore_length": 18.0,
+      "frame": 17,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.75,
+        29.75
+      ]
+    },
+    {
+      "elbow": [
+        23.7838077545166,
+        43.46247863769531
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 18,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.5,
+        29.0
+      ]
+    },
+    {
+      "elbow": [
+        23.65502166748047,
+        42.801509857177734
+      ],
+      "fore_length": 18.0,
+      "frame": 19,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.25,
+        28.25
+      ]
+    },
+    {
+      "elbow": [
+        23.487056732177734,
+        42.11088943481445
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 20,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.0,
+        27.5
+      ]
+    },
+    {
+      "elbow": [
+        23.39920425415039,
+        41.797271728515625
+      ],
+      "fore_length": 18.0,
+      "frame": 21,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.0,
+        27.25
+      ]
+    },
+    {
+      "elbow": [
+        23.301345825195312,
+        41.47545623779297
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 22,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.0,
+        27.0
+      ]
+    },
+    {
+      "elbow": [
+        23.806102752685547,
+        43.595977783203125
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 23,
+      "hand_angle_degrees": 10.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        29.5
+      ]
+    },
+    {
+      "elbow": [
+        23.98822784423828,
+        45.4058723449707
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 24,
+      "hand_angle_degrees": 20.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        36.0,
+        32.0
+      ]
+    },
+    {
+      "elbow": [
+        23.67570686340332,
+        49.102195739746094
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 25,
+      "hand_angle_degrees": 32.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        37.0,
+        37.0
+      ]
+    },
+    {
+      "elbow": [
+        22.860092163085938,
+        51.73566818237305
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 26,
+      "hand_angle_degrees": 45.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000001907348633,
+      "wrist": [
+        38.0,
+        42.0
+      ]
+    },
+    {
+      "elbow": [
+        21.368663787841797,
+        54.486236572265625
+      ],
+      "fore_length": 18.0,
+      "frame": 27,
+      "hand_angle_degrees": 57.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000001907348633,
+      "wrist": [
+        37.5,
+        46.5
+      ]
+    },
+    {
+      "elbow": [
+        19.824207305908203,
+        56.384437561035156
+      ],
+      "fore_length": 18.0,
+      "frame": 28,
+      "hand_angle_degrees": 70.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        37.0,
+        51.0
+      ]
+    },
+    {
+      "elbow": [
+        18.102920532226562,
+        57.922115325927734
+      ],
+      "fore_length": 18.0,
+      "frame": 29,
+      "hand_angle_degrees": 85.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        36.0,
+        56.0
+      ]
+    },
+    {
+      "elbow": [
+        17.050188064575195,
+        58.656795501708984
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 30,
+      "hand_angle_degrees": 90.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        60.0
+      ]
+    }
+  ],
+  "interrupted": [
+    {
+      "elbow": [
+        17.050188064575195,
+        58.656795501708984
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 2,
+      "hand_angle_degrees": 90.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        60.0
+      ]
+    },
+    {
+      "elbow": [
+        17.548866271972656,
+        58.32545471191406
+      ],
+      "fore_length": 18.0,
+      "frame": 3,
+      "hand_angle_degrees": 87.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999998092651367,
+      "wrist": [
+        35.5,
+        57.0
+      ]
+    },
+    {
+      "elbow": [
+        18.384716033935547,
+        57.70158386230469
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 4,
+      "hand_angle_degrees": 85.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        36.0,
+        54.0
+      ]
+    },
+    {
+      "elbow": [
+        19.447587966918945,
+        56.763267517089844
+      ],
+      "fore_length": 18.0,
+      "frame": 5,
+      "hand_angle_degrees": 72.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        36.5,
+        51.0
+      ]
+    },
+    {
+      "elbow": [
+        20.626609802246094,
+        55.47744369506836
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 6,
+      "hand_angle_degrees": 60.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        37.0,
+        48.0
+      ]
+    },
+    {
+      "elbow": [
+        21.281349182128906,
+        54.61211395263672
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 7,
+      "hand_angle_degrees": 47.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000001907348633,
+      "wrist": [
+        36.5,
+        45.0
+      ]
+    },
+    {
+      "elbow": [
+        22.056842803955078,
+        53.383689880371094
+      ],
+      "fore_length": 18.0,
+      "frame": 8,
+      "hand_angle_degrees": 35.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        36.0,
+        42.0
+      ]
+    },
+    {
+      "elbow": [
+        22.836597442626953,
+        51.792118072509766
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 9,
+      "hand_angle_degrees": 25.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000001907348633,
+      "wrist": [
+        35.5,
+        39.0
+      ]
+    },
+    {
+      "elbow": [
+        23.498519897460938,
+        49.846153259277344
+      ],
+      "fore_length": 18.0,
+      "frame": 10,
+      "hand_angle_degrees": 15.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        35.0,
+        36.0
+      ]
+    },
+    {
+      "elbow": [
+        23.777618408203125,
+        48.57331466674805
+      ],
+      "fore_length": 18.0,
+      "frame": 11,
+      "hand_angle_degrees": 7.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999998092651367,
+      "wrist": [
+        35.0,
+        34.5
+      ]
+    },
+    {
+      "elbow": [
+        23.951122283935547,
+        47.209938049316406
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 12,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        33.0
+      ]
+    },
+    {
+      "elbow": [
+        23.982032775878906,
+        46.733917236328125
+      ],
+      "fore_length": 18.0,
+      "frame": 13,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999998092651367,
+      "wrist": [
+        35.0,
+        32.5
+      ]
+    },
+    {
+      "elbow": [
+        23.99797821044922,
+        46.246246337890625
+      ],
+      "fore_length": 18.0,
+      "frame": 14,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        32.0
+      ]
+    },
+    {
+      "elbow": [
+        23.99136734008789,
+        45.49113845825195
+      ],
+      "fore_length": 18.0,
+      "frame": 15,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        35.0,
+        31.25
+      ]
+    },
+    {
+      "elbow": [
+        23.943939208984375,
+        44.704349517822266
+      ],
+      "fore_length": 18.0,
+      "frame": 16,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        35.0,
+        30.5
+      ]
+    },
+    {
+      "elbow": [
+        23.878700256347656,
+        44.096248626708984
+      ],
+      "fore_length": 18.0,
+      "frame": 17,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.75,
+        29.75
+      ]
+    },
+    {
+      "elbow": [
+        23.7838077545166,
+        43.46247863769531
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 18,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.5,
+        29.0
+      ]
+    },
+    {
+      "elbow": [
+        23.65502166748047,
+        42.801509857177734
+      ],
+      "fore_length": 18.0,
+      "frame": 19,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.25,
+        28.25
+      ]
+    },
+    {
+      "elbow": [
+        23.487056732177734,
+        42.11088943481445
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 20,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.0,
+        27.5
+      ]
+    },
+    {
+      "elbow": [
+        23.39920425415039,
+        41.797271728515625
+      ],
+      "fore_length": 18.0,
+      "frame": 21,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.0,
+        27.25
+      ]
+    },
+    {
+      "elbow": [
+        23.301345825195312,
+        41.47545623779297
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 22,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.0,
+        27.0
+      ]
+    },
+    {
+      "elbow": [
+        23.806102752685547,
+        43.595977783203125
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 23,
+      "hand_angle_degrees": 10.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        29.5
+      ]
+    },
+    {
+      "elbow": [
+        23.98822784423828,
+        45.4058723449707
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 24,
+      "hand_angle_degrees": 20.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        36.0,
+        32.0
+      ]
+    },
+    {
+      "elbow": [
+        23.67570686340332,
+        49.102195739746094
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 25,
+      "hand_angle_degrees": 32.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        37.0,
+        37.0
+      ]
+    },
+    {
+      "elbow": [
+        22.860092163085938,
+        51.73566818237305
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 26,
+      "hand_angle_degrees": 45.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000001907348633,
+      "wrist": [
+        38.0,
+        42.0
+      ]
+    },
+    {
+      "elbow": [
+        21.368663787841797,
+        54.486236572265625
+      ],
+      "fore_length": 18.0,
+      "frame": 27,
+      "hand_angle_degrees": 57.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000001907348633,
+      "wrist": [
+        37.5,
+        46.5
+      ]
+    },
+    {
+      "elbow": [
+        19.824207305908203,
+        56.384437561035156
+      ],
+      "fore_length": 18.0,
+      "frame": 28,
+      "hand_angle_degrees": 70.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        37.0,
+        51.0
+      ]
+    },
+    {
+      "elbow": [
+        18.102920532226562,
+        57.922115325927734
+      ],
+      "fore_length": 18.0,
+      "frame": 29,
+      "hand_angle_degrees": 85.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        36.0,
+        56.0
+      ]
+    },
+    {
+      "elbow": [
+        17.050188064575195,
+        58.656795501708984
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 30,
+      "hand_angle_degrees": 90.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        60.0
+      ]
+    }
+  ],
+  "working-enter": [
+    {
+      "elbow": [
+        17.050188064575195,
+        58.656795501708984
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 2,
+      "hand_angle_degrees": 90.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        60.0
+      ]
+    },
+    {
+      "elbow": [
+        17.548866271972656,
+        58.32545471191406
+      ],
+      "fore_length": 18.0,
+      "frame": 3,
+      "hand_angle_degrees": 87.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999998092651367,
+      "wrist": [
+        35.5,
+        57.0
+      ]
+    },
+    {
+      "elbow": [
+        18.384716033935547,
+        57.70158386230469
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 4,
+      "hand_angle_degrees": 85.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        36.0,
+        54.0
+      ]
+    },
+    {
+      "elbow": [
+        19.57786750793457,
+        56.635257720947266
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 5,
+      "hand_angle_degrees": 72.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        36.5,
+        50.5
+      ]
+    },
+    {
+      "elbow": [
+        20.925029754638672,
+        55.099098205566406
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 6,
+      "hand_angle_degrees": 60.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.99999713897705,
+      "wrist": [
+        37.0,
+        47.0
+      ]
+    },
+    {
+      "elbow": [
+        21.77787208557129,
+        53.85658645629883
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 7,
+      "hand_angle_degrees": 47.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        36.5,
+        43.5
+      ]
+    },
+    {
+      "elbow": [
+        22.693796157836914,
+        52.12208557128906
+      ],
+      "fore_length": 18.0,
+      "frame": 8,
+      "hand_angle_degrees": 35.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        36.0,
+        40.0
+      ]
+    },
+    {
+      "elbow": [
+        23.681163787841797,
+        49.076271057128906
+      ],
+      "fore_length": 18.0,
+      "frame": 9,
+      "hand_angle_degrees": 25.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.5,
+        35.5
+      ]
+    },
+    {
+      "elbow": [
+        23.980358123779297,
+        45.23261642456055
+      ],
+      "fore_length": 17.999996185302734,
+      "frame": 10,
+      "hand_angle_degrees": 15.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        31.0
+      ]
+    },
+    {
+      "elbow": [
+        23.7838077545166,
+        43.46247863769531
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 11,
+      "hand_angle_degrees": 7.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.5,
+        29.0
+      ]
+    },
+    {
+      "elbow": [
+        23.301345825195312,
+        41.47545623779297
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 12,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.0,
+        27.0
+      ]
+    },
+    {
+      "elbow": [
+        23.39920425415039,
+        41.797271728515625
+      ],
+      "fore_length": 18.0,
+      "frame": 13,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.0,
+        27.25
+      ]
+    },
+    {
+      "elbow": [
+        23.487056732177734,
+        42.11088943481445
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 14,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.0,
+        27.5
+      ]
+    },
+    {
+      "elbow": [
+        23.65502166748047,
+        42.801509857177734
+      ],
+      "fore_length": 18.0,
+      "frame": 15,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.25,
+        28.25
+      ]
+    },
+    {
+      "elbow": [
+        23.7838077545166,
+        43.46247863769531
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 16,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.5,
+        29.0
+      ]
+    },
+    {
+      "elbow": [
+        23.878700256347656,
+        44.096248626708984
+      ],
+      "fore_length": 18.0,
+      "frame": 17,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        34.75,
+        29.75
+      ]
+    },
+    {
+      "elbow": [
+        23.943939208984375,
+        44.704349517822266
+      ],
+      "fore_length": 18.0,
+      "frame": 18,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        35.0,
+        30.5
+      ]
+    },
+    {
+      "elbow": [
+        23.99136734008789,
+        45.49113845825195
+      ],
+      "fore_length": 18.0,
+      "frame": 19,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        35.0,
+        31.25
+      ]
+    },
+    {
+      "elbow": [
+        23.99797821044922,
+        46.246246337890625
+      ],
+      "fore_length": 18.0,
+      "frame": 20,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        32.0
+      ]
+    },
+    {
+      "elbow": [
+        23.982032775878906,
+        46.733917236328125
+      ],
+      "fore_length": 18.0,
+      "frame": 21,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999998092651367,
+      "wrist": [
+        35.0,
+        32.5
+      ]
+    },
+    {
+      "elbow": [
+        23.951122283935547,
+        47.209938049316406
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 22,
+      "hand_angle_degrees": 0.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        33.0
+      ]
+    },
+    {
+      "elbow": [
+        23.82859992980957,
+        48.2611083984375
+      ],
+      "fore_length": 18.0,
+      "frame": 23,
+      "hand_angle_degrees": 10.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        36.0,
+        35.0
+      ]
+    },
+    {
+      "elbow": [
+        23.67570686340332,
+        49.102195739746094
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 24,
+      "hand_angle_degrees": 20.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        37.0,
+        37.0
+      ]
+    },
+    {
+      "elbow": [
+        22.79755401611328,
+        51.8845100402832
+      ],
+      "fore_length": 18.0,
+      "frame": 25,
+      "hand_angle_degrees": 32.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999998092651367,
+      "wrist": [
+        37.5,
+        41.5
+      ]
+    },
+    {
+      "elbow": [
+        21.793102264404297,
+        53.831764221191406
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 26,
+      "hand_angle_degrees": 45.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        38.0,
+        46.0
+      ]
+    },
+    {
+      "elbow": [
+        20.430644989013672,
+        55.712894439697266
+      ],
+      "fore_length": 18.000001907348633,
+      "frame": 27,
+      "hand_angle_degrees": 57.5,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 14.999999046325684,
+      "wrist": [
+        37.5,
+        50.0
+      ]
+    },
+    {
+      "elbow": [
+        19.244503021240234,
+        56.95674133300781
+      ],
+      "fore_length": 18.0,
+      "frame": 28,
+      "hand_angle_degrees": 70.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.000000953674316,
+      "wrist": [
+        37.0,
+        54.0
+      ]
+    },
+    {
+      "elbow": [
+        18.0,
+        58.0
+      ],
+      "fore_length": 18.0,
+      "frame": 29,
+      "hand_angle_degrees": 85.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        36.0,
+        58.0
+      ]
+    },
+    {
+      "elbow": [
+        17.050188064575195,
+        58.656795501708984
+      ],
+      "fore_length": 17.999998092651367,
+      "frame": 30,
+      "hand_angle_degrees": 90.0,
+      "scale": 1.0,
+      "shoulder": [
+        9.0,
+        46.0
+      ],
+      "upper_length": 15.0,
+      "wrist": [
+        35.0,
+        60.0
+      ]
+    }
+  ]
+}

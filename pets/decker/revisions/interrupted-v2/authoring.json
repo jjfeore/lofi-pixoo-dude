@@ -1,0 +1,197 @@
+{
+  "id": "decker-interrupted-v2",
+  "base": "../../base-v3.png",
+  "approved_pack": "../needs-input-v3/review",
+  "frames": 40,
+  "frame_ms": 83,
+  "prelude_frames": 8,
+  "main_aperture": [
+    [
+      55,
+      29,
+      49
+    ],
+    [
+      56,
+      29,
+      49
+    ],
+    [
+      57,
+      28,
+      50
+    ],
+    [
+      58,
+      28,
+      50
+    ],
+    [
+      59,
+      28,
+      50
+    ],
+    [
+      60,
+      28,
+      50
+    ],
+    [
+      61,
+      27,
+      51
+    ],
+    [
+      62,
+      27,
+      51
+    ],
+    [
+      63,
+      27,
+      51
+    ]
+  ],
+  "rear_area": [
+    35,
+    40,
+    11,
+    7
+  ],
+  "traffic_mask": [
+    [
+      25,
+      7,
+      35,
+      9
+    ],
+    [
+      34,
+      16,
+      26,
+      1
+    ]
+  ],
+  "cars": {
+    "cyan": "../idle-v4/combined/cyan-car-sprite.png",
+    "magenta": "../idle-v4/combined/magenta-car-sprite.png"
+  },
+  "chase": [
+    {
+      "id": "getaway",
+      "sprite": "magenta",
+      "police": false,
+      "lane": 8,
+      "start_x": 20,
+      "end_x": 102,
+      "beacon_phase": 0
+    },
+    {
+      "id": "police-1",
+      "sprite": "cyan",
+      "police": true,
+      "lane": 8,
+      "start_x": 14,
+      "end_x": 96,
+      "beacon_phase": 1
+    },
+    {
+      "id": "police-2",
+      "sprite": "cyan",
+      "police": true,
+      "lane": 11,
+      "start_x": 8,
+      "end_x": 90,
+      "beacon_phase": 2
+    },
+    {
+      "id": "police-3",
+      "sprite": "cyan",
+      "police": true,
+      "lane": 14,
+      "start_x": 2,
+      "end_x": 84,
+      "beacon_phase": 3
+    },
+    {
+      "id": "police-4",
+      "sprite": "cyan",
+      "police": true,
+      "lane": 8,
+      "start_x": -4,
+      "end_x": 78,
+      "beacon_phase": 4
+    },
+    {
+      "id": "police-5",
+      "sprite": "cyan",
+      "police": true,
+      "lane": 12,
+      "start_x": -10,
+      "end_x": 72,
+      "beacon_phase": 5
+    }
+  ],
+  "expression_study": "sources/expression-study.png",
+  "expression_area": [
+    21,
+    34,
+    8,
+    8
+  ],
+  "expression_frames": [
+    null,
+    null,
+    1,
+    1,
+    2,
+    2,
+    1,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "red": [
+    255,
+    35,
+    63
+  ],
+  "red_recovery": [
+    14,
+    34
+  ],
+  "rear_recovery": [
+    28,
+    38
+  ]
+}

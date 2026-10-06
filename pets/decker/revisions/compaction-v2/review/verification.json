@@ -1,0 +1,75 @@
+{
+  "method": "Read-only PNG/GIF decoding and exact accepted-frame/artifact comparisons.",
+  "frames_per_variant": 32,
+  "frame_ms": 83,
+  "native_duration_ms": 2656,
+  "gif_duration_ms": 2650,
+  "approved_base_clips_and_previews_byte_identical": true,
+  "motorized_metadata_and_cycle_byte_identical": true,
+  "compression_phases": {
+    "read": 8,
+    "compress": 8,
+    "packed": 4,
+    "deliver_and_refill": 12
+  },
+  "clips": {
+    "compacting-idle": {
+      "unique_complete_frames": 32,
+      "fixed_pixels_match_corresponding_approved_frame": 3678,
+      "body_visor_fingertips_and_main_screen_exact": true,
+      "animated_main_glass_pixels": 209,
+      "fixed_bezel_pixels": 214,
+      "rear_screen_patterns": 18,
+      "rear_screen_first_last_pixels_identical": true,
+      "packet_dimensions": [
+        3,
+        3
+      ],
+      "vehicle_types": [
+        "cyan",
+        "cyan-far"
+      ],
+      "passes_per_cycle": 2,
+      "traffic_lane_patterns": {
+        "10": 27,
+        "14": 27
+      },
+      "traffic_changed_pixel_total": 219,
+      "decoded_gif_pixels_outside_overlays_match_approved": true
+    },
+    "compacting-working": {
+      "unique_complete_frames": 32,
+      "fixed_pixels_match_corresponding_approved_frame": 3678,
+      "body_visor_fingertips_and_main_screen_exact": true,
+      "animated_main_glass_pixels": 209,
+      "fixed_bezel_pixels": 214,
+      "rear_screen_patterns": 18,
+      "rear_screen_first_last_pixels_identical": true,
+      "packet_dimensions": [
+        3,
+        3
+      ],
+      "vehicle_types": [
+        "cyan",
+        "cyan-far",
+        "magenta"
+      ],
+      "passes_per_cycle": 5,
+      "traffic_lane_patterns": {
+        "7": 14,
+        "11": 14,
+        "15": 27
+      },
+      "traffic_changed_pixel_total": 341,
+      "decoded_gif_pixels_outside_overlays_match_approved": true
+    }
+  },
+  "compaction_variant_manifest": "idle and working mapped to 32-frame full-scene sources",
+  "cycle_preview_frames": 64,
+  "cycle_preview_duration_ms": 5310,
+  "review": "Native full-scene and rear-screen contacts inspected; owner approved both variants on 2026-10-05.",
+  "activation": "Separate review pack; no device upload or bridge/configuration changes.",
+  "offline_example_compilation": "passed",
+  "formatting_clippy_and_bridge_validation": "attempted; blocked by sandbox directory-access errors; not marked passed",
+  "external_helper_syntax": "PowerShell AST parser passed"
+}
