@@ -6,6 +6,7 @@ mod event;
 mod ipc;
 mod runtime;
 mod setup;
+mod storage;
 #[cfg(windows)]
 mod winpipe;
 
@@ -35,6 +36,17 @@ enum Command {
         config: PathBuf,
         #[arg(long)]
         dry_run: bool,
+    },
+    /// Upsert configured native GIFs to device storage; run before or outside the bridge.
+    SyncGifs {
+        #[arg(short, long)]
+        config: PathBuf,
+        /// Resend all GIFs, including those with unchanged transfer receipts.
+        #[arg(long)]
+        force: bool,
+        /// Export the native GIFs and plan without making any device requests.
+        #[arg(long)]
+        prepare_only: bool,
     },
     /// Forward official hook JSON from stdin; returns harmless success by default.
     Emit {
@@ -163,6 +175,18 @@ async fn execute(cli: Cli) -> Result<()> {
             config.dry_run |= dry_run;
             let pack = assets::Pack::load(&config.pack, config.device.max_frames)?;
             runtime::run(config, pack).await?;
+        }
+        Command::SyncGifs { config, force, prepare_only } => {
+            let config = Config::load(&config)?;
+            let pack = assets::Pack::load(&config.pack, config.device.max_frames)?;
+            let catalog = storage::Catalog::prepare(&config, &pack)?;
+            let mut report = catalog.report();
+            if prepare_only || config.dry_run {
+                report["preload"] = serde_json::json!("not requested; no device requests");
+            } else {
+                report["preload"] = serde_json::to_value(storage::sync(&config.device, &catalog, force, None).await?)?;
+            }
+            println!("{}", serde_json::to_string_pretty(&report)?);
         }
         Command::Emit { pipe, json, strict } => {
             let result = async {

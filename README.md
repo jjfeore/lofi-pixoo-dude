@@ -1,8 +1,8 @@
 # Pixoo pets for Codex
 
-This repo provides a reusable **create-pixoo-pet skill/plugin** and a small **Rust bridge for Windows**. The bridge follows documented local Codex lifecycle hooks and sends 64x64 RGB animations to a Divoom Pixoo64 over its LAN HTTP API.
+This repo provides a reusable **create-pixoo-pet skill/plugin** and a small **Rust bridge for Windows**. The bridge follows documented local Codex lifecycle hooks and plays locally stored 64x64 GIF animations on a Divoom Pixoo64 over its LAN HTTP API.
 
-The executable needs no Python or Node installation. Artwork is decoded and encoded once at startup. Stable clips loop on the display; the bridge sleeps between events instead of rendering or sending 12 frames per second.
+The executable needs no Python or Node installation. At startup, it exports the configured animations and upserts new or changed GIFs to the display. Unchanged files reuse prior transfer receipts, including after a restart. State changes select a saved filename, and stable clips loop on the display without continuing host frame transfers.
 
 ## Run
 
@@ -10,7 +10,7 @@ From a release bundle, use `pixoo-pet.exe`. From source, install the stable Rust
 
 ```powershell
 cargo build --locked --release
-.\target\release\pixoo-pet.exe validate .\pets\decker
+.\target\release\pixoo-pet.exe validate .\pets\decker\revisions\delegation-v3\review
 .\target\release\pixoo-pet.exe run --config .\config\bridge.example.toml --dry-run
 ```
 
@@ -25,6 +25,8 @@ Copy the example config into a private local directory and set `device.address` 
 Keep the bridge running. Install the generated hooks and completion adapter following [Codex setup](docs/codex-setup.md). Existing hooks and any completion notifier must be preserved. Closing the bridge leaves the panel's current content in place; hook emitters remain harmless when the bridge is unavailable. The Divoom app can select another channel after shutdown.
 
 ## Install or update Codex integration
+
+[Stored GIF playback](docs/stored-gifs.md) is the default, including when `device.transport` is omitted. The standard example uses the complete delegation-v3 pack and immediate filename selection. Set `device.transport = "frames"` explicitly to use the older per-switch RGB upload mode. The owner verified repeated idle/working recall with instant switches and no visible loading on this display; other devices still need a playback check.
 
 Create your private config, set its device address/token, and choose a pet:
 

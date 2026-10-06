@@ -1,5 +1,25 @@
 # Verification record
 
+## Default stored-GIF playback, 2026-10-05
+
+Stored GIFs are now the default for omitted transport settings and the standard example, with `switch_interval_ms = 0`. The normal private `local/bridge.toml` was migrated to the tested delegation-v3 configuration, retaining the original device credentials, pipe, notification forwarding and unrelated settings. Its cache and device folder reuse matching exact-byte transfer receipts for all 16 files. The original config was backed up under ignored `local/`. Explicit `transport = "frames"` remains available.
+
+The owner ran the bounded local-file test after preloading the GIFs: idle → working → idle → working, six seconds per clip. The owner reported instant switches with no visible loading. This confirms repeated recall of those two stored loops on this display; delegation entry/loop/exit and host-timed one-shot returns were not covered by that visual test. No optical latency measurement or reboot-persistence test was performed.
+
+The current binary unit run reported 29 passed and the same four filesystem failures caused by sandbox directory canonicalization (`Access is denied`, os error 5). The new omitted-transport/explicit-frames regression passed. All seven storage tests passed using the implicit transport default, including upsert/receipt reuse and writer selections for transitions and holds without event-time uploads. Python integration-test syntax, example/private config consistency, PowerShell helper syntax and Git whitespace checks passed. Clippy and rustfmt still fail on sandbox directory metadata access.
+
+The updated release executable built successfully. The targeted default-transport CLI/named-pipe integration test was attempted against it, but failed during fixture setup because the `example` command encounters the same directory access restriction; its playback assertions were not reached. Run `scripts/check-stored-gifs.ps1 -Format` in the owner's PowerShell for the remaining full host checks. No live bridge was started during this defaults change.
+
+## Initial stored-GIF implementation, 2026-10-05
+
+The selectable stored-GIF transport exports native GIFs, upserts changed files before playback, and uses type 0 local filename selection for runtime changes. Seven storage tests passed in the managed Windows session. They cover deterministic encoding, exact pixels for a limited palette, native dimensions/timing/repeat metadata, configured reference selection, all 11 physical delegation-v3 clips plus five derived holds, complete-GET requirements, unchanged/changed/forced sync behavior, invalidated receipts after failed forced resync, and transition/hold playback without raw-frame uploads.
+
+The full binary unit suite reported 28 passed and four failed. Those same four filesystem tests failed before this change because directory canonicalization returns `Access is denied (os error 5)` in this sandbox. The existing release pack validator fails at the same directory step. Clippy and rustfmt are also blocked by directory metadata access, and the CLI/named-pipe integration additions remain unexecuted here. Python test syntax and the PowerShell helper syntax passed. `git diff --check` passed.
+
+A read-only probe using the prepared stored-GIF configuration confirmed that the Pixoo was reachable, at brightness 100 and clock channel 0; firmware was not returned. No stored-GIF preload or visual playback was verified on the physical device in this update. Use `scripts/check-stored-gifs.ps1 -Format -Sync` from the owner's PowerShell to perform the remaining full checks and preload, then verify visible local-file recall. The private `local/bridge-stored-gifs.toml` selects delegation-v3 and preserves the current device credentials and completion forwarding. The existing active configuration was retained.
+
+## Initial implementation, 2026-10-02
+
 Tested on the owner's Windows computer on 2026-10-02, using a stable Rust 1.99 MSVC release build. Codex desktop was observed as 26.930.2377.0 with a bundled 0.159.0-alpha.12.1 CLI. These are local observations, not claims about every Codex version or Pixoo firmware.
 
 ## Code and packaging

@@ -1,10 +1,11 @@
 use crate::{
     assets::{Clip, Pack},
-    config::Config,
+    config::{Config, Transport},
     device::{self, Ack, Target},
     engine::{Engine, Outcome},
     event::Event,
     ipc,
+    storage::Catalog,
 };
 use anyhow::Result;
 use serde_json::json;
@@ -109,6 +110,11 @@ impl Playback {
 }
 
 pub async fn run(config: Config, pack: Pack) -> Result<()> {
+    let catalog = if config.device.transport == Transport::StoredGif {
+        Some(Arc::new(Catalog::prepare(&config, &pack)?))
+    } else {
+        None
+    };
     let status = Arc::new(Mutex::new(json!({
         "pack":pack.manifest.id, "observation":"events received since bridge start",
         "device":{"dry_run":config.dry_run}, "prepared_bytes":pack.encoded_bytes
@@ -134,6 +140,7 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
     let mut writer = tokio::spawn(device::writer(
         config.device.clone(),
         config.dry_run,
+        catalog,
         target_rx,
         ack_tx,
         status.clone(),

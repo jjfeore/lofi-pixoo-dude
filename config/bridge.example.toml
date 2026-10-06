@@ -1,5 +1,5 @@
 version = 1
-pack = "../pets/decker"
+pack = "../pets/decker/revisions/delegation-v3/review"
 pipe = '\\.\pipe\pixoo-pet'
 dry_run = false
 # If Codex already has a notify command, copy its complete array here before
@@ -8,15 +8,28 @@ notification_forward = []
 
 [device]
 address = "192.168.1.123" # change to your own Pixoo's IP or hostname
+# Default: upsert changed GIFs at startup, then select stored filenames.
+# Set transport = "frames" explicitly for per-switch RGB uploads.
+transport = "stored-gif"
 # Optional on firmware that expects LocalToken. Keep real credentials local.
 # local_token = 123456
 # brightness = 35  # omit to preserve the current brightness
 max_frames = 40
 timeout_ms = 3000
 frame_upload_interval_ms = 150
-switch_interval_ms = 1000
+switch_interval_ms = 0
 # Calibrate visible-start delay on your hardware if host one-shot timing needs it.
 playback_start_delay_ms = 0
+
+[device.storage]
+# Relative to this config; exports and transfer receipts stay in private local/.
+cache_dir = "../local/stored-gifs"
+directory = "codex-pet/decker"
+bind = "0.0.0.0:8787"
+# Auto-detected from the route to the Pixoo; override for another host interface.
+# public_base_url = "http://192.168.1.18:8787"
+download_timeout_ms = 15000
+settle_ms = 500
 
 [animations]
 # Names default to the logical state name. Missing clips are skipped.

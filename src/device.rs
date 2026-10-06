@@ -1,4 +1,4 @@
-use crate::{assets::Clip, config::DeviceConfig};
+use crate::{assets::Clip, config::{DeviceConfig, Transport}, storage::{self, Catalog}};
 use anyhow::{Context, Result, ensure};
 use serde_json::{Value, json};
 use std::sync::Arc;
@@ -89,15 +89,35 @@ pub struct Ack {
 pub async fn writer(
     config: DeviceConfig,
     dry_run: bool,
+    catalog: Option<Arc<Catalog>>,
     mut rx: watch::Receiver<Target>,
     ack: mpsc::Sender<Ack>,
     status: Arc<std::sync::Mutex<Value>>,
 ) -> Result<()> {
+    ensure!(config.transport != Transport::StoredGif || catalog.is_some(), "stored GIF catalog missing");
     let device = if dry_run {
         None
     } else {
         Some(Device::new(config.clone())?)
     };
+    if let Some(catalog) = &catalog {
+        if dry_run {
+            status.lock().unwrap()["storage"] = json!({"phase":"dry-run", "files":catalog.files.len()});
+        } else {
+            let mut retry_ms = 500;
+            loop {
+                match storage::sync(&config, catalog, false, Some(&status)).await {
+                    Ok(_) => break,
+                    Err(error) => {
+                        status.lock().unwrap()["storage"] = json!({"phase":"failed", "error":format!("{error:#}")});
+                        eprintln!("GIF preload failed: {error:#}; retrying with bounded backoff");
+                        sleep(Duration::from_millis(retry_ms)).await;
+                        retry_ms = (retry_ms * 2).min(30_000);
+                    }
+                }
+            }
+        }
+    }
     let mut brightness_set = false;
     let mut last_key: Option<String> = None;
     let mut last_switch = Instant::now() - Duration::from_millis(config.switch_interval_ms);
@@ -142,7 +162,7 @@ pub async fn writer(
                 change = rx.changed() => { if change.is_err() { return Ok(()); } continue; }
             }
         }
-        // A partial/cancelled upload invalidates the previous residency assumption.
+        // An interrupted request makes the currently selected clip uncertain.
         last_key = None;
         one_shot_end = None;
         last_switch = Instant::now();
@@ -153,19 +173,26 @@ pub async fn writer(
                         .command(json!({"Command":"Channel/SetBrightness","Brightness":brightness}))
                         .await?;
                 }
-                device
-                    .command(json!({"Command":"Draw/ResetHttpGifId"}))
-                    .await?;
-                for (index, data) in clip.frames.iter().enumerate() {
+                if let Some(catalog) = &catalog {
                     device
-                        .command(json!({
-                            "Command":"Draw/SendHttpGif", "PicNum":clip.frames.len(),
-                            "PicWidth":64, "PicOffset":index, "PicID":1,
-                            "PicSpeed":clip.frame_ms, "PicData":data
-                        }))
+                        .command(json!({"Command":"Device/PlayTFGif", "FileType":0,
+                            "FileName":catalog.get(clip)?.local_name}))
                         .await?;
-                    if index + 1 < clip.frames.len() {
-                        sleep(Duration::from_millis(config.frame_upload_interval_ms)).await;
+                } else {
+                    device
+                        .command(json!({"Command":"Draw/ResetHttpGifId"}))
+                        .await?;
+                    for (index, data) in clip.frames.iter().enumerate() {
+                        device
+                            .command(json!({
+                                "Command":"Draw/SendHttpGif", "PicNum":clip.frames.len(),
+                                "PicWidth":64, "PicOffset":index, "PicID":1,
+                                "PicSpeed":clip.frame_ms, "PicData":data
+                            }))
+                            .await?;
+                        if index + 1 < clip.frames.len() {
+                            sleep(Duration::from_millis(config.frame_upload_interval_ms)).await;
+                        }
                     }
                 }
             }
@@ -182,14 +209,21 @@ pub async fn writer(
                 last_switch = Instant::now();
                 retry_ms = 500;
                 brightness_set = true;
-                let hold_ms = clip.duration_ms() + config.playback_start_delay_ms;
+                let hold_ms = catalog.as_ref().map(|catalog| catalog.get(clip).map(|file| file.duration_ms))
+                    .transpose()?.unwrap_or_else(|| clip.duration_ms()) + config.playback_start_delay_ms;
                 if target.single_play || (!clip.looping && clip.frames.len() > 1) {
                     one_shot_end = Some(Instant::now() + Duration::from_millis(hold_ms));
                 }
                 {
                     let mut state = status.lock().unwrap();
-                    state["device"] = json!({"dry_run":dry_run,"last_uploaded_clip":clip.name,"healthy":true,
-                            "upload_ms":upload_ms});
+                    state["device"] = json!({"dry_run":dry_run,"last_clip":clip.name,"healthy":true,
+                        "transport":config.transport.name(), "selection_ms":upload_ms});
+                    if catalog.is_some() {
+                        state["device"]["last_played_clip"] = json!(clip.name);
+                    } else {
+                        state["device"]["last_uploaded_clip"] = json!(clip.name);
+                        state["device"]["upload_ms"] = json!(upload_ms);
+                    }
                 }
                 let _ = ack
                     .send(Ack {
@@ -199,7 +233,7 @@ pub async fn writer(
                     .await;
                 eprintln!(
                     "{}: {}",
-                    if dry_run { "simulated" } else { "uploaded" },
+                    if dry_run { "simulated" } else if catalog.is_some() { "selected local GIF" } else { "uploaded" },
                     clip.name
                 );
             }
