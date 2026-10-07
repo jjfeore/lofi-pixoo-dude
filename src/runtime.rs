@@ -3,7 +3,7 @@ use crate::{
     config::{Config, Transport},
     device::{self, Ack, Target},
     engine::{Engine, Outcome},
-    event::Event,
+    event::{Event, Kind},
     ipc,
     storage::Catalog,
 };
@@ -163,6 +163,13 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
         tokio::select! {
             Some(event) = events_rx.recv() => {
                 let outcome = engine.apply(&event);
+                if matches!(event.kind, Kind::AgentStart | Kind::AgentStop) {
+                    eprintln!(
+                        "delegation event: {:?}; observed_children={}",
+                        event.kind,
+                        engine.snapshot().observed_children
+                    );
+                }
                 let next = playback.on_event(&outcome, &engine, &config, &pack);
                 if let Some((clip,single_play)) = next {
                     target = Target { serial:target.serial+1,clip,single_play,created:Instant::now() };
@@ -220,7 +227,8 @@ mod tests {
     fn signal(playback: &mut Playback, engine: &mut Engine, pack: &Pack, kind: Kind, agent: Option<&str>)
         -> Option<(String, bool)> {
         let event = Event {
-            kind, session_id: "parent".into(), turn_id: Some("turn".into()),
+            kind, session_id: "parent".into(),
+            turn_id: Some(agent.map_or_else(|| "turn".into(), |id| format!("child-{id}"))),
             agent_id: agent.map(str::to_owned), tool_name: Some("Bash".into()), tool_use_id: None,
             observed_at_ms: 1,
         };

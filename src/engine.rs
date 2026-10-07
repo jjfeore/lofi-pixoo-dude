@@ -138,8 +138,10 @@ impl Engine {
                 // Manual compaction doesn't force the already-idle base pose into working.
             }
             Kind::CompactEnd if matches => session.compacting = false,
-            Kind::AgentStart if matches => {
-                session.turn = Some(turn.into());
+            // Subagent hooks identify the parent session, but their turn ID can
+            // belong to the child (or be absent). Keep the parent's turn intact.
+            // A known, completed parent must not be revived by a late hook.
+            Kind::AgentStart if session.running || session.turn.is_none() => {
                 session.running = true;
                 if let Some(agent) = &event.agent_id
                     && session.children.len() < MAX_CHILDREN
@@ -147,7 +149,7 @@ impl Engine {
                     session.children.insert(agent.clone());
                 }
             }
-            Kind::AgentStop if matches => {
+            Kind::AgentStop => {
                 if let Some(agent) = &event.agent_id {
                     session.children.remove(agent);
                 }
@@ -160,6 +162,7 @@ impl Engine {
                     session.terminals.pop_front();
                 }
                 if matches {
+                    session.turn = Some(turn.into());
                     session.running = false;
                     session.approvals.clear();
                     session.children.clear();
@@ -261,6 +264,70 @@ mod tests {
         e.kind = Kind::Interrupt;
         assert_eq!(engine.apply(&e).reaction, Some("interrupted"));
         assert!(!engine.busy());
+    }
+    #[test]
+    fn delegation_hooks_with_child_turn_ids_preserve_the_parent_turn() {
+        let mut engine = Engine::default();
+        engine.apply(&event(Kind::Prompt, "parent", "parent-turn", 10));
+        let mut child = event(Kind::AgentStart, "parent", "child-turn", 20);
+        child.agent_id = Some("child".into());
+        assert!(engine.apply(&child).entered_delegation);
+        assert_eq!(engine.snapshot().observed_children, 1);
+        assert_eq!(engine.sessions["parent"].turn.as_deref(), Some("parent-turn"));
+        child.kind = Kind::AgentStop;
+        child.observed_at_ms = 30;
+        assert!(engine.apply(&child).finished_delegation);
+        assert!(engine.busy());
+        assert_eq!(engine.candidates(), ["working"]);
+        assert_eq!(
+            engine.apply(&event(Kind::Complete, "parent", "parent-turn", 40)).reaction,
+            Some("finished")
+        );
+        assert!(!engine.busy());
+    }
+    #[test]
+    fn delegation_hooks_without_turn_ids_track_parallel_children() {
+        let mut engine = Engine::default();
+        engine.apply(&event(Kind::Prompt, "parent", "parent-turn", 10));
+        let mut child = event(Kind::AgentStart, "parent", "unused", 20);
+        child.turn_id = None;
+        child.agent_id = Some("one".into());
+        assert!(engine.apply(&child).entered_delegation);
+        child.agent_id = Some("two".into());
+        assert!(!engine.apply(&child).entered_delegation);
+        assert_eq!(engine.snapshot().observed_children, 2);
+        child.kind = Kind::AgentStop;
+        child.agent_id = Some("one".into());
+        assert!(!engine.apply(&child).finished_delegation);
+        assert!(engine.delegating());
+        child.agent_id = Some("two".into());
+        assert!(engine.apply(&child).finished_delegation);
+        assert!(engine.busy());
+    }
+    #[test]
+    fn late_delegation_hooks_do_not_restart_a_completed_parent() {
+        let mut engine = Engine::default();
+        engine.apply(&event(Kind::Prompt, "parent", "parent-turn", 10));
+        engine.apply(&event(Kind::Complete, "parent", "parent-turn", 20));
+        let mut child = event(Kind::AgentStart, "parent", "child-turn", 30);
+        child.agent_id = Some("child".into());
+        assert!(!engine.apply(&child).entered_delegation);
+        assert!(!engine.busy());
+        assert!(!engine.delegating());
+    }
+    #[test]
+    fn delegation_cannot_restart_a_parent_whose_prompt_was_unobserved() {
+        let mut engine = Engine::default();
+        let mut child = event(Kind::AgentStart, "parent", "child-turn", 10);
+        child.agent_id = Some("child".into());
+        assert!(engine.apply(&child).entered_delegation);
+        assert!(engine.busy());
+        engine.apply(&event(Kind::Complete, "parent", "parent-turn", 20));
+        child.turn_id = Some("other-child-turn".into());
+        child.observed_at_ms = 30;
+        assert!(!engine.apply(&child).entered_delegation);
+        assert!(!engine.busy());
+        assert!(!engine.delegating());
     }
     #[test]
     fn delegation_edges_follow_first_and_last_child_across_chats() {

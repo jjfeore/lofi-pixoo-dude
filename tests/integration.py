@@ -303,14 +303,14 @@ class Integration(unittest.TestCase):
         f.emit("UserPromptSubmit")
         f.uploaded("working-enter")
         f.uploaded("working")
-        f.emit("SubagentStart", agent_id="one")
+        f.emit("SubagentStart", agent_id="one", turn="child-one")
         f.uploaded("delegating-start")
-        f.emit("SubagentStart", agent_id="two")
+        f.emit("SubagentStart", agent_id="two", turn="child-two")
         f.uploaded("delegating")
-        f.emit("SubagentStop", agent_id="one")
+        f.emit("SubagentStop", agent_id="one", turn="child-one")
         f.wait(lambda s: s.get("state", {}).get("observed_children") == 1)
         self.assertEqual(f.state()["desired_clip"], "delegating")
-        f.emit("SubagentStop", agent_id="two")
+        f.emit("SubagentStop", agent_id="two", turn="child-two")
         f.uploaded("delegating-finished")
         f.uploaded("working")
         self.assertEqual(f.state()["state"]["working"], 1)
@@ -337,11 +337,14 @@ class Integration(unittest.TestCase):
         f = self.fixture(dry=True)
         hooks = self.root / "hooks.json"
         cli("hooks", "-c", f.config, "--output", hooks)
-        command = json.loads(hooks.read_text())["hooks"]["UserPromptSubmit"][0]["hooks"][0]["command"]
-        result = subprocess.run(command, input=json.dumps({"hook_event_name":"UserPromptSubmit",
-            "session_id":"a","turn_id":"1"}), text=True, shell=True, capture_output=True,
-            creationflags=subprocess.CREATE_NO_WINDOW, timeout=3)
-        self.assertEqual(result.returncode,0,result.stderr)
+        handler = json.loads(hooks.read_text())["hooks"]["UserPromptSubmit"][0]["hooks"][0]
+        command = handler["commandWindows"]
+        for args in (["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", command],
+                     f'{os.environ.get("COMSPEC", "cmd.exe")} /C "{command}"'):
+            result = subprocess.run(args, input=json.dumps({"hook_event_name":"UserPromptSubmit",
+                "session_id":"a","turn_id":"1"}), text=True, capture_output=True,
+                creationflags=subprocess.CREATE_NO_WINDOW, timeout=3)
+            self.assertEqual(result.returncode,0,result.stderr)
         f.wait(lambda s: s.get("state",{}).get("working")==1)
         output = self.root / "forwarded.json"
         helper = self.root / "notifier.py"

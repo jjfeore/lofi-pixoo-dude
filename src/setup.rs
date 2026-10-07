@@ -1,8 +1,42 @@
 use crate::{assets::Pack, config::Config, shell_path};
 use anyhow::{Context, Result, ensure};
+use base64::{Engine as _, engine::general_purpose::STANDARD};
 use serde_json::{Value, json};
 use std::{fs, path::Path};
 use toml_edit::{Array, DocumentMut, Item, value};
+
+fn windows_emit_command(exe: &Path, pipe: &str) -> (String, u64) {
+    let path = exe.to_string_lossy();
+    let plain = |text: &str| {
+        !text.is_empty()
+            && text.chars().all(|c| {
+                c.is_ascii_alphanumeric() || matches!(c, ':' | '\\' | '/' | '.' | '_' | '-')
+            })
+    };
+    // Safe bare arguments work in both Windows shells without another process.
+    // In particular, the usual C:\pixoo-style install and pipe need no quotes.
+    if plain(&path) && plain(pipe) {
+        return (format!("{path} emit --pipe {pipe}"), 1);
+    }
+    // Codex inherits the session shell, which can be PowerShell or cmd.exe.
+    // A quoted path alone is a string expression in PowerShell. Keep quotes out
+    // of the outer command and explicitly invoke the native emitter inside a
+    // UTF-16LE encoded PowerShell command. Its stdin stays attached to the hook.
+    let literal = |text: &str| format!("'{}'", text.replace('\'', "''"));
+    let script = format!(
+        "& {} emit --pipe {}; exit $LASTEXITCODE",
+        literal(&path),
+        literal(pipe),
+    );
+    let bytes: Vec<u8> = script.encode_utf16().flat_map(u16::to_le_bytes).collect();
+    (
+        format!(
+            "powershell.exe -NoProfile -NonInteractive -EncodedCommand {}",
+            STANDARD.encode(bytes),
+        ),
+        3,
+    )
+}
 
 pub fn hook_spec(config: &Config, pack: &Pack, exe: &Path) -> Result<Value> {
     for text in [exe.to_string_lossy(), config.pipe.as_str().into()] {
@@ -12,6 +46,7 @@ pub fn hook_spec(config: &Config, pack: &Pack, exe: &Path) -> Result<Value> {
         );
     }
     let command = format!("\"{}\" emit --pipe \"{}\"", exe.display(), config.pipe);
+    let (windows_command, timeout) = windows_emit_command(exe, &config.pipe);
     let mut hooks = serde_json::Map::new();
     let mut events = vec![
         "SessionStart",
@@ -32,7 +67,8 @@ pub fn hook_spec(config: &Config, pack: &Pack, exe: &Path) -> Result<Value> {
         }
     }
     for event in events {
-        let mut group = json!({"hooks":[{"type":"command","command":command,"timeout":1}]});
+        let mut group = json!({"hooks":[{"type":"command","command":command,
+            "commandWindows":windows_command,"timeout":timeout}]});
         if event == "PostToolUse" {
             group["matcher"] = json!("^(Bash|apply_patch|Edit|Write|mcp__.*)$");
         }
@@ -292,7 +328,8 @@ mod tests {
         let old = json!({"unrelated":true,"hooks":{"UserPromptSubmit":[other.clone(),
             {"hooks":[{"type":"command","command":"\"C:\\old\\pixoo-pet.exe\" emit --pipe \"old\""}]}]}});
         let replacement =
-            json!({"hooks":[{"type":"command","command":"\"pixoo-pet.exe\" emit --pipe \"new\""}]});
+            json!({"hooks":[{"type":"command","command":"\"pixoo-pet.exe\" emit --pipe \"new\"",
+                "commandWindows":windows_emit_command(exe, "new").0}]});
         let fragment = json!({"hooks":{"UserPromptSubmit":[replacement.clone()]}});
         let merged = merge_hooks(old, &fragment, exe).unwrap();
         assert_eq!(
@@ -301,5 +338,72 @@ mod tests {
         );
         assert_eq!(merged["unrelated"], true);
         assert_eq!(merge_hooks(merged.clone(), &fragment, exe).unwrap(), merged);
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn windows_hook_invokes_quoted_paths_in_both_shells() {
+        use std::os::windows::process::CommandExt;
+        use std::{
+            io::Write,
+            process::{Command, Stdio},
+        };
+
+        let root = tempfile::tempdir().unwrap();
+        // A batch child records what it receives. Spaces, apostrophes,
+        // and shell metacharacters must remain literal arguments, not commands.
+        for (name, pipe, quoted) in [
+            ("hook-child.cmd", r"\\.\pipe\pixoo-test", false),
+            ("hook child ' test.cmd", r"\\.\pipe\pixoo ' test & value", true),
+        ] {
+            let child = root.path().join(name);
+            fs::write(
+                &child,
+                "@echo off\r\necho %1\r\necho %2\r\necho %3\r\nset /p taskPayload=\r\necho %taskPayload%\r\n",
+            )
+            .unwrap();
+            let (command_line, _) = windows_emit_command(&child, pipe);
+            for program in ["powershell.exe", "cmd.exe"] {
+                let mut command = Command::new(program);
+                if program == "cmd.exe" {
+                    command.arg("/C").raw_arg(format!("\"{command_line}\""));
+                } else {
+                    command.args(["-NoProfile", "-NonInteractive", "-Command", &command_line]);
+                }
+                let mut process = command
+                    .creation_flags(0x08000000)
+                    .stdin(Stdio::piped())
+                    .stdout(Stdio::piped())
+                    .stderr(Stdio::piped())
+                    .spawn()
+                    .unwrap();
+                process
+                    .stdin
+                    .take()
+                    .unwrap()
+                    .write_all(b"{\"session_id\":\"stdin-retained\"}\n")
+                    .unwrap();
+                let result = process.wait_with_output().unwrap();
+                assert!(
+                    result.status.success(),
+                    "{program}: {}",
+                    String::from_utf8_lossy(&result.stderr)
+                );
+                let lines: Vec<_> = String::from_utf8(result.stdout)
+                    .unwrap()
+                    .lines()
+                    .map(str::to_owned)
+                    .collect();
+                let expected_pipe = if quoted {
+                    format!("\"{pipe}\"")
+                } else {
+                    pipe.into()
+                };
+                assert_eq!(
+                    lines,
+                    ["emit", "--pipe", &expected_pipe, "{\"session_id\":\"stdin-retained\"}"]
+                );
+            }
+        }
     }
 }

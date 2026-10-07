@@ -20,7 +20,7 @@ if (-not $Python) {
 Push-Location -LiteralPath $taskRepoRoot
 try {
     if ($Format) {
-        & rustfmt --edition 2024 --config skip_children=true src/config.rs src/device.rs src/main.rs src/runtime.rs src/storage.rs
+        & rustfmt --edition 2024 --config skip_children=true src/config.rs src/device.rs src/engine.rs src/main.rs src/runtime.rs src/setup.rs src/storage.rs
         if ($LASTEXITCODE -ne 0) { throw 'Bridge formatting failed.' }
     }
     & cargo test --locked --bin pixoo-pet
