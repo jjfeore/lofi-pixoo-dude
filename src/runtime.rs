@@ -12,7 +12,7 @@ use serde_json::json;
 use std::sync::{Arc, Mutex};
 use tokio::{
     sync::{mpsc, watch},
-    time::{Duration, Instant},
+    time::Instant,
 };
 
 pub fn base(engine: &Engine, config: &Config, pack: &Pack) -> Option<Arc<Clip>> {
@@ -109,6 +109,17 @@ impl Playback {
     }
 }
 
+fn acknowledge_playback(target: &Target, ack: Ack, deadline: &mut Option<Instant>) {
+    if ack.serial == target.serial
+        && (target.single_play
+            || target.clip.as_ref().is_some_and(|clip| !clip.looping && clip.frames.len() > 1))
+    {
+        // Preserve the writer's deadline even if the acknowledgement sat in the
+        // queue, or arrived after the clip should already have finished.
+        *deadline = Some(ack.playback_ends_at);
+    }
+}
+
 pub async fn run(config: Config, pack: Pack) -> Result<()> {
     let catalog = if config.device.transport == Transport::StoredGif {
         Some(Arc::new(Catalog::prepare(&config, &pack)?))
@@ -178,10 +189,7 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
                 }
             }
             Some(ack) = ack_rx.recv() => {
-                if ack.serial == target.serial &&
-                    (target.single_play || target.clip.as_ref().is_some_and(|c| !c.looping && c.frames.len()>1)) {
-                    deadline = Some(Instant::now()+Duration::from_millis(ack.hold_ms));
-                }
+                acknowledge_playback(&target, ack, &mut deadline);
             }
             _ = timer => {
                 deadline = None;
@@ -203,6 +211,38 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
 mod tests {
     use super::*;
     use crate::event::Kind;
+    use tokio::time::{Duration, sleep, timeout};
+
+    #[tokio::test]
+    async fn delayed_playback_acknowledgement_does_not_restart_the_one_shot_timer() {
+        let target = Target { serial: 7, clip: None, single_play: true, created: Instant::now() };
+        let playback_ends_at = Instant::now() + Duration::from_millis(20);
+        let (sender, mut receiver) = mpsc::channel(1);
+        sender.send(Ack { serial: target.serial, playback_ends_at }).await.unwrap();
+        sleep(Duration::from_millis(40)).await;
+        let mut deadline = None;
+        acknowledge_playback(&target, receiver.recv().await.unwrap(), &mut deadline);
+        assert_eq!(deadline, Some(playback_ends_at));
+        timeout(Duration::from_millis(50), tokio::time::sleep_until(deadline.unwrap()))
+            .await.unwrap();
+    }
+
+    #[test]
+    fn stale_acknowledgements_and_native_loops_do_not_replace_a_one_shot_deadline() {
+        let pack = delegation_pack(true);
+        let mut target = Target { serial: 7, clip: Some(pack.clips["working-enter"].clone()),
+            single_play: false, created: Instant::now() };
+        let playback_ends_at = Instant::now() + Duration::from_secs(1);
+        let mut deadline = None;
+        acknowledge_playback(&target, Ack { serial: 7, playback_ends_at }, &mut deadline);
+        assert_eq!(deadline, Some(playback_ends_at));
+        acknowledge_playback(&target, Ack { serial: 6, playback_ends_at: Instant::now() }, &mut deadline);
+        assert_eq!(deadline, Some(playback_ends_at));
+        target.clip = Some(pack.clips["working"].clone());
+        deadline = None;
+        acknowledge_playback(&target, Ack { serial: 7, playback_ends_at }, &mut deadline);
+        assert!(deadline.is_none());
+    }
 
     fn delegation_pack(transitions: bool) -> Pack {
         let names = ["idle", "working", "working-enter", "delegating", "needs-input", "compacting", "finished", "interrupted"];

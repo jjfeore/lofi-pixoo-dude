@@ -17,7 +17,7 @@ See [the example](../config/bridge.example.toml). The bridge reads TOML once at 
 | device.timeout_ms | 3000, range 100-30000 per HTTP request |
 | device.frame_upload_interval_ms | 150; wait between upload frames in `frames` mode, not between playback frames; unused in stored mode |
 | device.switch_interval_ms | 0; immediate ordinary clip selection; positive values add pacing; one-shot expiry may return sooner |
-| device.playback_start_delay_ms | 0; extra host hold time after selection for a measured visible-start delay |
+| device.playback_start_delay_ms | 0; measured visible-start offset added to the stored-GIF request time, or frame-upload completion time |
 | animations | Logical state → supplied clip name; missing mapping uses the same name, empty string disables it |
 
 Use TOML literal single-quoted strings for Windows paths and named pipes, avoiding backslash escaping. For example:

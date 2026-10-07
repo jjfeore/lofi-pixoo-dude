@@ -1,8 +1,16 @@
 # Verification record
 
+## Absolute one-shot deadlines, 2026-10-07
+
+Review of the brief repeat found a host timing error: the writer waited for the local-file play response, then the runtime started a fresh full-duration countdown after receiving its acknowledgement. The updated writer anchors stored playback to the start of the successful play request, after any brightness setup. Frame playback retains its upload-completion anchor. The writer and runtime share the resulting absolute deadline, including the existing calibrated visible-start offset. A late response or queued acknowledgement does not restart the countdown, and an expired one-shot bypasses ordinary switch pacing when returning.
+
+All nine storage tests and eight in-memory runtime tests passed. Four new regressions cover delayed local-file responses and prior brightness setup, expired-deadline return with two-second switch pacing, completed frame-upload timing, delayed acknowledgement delivery, stale serials and native-loop silence. Existing deterministic GIF encoding, configured exports/upserts and six delegation selection tests continue to pass. The existing filesystem-based runtime fixture was excluded because directory canonicalization is blocked in this managed Windows session. These checks establish the host timing behavior; visible playback after installing this update remains to be confirmed by the owner.
+
+The release compiled and linked, but Cargo could not replace the running installed executable. The fresh compiled artifact was staged under `local/animation-timing-fix-20261007/`; its source/artifact timestamps, Windows executable header, distinct SHA256, version command, update-helper PowerShell syntax and installer check-only hash validation passed. The guarded helper backs up and replaces the executable, then restarts the exact existing bridge configuration. The owner must run it in normal PowerShell. No hook, configuration, shortcut or encoded-GIF changes are needed for this update.
+
 ## Natural delegation retest, 2026-10-07
 
-After the owner applied the executable update, its installed SHA256 matched the prepared candidate. A fresh, read-only subagent task exercised the real lifecycle hooks without synthetic bridge events. The running bridge log recorded AgentStart with one observed child, delegation entry and loop, then AgentStop with zero observed children, delegation exit and return to working. The parent turn was held open until the exit animation's timer completed. This confirms natural start/stop event delivery and the selected stored-GIF sequence; the owner's visual confirmation of this retest is pending.
+After the owner applied the executable update, its installed SHA256 matched the prepared candidate. A fresh, read-only subagent task exercised the real lifecycle hooks without synthetic bridge events. The running bridge log recorded AgentStart with one observed child, delegation entry and loop, then AgentStop with zero observed children, delegation exit and return to working. The parent turn was held open until the exit animation's timer completed. The owner confirmed that the delegation animations displayed correctly, and reported that work entry/completion clips briefly began a second pass before returning. This establishes natural start/stop event delivery and visible delegation playback; the repeat observation prompted the absolute-deadline timing change.
 
 ## Delegation parent-session handling, 2026-10-06
 

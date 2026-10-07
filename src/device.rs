@@ -83,7 +83,7 @@ impl Target {
 
 pub struct Ack {
     pub serial: u64,
-    pub hold_ms: u64,
+    pub playback_ends_at: Instant,
 }
 
 pub async fn writer(
@@ -141,7 +141,7 @@ pub async fn writer(
             let _ = ack
                 .send(Ack {
                     serial: target.serial,
-                    hold_ms: 0,
+                    playback_ends_at: Instant::now(),
                 })
                 .await;
             if rx.changed().await.is_err() {
@@ -174,10 +174,13 @@ pub async fn writer(
                         .await?;
                 }
                 if let Some(catalog) = &catalog {
-                    device
-                        .command(json!({"Command":"Device/PlayTFGif", "FileType":0,
-                            "FileName":catalog.get(clip)?.local_name}))
-                        .await?;
+                    let command = json!({"Command":"Device/PlayTFGif", "FileType":0,
+                        "FileName":catalog.get(clip)?.local_name});
+                    // Playback may begin before the HTTP response arrives. Keep
+                    // that response time out of the one-shot's playback budget.
+                    let playback_started_at = Instant::now();
+                    device.command(command).await?;
+                    return Ok(playback_started_at);
                 } else {
                     device
                         .command(json!({"Command":"Draw/ResetHttpGifId"}))
@@ -196,14 +199,16 @@ pub async fn writer(
                     }
                 }
             }
-            Ok::<(), anyhow::Error>(())
+            // Frame uploads become playable only after their last frame; dry
+            // runs simulate an immediate selection at this same boundary.
+            Ok::<Instant, anyhow::Error>(Instant::now())
         };
         let result = tokio::select! {
             result = upload => result,
             change = rx.changed() => { if change.is_err() { return Ok(()); } continue; }
         };
         match result {
-            Ok(()) => {
+            Ok(playback_started_at) => {
                 let upload_ms = last_switch.elapsed().as_millis();
                 last_key = Some(clip.name.clone());
                 last_switch = Instant::now();
@@ -211,8 +216,9 @@ pub async fn writer(
                 brightness_set = true;
                 let hold_ms = catalog.as_ref().map(|catalog| catalog.get(clip).map(|file| file.duration_ms))
                     .transpose()?.unwrap_or_else(|| clip.duration_ms()) + config.playback_start_delay_ms;
+                let playback_ends_at = playback_started_at + Duration::from_millis(hold_ms);
                 if target.single_play || (!clip.looping && clip.frames.len() > 1) {
-                    one_shot_end = Some(Instant::now() + Duration::from_millis(hold_ms));
+                    one_shot_end = Some(playback_ends_at);
                 }
                 {
                     let mut state = status.lock().unwrap();
@@ -228,7 +234,7 @@ pub async fn writer(
                 let _ = ack
                     .send(Ack {
                         serial: target.serial,
-                        hold_ms,
+                        playback_ends_at,
                     })
                     .await;
                 eprintln!(

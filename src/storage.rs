@@ -344,6 +344,7 @@ pub async fn sync(config: &DeviceConfig, catalog: &Catalog, force: bool, status:
 mod tests {
     use super::*;
     use crate::assets::Manifest;
+    use tokio::time::Instant;
 
     fn clip(name: &str, looping: bool) -> Arc<Clip> {
         Arc::new(Clip {
@@ -472,11 +473,19 @@ mod tests {
         assert!(storage.validate().is_ok());
     }
 
+    struct CommandTiming {
+        command: String,
+        requested_at: Instant,
+        replied_at: Instant,
+    }
+
     struct MockDevice {
         address: String,
         calls: Arc<Mutex<Vec<Value>>>,
         files: Arc<Mutex<BTreeMap<String, Vec<u8>>>>,
         fetch_mode: Arc<std::sync::atomic::AtomicU8>,
+        response_delays: Arc<Mutex<BTreeMap<String, u64>>>,
+        timings: Arc<Mutex<Vec<CommandTiming>>>,
         task: JoinHandle<()>,
     }
 
@@ -491,9 +500,13 @@ mod tests {
             let calls = Arc::new(Mutex::new(Vec::new()));
             let files = Arc::new(Mutex::new(BTreeMap::new()));
             let fetch_mode = Arc::new(std::sync::atomic::AtomicU8::new(1));
+            let response_delays = Arc::new(Mutex::new(BTreeMap::<String, u64>::new()));
+            let timings = Arc::new(Mutex::new(Vec::new()));
             let captured = calls.clone();
             let stored = files.clone();
             let mode = fetch_mode.clone();
+            let delays = response_delays.clone();
+            let recorded_timings = timings.clone();
             let task = tokio::spawn(async move {
                 while let Ok((mut stream, _)) = listener.accept().await {
                     let mut request = Vec::new();
@@ -515,6 +528,8 @@ mod tests {
                         request.extend_from_slice(&chunk[..count]);
                     }
                     let value: Value = serde_json::from_slice(&request[header_end..header_end+length]).unwrap();
+                    let requested_at = Instant::now();
+                    let command = value["Command"].as_str().unwrap().to_owned();
                     captured.lock().unwrap().push(value.clone());
                     let mut error_code = 0;
                     if value["Command"] == "Device/SaveTFGif" {
@@ -532,13 +547,18 @@ mod tests {
                         && !stored.lock().unwrap().contains_key(value["FileName"].as_str().unwrap()) {
                         error_code = 2;
                     }
+                    let delay_ms = delays.lock().unwrap().get(&command).copied().unwrap_or(0);
+                    if delay_ms > 0 { sleep(Duration::from_millis(delay_ms)).await; }
                     let body = format!("{{\"error_code\":{error_code}}}");
                     let response = format!("HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}", body.len());
+                    recorded_timings.lock().unwrap().push(CommandTiming {
+                        command, requested_at, replied_at: Instant::now(),
+                    });
                     stream.write_all(response.as_bytes()).await.unwrap();
                     stream.shutdown().await.unwrap();
                 }
             });
-            Self { address, calls, files, fetch_mode, task }
+            Self { address, calls, files, fetch_mode, response_delays, timings, task }
         }
 
         fn config(&self, root: &Path) -> Config {
@@ -614,6 +634,83 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn stored_one_shot_deadline_excludes_brightness_and_response_time_and_bypasses_pacing() {
+        let root = tempfile::tempdir().unwrap();
+        let mock = MockDevice::start().await;
+        let mut config = mock.config(root.path());
+        config.device.brightness = Some(25);
+        config.device.playback_start_delay_ms = 50;
+        config.device.switch_interval_ms = 2000;
+        mock.response_delays.lock().unwrap().extend([
+            ("Channel/SetBrightness".into(), 100), ("Device/PlayTFGif".into(), 300),
+        ]);
+        let pack = test_pack();
+        let catalog = Arc::new(Catalog::prepare(&config, &pack).unwrap());
+        let hold = Duration::from_millis(catalog.files["work-entry"].duration_ms
+            + config.device.playback_start_delay_ms);
+        let initial = crate::device::Target { serial: 1, clip: Some(pack.clips["work-entry"].clone()),
+            single_play: true, created: Instant::now() };
+        let (targets, receiver) = tokio::sync::watch::channel(initial);
+        let (acknowledgements, mut acks) = mpsc::channel(16);
+        let writer = tokio::spawn(crate::device::writer(config.device, false, Some(catalog), receiver,
+            acknowledgements, Arc::new(Mutex::new(json!({})))));
+        let ack = timeout(Duration::from_secs(3), acks.recv()).await.unwrap().unwrap();
+        let playback_started_at = ack.playback_ends_at - hold;
+        {
+            let timings = mock.timings.lock().unwrap();
+            let brightness = timings.iter().find(|timing| timing.command == "Channel/SetBrightness").unwrap();
+            let play = timings.iter().find(|timing| timing.command == "Device/PlayTFGif").unwrap();
+            assert!(playback_started_at >= brightness.replied_at,
+                "brightness setup must finish before the playback budget begins");
+            assert!(playback_started_at <= play.requested_at,
+                "the deadline must use the play request, not its response");
+            assert!(ack.playback_ends_at <= play.replied_at,
+                "a response slower than the clip must leave its deadline expired");
+        }
+        mock.response_delays.lock().unwrap().clear();
+        targets.send_replace(crate::device::Target { serial: 2, clip: Some(pack.clips["working"].clone()),
+            single_play: false, created: Instant::now() });
+        assert_eq!(timeout(Duration::from_secs(1), acks.recv()).await.unwrap().unwrap().serial, 2,
+            "an expired one-shot must return without the two-second switch pacing");
+        drop(targets);
+        timeout(Duration::from_secs(1), writer).await.unwrap().unwrap().unwrap();
+    }
+
+    #[tokio::test]
+    async fn frame_upload_deadline_starts_after_the_last_frame_response() {
+        let root = tempfile::tempdir().unwrap();
+        let mock = MockDevice::start().await;
+        let mut config = mock.config(root.path());
+        config.device.transport = crate::config::Transport::Frames;
+        config.device.frame_upload_interval_ms = 20;
+        config.device.playback_start_delay_ms = 50;
+        mock.response_delays.lock().unwrap().insert("Draw/SendHttpGif".into(), 100);
+        let mut entry = clip("work-entry", false);
+        let frame = entry.frames[0].clone();
+        Arc::get_mut(&mut entry).unwrap().frames.push(frame);
+        let hold = Duration::from_millis(entry.duration_ms() + config.device.playback_start_delay_ms);
+        let initial = crate::device::Target { serial: 1, clip: Some(entry), single_play: true,
+            created: Instant::now() };
+        let (targets, receiver) = tokio::sync::watch::channel(initial);
+        let (acknowledgements, mut acks) = mpsc::channel(16);
+        let writer = tokio::spawn(crate::device::writer(config.device, false, None, receiver,
+            acknowledgements, Arc::new(Mutex::new(json!({})))));
+        let ack = timeout(Duration::from_secs(2), acks.recv()).await.unwrap().unwrap();
+        let acknowledged_at = Instant::now();
+        let playback_started_at = ack.playback_ends_at - hold;
+        {
+            let timings = mock.timings.lock().unwrap();
+            let frames: Vec<_> = timings.iter().filter(|timing| timing.command == "Draw/SendHttpGif").collect();
+            assert_eq!(frames.len(), 2);
+            assert!(playback_started_at >= frames[1].replied_at,
+                "a frame upload must not spend its playback budget during transmission");
+            assert!(playback_started_at <= acknowledged_at);
+        }
+        drop(targets);
+        timeout(Duration::from_secs(1), writer).await.unwrap().unwrap().unwrap();
+    }
+
+    #[tokio::test]
     async fn default_writer_selects_transitions_and_holds_with_no_event_time_uploads() {
         let root = tempfile::tempdir().unwrap();
         let mock = MockDevice::start().await;
@@ -633,7 +730,9 @@ mod tests {
             targets.send_replace(crate::device::Target { serial: index as u64 + 2,
                 single_play: !clip.looping, clip: Some(clip), created: tokio::time::Instant::now() });
             let ack = timeout(Duration::from_secs(1), acks.recv()).await.unwrap().unwrap();
-            assert_eq!(ack.hold_ms, catalog.files[*name].duration_ms);
+            let timings = mock.timings.lock().unwrap();
+            let play = timings.iter().rev().find(|timing| timing.command == "Device/PlayTFGif").unwrap();
+            assert!(ack.playback_ends_at <= play.requested_at + Duration::from_millis(catalog.files[*name].duration_ms));
         }
         let mut held = clip("finished:final", true);
         Arc::get_mut(&mut held).unwrap().frames = pack.clips["finished"].frames.clone();
