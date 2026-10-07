@@ -1,0 +1,59 @@
+{
+  "animations": {
+    "idle": {
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "idle-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle-city": {
+      "frame_duration_ms": 100,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "idle-city-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle-flyby": {
+      "frame_duration_ms": 100,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "idle-flyby-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle-message": {
+      "frame_duration_ms": 100,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "idle-message-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle-yawn": {
+      "frame_duration_ms": 100,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "idle-yawn-sprite.png",
+        "type": "sprite_sheet"
+      }
+    }
+  },
+  "background": "#000000",
+  "canvas_size": 64,
+  "default_animation": "idle",
+  "id": "decker-idle-alternates-v1",
+  "schema_version": 1
+}

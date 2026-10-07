@@ -1,0 +1,24 @@
+{
+  "id": "decker-idle-alternates-v1",
+  "approved_pack": "../delegation-v3/review",
+  "base": "../../base-v3.png",
+  "car": "sources/flyby-car.png",
+  "expressions": "sources/yawn-keyframes.png",
+  "mouth_poses": "../interrupted-v4/review/interrupted",
+  "frames": 40,
+  "frame_ms": 100,
+  "car_size": [16, 5],
+  "car_clip": [[25, 7, 35, 9], [34, 16, 26, 8]],
+  "rear_area": [35, 40, 11, 7],
+  "eye_area": [23, 28, 4, 1],
+  "mouth_area": [21, 33, 6, 8],
+  "lamp_area": [0, 12, 7, 14],
+  "building_areas": [[49, 9, 2, 20], [39, 14, 5, 1], [39, 18, 5, 1], [39, 22, 5, 1]],
+  "main_aperture": [[55, 29, 49], [56, 29, 49], [57, 28, 50], [58, 28, 50], [59, 28, 50], [60, 28, 50], [61, 27, 51], [62, 27, 51], [63, 27, 51]],
+  "clips": [
+    {"id": "idle-flyby", "name": "Window flyby", "differences": ["A larger rose hovercar passes close to the window", "A cyan sweep crosses the rear monitor"]},
+    {"id": "idle-yawn", "name": "Sleepy Decker", "differences": ["Decker closes their eye and yawns", "The light behind Decker warms to amber and fades back"]},
+    {"id": "idle-message", "name": "Incoming message", "differences": ["An envelope notification arrives on the rear monitor", "A mint message header and rows scroll on the main monitor"]},
+    {"id": "idle-city", "name": "Night city", "differences": ["A lit elevator descends through a distant tower", "Three building floors briefly light up", "The light behind Decker pulses through rainbow colors"]}
+  ]
+}

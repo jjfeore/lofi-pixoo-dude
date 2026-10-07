@@ -1,5 +1,5 @@
 version = 1
-pack = "../pets/decker/revisions/delegation-v3/review"
+pack = "../pets/decker/revisions/idle-alternates-v2/combined"
 pipe = '\\.\pipe\pixoo-pet'
 dry_run = false
 # If Codex already has a notify command, copy its complete array here before
@@ -36,3 +36,11 @@ settle_ms = 500
 # Use a different clip name to remap a state, or "" to disable it.
 # compacting = "compacting"
 # delegating = "delegating"
+
+[idle_alternates]
+# Play one random clip after each uninterrupted interval of normal idle.
+# Empty animations disables alternates. Intervals are inclusive milliseconds.
+animations = ["idle-flyby", "idle-yawn", "idle-message", "idle-city"]
+min_interval_ms = 45000
+max_interval_ms = 60000
+avoid_immediate_repeat = true

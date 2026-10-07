@@ -1,0 +1,22 @@
+{
+  "mode": "built-in imagegen",
+  "prompts": [
+    {
+      "key": "car",
+      "args": {
+        "transparent_background": true,
+        "prompt": "Use case: stylized-concept. Asset type: one transparent pixel-art flying car sprite for a 64x64 cyberpunk night room animation. Draw ONE clean broadside hovercar facing RIGHT, isolated on true transparency, no environment, no shadow plane, no lettering, no glow outside the body. It is a near-window flyby that will be displayed at only about 16 pixels wide by 6 pixels tall. Use a deliberate 16x6-style coarse pixel grid, enlarged with hard square pixels, no antialiasing or tiny detail. Distinct slightly tapered pale rose and magenta body, dark purple underside, single teal glass cockpit canopy with a pale cyan highlight, two small amber front lights at the right nose, a tiny blue-white thruster at the left rear. A stylish low long flying taxi with no visible wheels or wings. High contrast, clear dark outline, sparse palette of purple, pink, pale rose, teal, cyan and warm amber. Horizontal pose, flat side profile, no rotation, no perspective change. Large isolated sprite centered in the canvas, generous transparent padding. Must remain legible when mechanically downsampled to 16x6 pixels."
+      }
+    },
+    {
+      "key": "yawn",
+      "args": {
+        "transparent_background": false,
+        "referenced_image_paths": [
+          "C:\\Users\\jjfeo\\Repos\\lofi-pixoo-dude\\pets\\decker\\revisions\\delegation-v3\\review\\idle-poster.png"
+        ],
+        "prompt": "Use case: identity-preserve. Asset type: registered FOUR-frame expression sprite sheet for an existing 64x64 pixel-art scene. Image 1 is the exact approved base, shown enlarged 8x. Create a strict 2-column by 2-row atlas with four equal square cells, no margins, gutters, labels or text. Each cell must reproduce the ENTIRE input scene in exactly the same composition, palette and hard 64x64 pixel grid at 8x nearest-neighbor scale. Do not redesign or reframe anything. Frame order row-major: 1. exact original neutral face; 2. Decker's visible eyelid closes gently and lips part just a little, beginning a sleepy yawn; 3. visible eyelid fully closed, mouth a small clearly open dark vertical oval in the existing face, restrained tired yawn; 4. lips relaxing back nearly shut with the eyelid partly reopened. Facial expression only: keep the hair, head position, outer head silhouette, cheek, nose, upper face, neck, visor above forehead, shoulders, jacket, both arms and hands at exactly the same pixel locations. Avoid head tilt, torso or arm movement. Only the tiny eye and mouth interior pixels vary. Preserve all room pixels, monitors, window, traffic, lights and colors exactly. Pixel-art reduction must retain one-to-two-pixel closed eyelid and two-to-three-pixel dark yawn mouth, not a new face. This is a calm sleepy expression, no shock, fear or speech."
+      }
+    }
+  ]
+}

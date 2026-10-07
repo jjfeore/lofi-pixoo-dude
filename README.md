@@ -10,7 +10,7 @@ From a release bundle, use `pixoo-pet.exe`. From source, install the stable Rust
 
 ```powershell
 cargo build --locked --release
-.\target\release\pixoo-pet.exe validate .\pets\decker\revisions\delegation-v3\review
+.\target\release\pixoo-pet.exe validate .\pets\decker\revisions\idle-alternates-v2\combined
 .\target\release\pixoo-pet.exe run --config .\config\bridge.example.toml --dry-run
 ```
 
@@ -26,7 +26,7 @@ Keep the bridge running. Install the generated hooks and completion adapter foll
 
 ## Install or update Codex integration
 
-[Stored GIF playback](docs/stored-gifs.md) is the default, including when `device.transport` is omitted. The standard example uses the complete delegation-v3 pack and immediate filename selection. Set `device.transport = "frames"` explicitly to use the older per-switch RGB upload mode. The owner verified repeated idle/working recall with instant switches and no visible loading on this display; other devices still need a playback check.
+[Stored GIF playback](docs/stored-gifs.md) is the default, including when `device.transport` is omitted. The standard example uses the complete alternate-idle pack with all delegation-v3 lifecycle clips and immediate filename selection. Set `device.transport = "frames"` explicitly to use the older per-switch RGB upload mode. The owner verified repeated idle/working recall with instant switches and no visible loading on this display; other devices still need a playback check.
 
 Create your private config, set its device address/token, and choose a pet:
 
@@ -47,6 +47,8 @@ The installer checks for intervening edits, saves originals in the review direct
 
 Start in a terminal with `pixoo-pet.exe run --config local\bridge.toml`, or use `scripts/start-bridge.ps1` for a hidden process. The scripts find the release executable at the bundle root or `target/release/` in a source checkout. They do not install a service or automatic startup task.
 
+From a source checkout, use `scripts/rebuild-bridge.ps1 -Config local\bridge.toml` to test, rebuild and restart an installed bridge. It builds separately from the running executable, validates the config/pack offline, saves backups, targets the matching process, and attempts rollback on failure. It also installs the staged alternate-idle settings beside the private config after replacing the compatible executable. Add `-CheckOnly` to leave the running bridge in place. See [restart details](docs/configuration.md#rebuild-and-restart-from-source).
+
 ## Create or add a pet
 
 The portable plugin is in [plugin](plugin/plugin.json). Its entrypoint is [create-pixoo-pet](plugin/skills/create-pixoo-pet/SKILL.md). It supports characters on black and full room scenes. It shows the real 64x64 base and waits for approval before creating the complete animation set.
@@ -62,6 +64,8 @@ The new [needs-input review pack](pets/decker/revisions/needs-input-v3/README.md
 The latest [interruption review pack](pets/decker/revisions/interrupted-v4/README.md) preserves those seven approved physical clips and adds a forty-frame dumpshock-to-idle action. The mouth opens for a brief shout and the jaw lowers with it, while the upper face stays steady; three bold shock rays, a red visor and whole-screen corruption lead into the accepted automatic visor lift. A red rear-screen halt symbol fades back to the waveform while one getaway car is pursued by five patrol cars with alternating roof lights. The last frame matches the approved idle start exactly. Its offline authoring example is `interruption_revision`; the revision notes include previews, reproduction and check commands.
 
 The latest [delegation review pack](pets/decker/revisions/delegation-v3/README.md) preserves all eight prior physical clips and adds forty-frame drone dispatch/return sequences around a 32-frame working loop. The rear screen shows green falling glyphs during child activity and upload/download arrows during transfers. The drone's neon-green task lamp changes after transfer; it exits right after dispatch and descends below the window after return. Car traffic is confined to the loop. All three retain the accepted working character, typing and entire main-glass animation. The updated bridge accepts optional delegation `entry` and `exit` references and follows the first/last observed child across chats. Rebuild the executable before using this pack's new `exit` field. The review notes include the combined preview, reproduction and remaining external checks.
+
+The approved [alternate idle animations](pets/decker/revisions/idle-alternates-v2/README.md) add a close hovercar flyby, a yawn, an incoming message and changing city lights. Each pairs multiple scene changes, uses the same 83 ms frame clock, and lasts 3.320 seconds within forty frames. Their [complete runtime pack](pets/decker/revisions/idle-alternates-v2/combined/pet.json) preserves every previous lifecycle clip. `[idle_alternates]` accepts clip names and a configurable interval range; the examples choose a fresh random 45–60 second wait during uninterrupted normal idle, play one alternate, then return to idle. Activity interrupts alternates and resets the wait. Omitting the table or using an empty list disables them for existing configs.
 
 Existing images work without image generation:
 

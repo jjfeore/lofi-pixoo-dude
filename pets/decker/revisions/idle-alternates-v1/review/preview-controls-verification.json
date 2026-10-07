@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "js_syntax": true,
+  "initial_four_previews": true,
+  "play_pause": true,
+  "scrubbing": true,
+  "native_size": true,
+  "saved_state_restore": true,
+  "browser_rendering_checked": false
+}

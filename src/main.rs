@@ -4,6 +4,7 @@ mod device;
 mod engine;
 mod event;
 mod ipc;
+mod idle;
 mod runtime;
 mod setup;
 mod storage;
@@ -73,6 +74,11 @@ enum Command {
         pack: PathBuf,
         #[arg(long, default_value_t = 40)]
         max_frames: usize,
+    },
+    /// Validate configuration and its animation references without accessing a device.
+    CheckConfig {
+        #[arg(short, long)]
+        config: PathBuf,
     },
     /// Export a prepared clip as an enlarged GIF and optional contact sheet.
     Preview {
@@ -248,6 +254,17 @@ async fn execute(cli: Cli) -> Result<()> {
                 .await?
                 .context("no bridge status")?;
             println!("{}", serde_json::to_string_pretty(&status)?);
+        }
+        Command::CheckConfig { config } => {
+            let config = Config::load(&config)?;
+            if !config.dry_run { config.device.url()?; }
+            let pack = assets::Pack::load(&config.pack, config.device.max_frames)?;
+            let alternates = config.idle_alternate_clips(&pack)?;
+            println!("{}", serde_json::to_string_pretty(&serde_json::json!({
+                "valid":true,"pack":pack.manifest.id,"pipe":config.pipe,
+                "animations":pack.clips.keys().collect::<Vec<_>>(),
+                "idle_alternates":alternates.iter().map(|clip| clip.name.as_str()).collect::<Vec<_>>(),
+            }))?);
         }
         Command::Validate { pack, max_frames } => {
             let pack = assets::Pack::load(&pack, max_frames)?;

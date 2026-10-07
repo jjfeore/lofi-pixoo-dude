@@ -1,5 +1,15 @@
 # Verification record
 
+## Alternate idle scheduling, 2026-10-07
+
+The complete pack combines every delegation-v3 manifest entry with the four approved alternate-idle clips. A read-only Rust regression test verified all copied sprite bytes and manifest entries, every 83 ms source clock, native GIF dimensions/frame counts/timing, single-pass alternate GIFs, and the 9,306,112-byte prepared payload below the 16 MiB limit. The configured alternates are included in preload reachability, including references that resolve through an idle variant alias.
+
+Release compilation succeeded in a separate `local/bridge-build` target directory. The Rust binary test run reported **42 passed, 11 failed**. All failures reported Windows access-denied errors: existing filesystem canonicalization/atomic-replacement checks and the new named-pipe controller test. Scheduler bounds, fixed/random intervals, selection without immediate repeats, disablement, invalid references, activity cancellation, return to idle, deduplicated idle acknowledgements and pack regression checks passed. The standalone PowerShell checks passed syntax, ten process-matching cases and stale/staged-config edit rejection. The new CLI/mock-device alternate test was blocked during fixture creation by the same filesystem error. Formatting and Clippy were also blocked by directory access restrictions; these are not passing checks.
+
+Both private bridge configurations have prepared sibling pending configs and hash receipts. The original files and installed executable were left in place. Device settings and the existing completion notifier were preserved. `scripts/rebuild-bridge.ps1` reruns Rust tests, Clippy and PowerShell guards in the owner's PowerShell before installation, validates the prepared pack/config offline, then backs up and replaces only the matching bridge. This task did not restart the live bridge or test scheduled playback on the physical display.
+
+The script's `-CheckOnly -SkipTests` path rebuilt the release successfully and stopped at the sandbox-blocked pack-directory validation before reaching process inspection or installation. Original private-config hashes still match their staging receipts. Hidden launch argument tests also verify quoting, log paths and preservation of a command-line dry-run override without creating any processes.
+
 ## Absolute one-shot deadlines, 2026-10-07
 
 Review of the brief repeat found a host timing error: the writer waited for the local-file play response, then the runtime started a fresh full-duration countdown after receiving its acknowledgement. The updated writer anchors stored playback to the start of the successful play request, after any brightness setup. Frame playback retains its upload-completion anchor. The writer and runtime share the resulting absolute deadline, including the existing calibrated visible-start offset. A late response or queued acknowledgement does not restart the countdown, and an expired one-shot bypasses ordinary switch pacing when returning.

@@ -31,7 +31,7 @@ def cli(*args, data=None, check=True, timeout=5):
 class Fixture:
     def __init__(self, root, pack, *, dry=False, fail_once=False, switch_ms=100,
                  storage=False, fetch_gifs=True, start=True, head_only=False,
-                 use_default_transport=False):
+                 use_default_transport=False, idle_alternates=(), idle_interval_ms=800):
         self.requests = []
         self.lock = threading.Lock()
         self.fail_once = fail_once
@@ -93,7 +93,10 @@ class Fixture:
             "local_token = 123456\nframe_upload_interval_ms = 15\n"
             f"switch_interval_ms = {switch_ms}\ntimeout_ms = 1000\n"
             f"[device.storage]\ncache_dir = '{self.cache}'\nbind = '127.0.0.1:0'\n"
-            "settle_ms = 0\ndownload_timeout_ms = 300\n", encoding="utf-8")
+            "settle_ms = 0\ndownload_timeout_ms = 300\n"
+            f"[idle_alternates]\nanimations = {json.dumps(list(idle_alternates))}\n"
+            f"min_interval_ms = {idle_interval_ms}\nmax_interval_ms = {idle_interval_ms}\n"
+            "avoid_immediate_repeat = true\n", encoding="utf-8")
         self.log = open(root / f"{uuid.uuid4()}.log", "w+", encoding="utf-8")
         if start:
             self.start()
@@ -204,6 +207,50 @@ class Integration(unittest.TestCase):
         f.start()
         self.assertEqual(len(saves), sum(value["Command"] == "Device/SaveTFGif" for _, value in f.requests),
                          "restart must reuse unchanged transfer receipts")
+
+    def test_idle_alternates_preload_cycle_preempt_and_reset_without_uploads(self):
+        path = self.pack / "pet.json"
+        manifest = json.loads(path.read_text())
+        for name, source in [("idle-a", "working"), ("idle-b", "delegating")]:
+            # Even looping source clips must play only one pass as alternates.
+            manifest["animations"][name] = {**manifest["animations"][source], "loop": True}
+        path.write_text(json.dumps(manifest), encoding="utf-8")
+        f = self.fixture(storage=True, switch_ms=0, idle_alternates=("idle-a", "idle-b"))
+        validation = json.loads(cli("check-config", "-c", f.config).stdout)
+        self.assertEqual(validation["idle_alternates"], ["idle-a", "idle-b"])
+        saves = sum(value["Command"] == "Device/SaveTFGif" for _, value in f.requests)
+        self.assertTrue(all(any(name in key for key in f.stored_files) for name in ("idle-a", "idle-b")))
+        first = f.wait(lambda s: s.get("idle_alternates", {}).get("playing") in ("idle-a", "idle-b"))
+        first_name = first["idle_alternates"]["playing"]
+        f.uploaded(first_name)
+        f.uploaded("idle")
+        second = f.wait(lambda s: s.get("idle_alternates", {}).get("playing") in ("idle-a", "idle-b"))
+        second_name = second["idle_alternates"]["playing"]
+        self.assertNotEqual(first_name, second_name)
+        f.uploaded(second_name)
+        f.emit("UserPromptSubmit")
+        f.uploaded("working-enter")
+        state = f.uploaded("working")
+        self.assertIsNone(state["idle_alternates"]["playing"])
+        self.assertIsNone(state["idle_alternates"]["next_in_ms"])
+        after_work = len(f.requests)
+        time.sleep(1)
+        self.assertFalse(any("idle-a" in value.get("FileName", "") or "idle-b" in value.get("FileName", "")
+                             for _, value in f.requests[after_work:]))
+        f.complete()
+        f.uploaded("finished")
+        f.wait(lambda s: s.get("device", {}).get("last_clip") == "idle" and
+               s.get("idle_alternates", {}).get("next_in_ms") is not None)
+        f.emit("PreCompact", session="manual")
+        f.uploaded("compacting")
+        time.sleep(1)
+        self.assertIsNone(f.state()["idle_alternates"]["next_in_ms"])
+        f.emit("PostCompact", session="manual")
+        idle = f.wait(lambda s: s.get("device", {}).get("last_clip") == "idle" and
+                      s.get("idle_alternates", {}).get("next_in_ms") is not None)
+        self.assertGreater(idle["idle_alternates"]["next_in_ms"], 550)
+        self.assertEqual(saves, sum(value["Command"] == "Device/SaveTFGif" for _, value in f.requests))
+        self.assertFalse(any(value["Command"].startswith("Draw/") for _, value in f.requests))
 
     def test_stored_gif_upsert_compares_bytes_and_force_resends(self):
         f = self.fixture(storage=True, start=False)

@@ -1,0 +1,62 @@
+{
+  "id": "decker-idle-alternates-v2",
+  "approved_pack": "../delegation-v3/review",
+  "base": "../../base-v3.png",
+  "car": "../idle-alternates-v1/sources/flyby-car.png",
+  "expressions": "../idle-alternates-v1/sources/yawn-keyframes.png",
+  "mouth_poses": "../interrupted-v4/review/interrupted",
+  "frames": 40,
+  "frame_ms": 83,
+  "car_size": [16, 5],
+  "car_clip": [[31, 17, 29, 4], [32, 21, 28, 1]],
+  "rear_area": [35, 40, 11, 7],
+  "eye_area": [23, 28, 4, 1],
+  "mouth_area": [21, 33, 6, 8],
+  "lamp_area": [4, 15, 2, 10],
+  "building_areas": [[49, 16, 1, 11], [41, 23, 2, 1], [41, 26, 2, 1], [41, 29, 2, 1]],
+  "main_aperture": [[55, 29, 49], [56, 29, 49], [57, 28, 50], [58, 28, 50], [59, 28, 50], [60, 28, 50], [61, 27, 51], [62, 27, 51], [63, 27, 51]],
+  "refinement": {
+    "envelope_offset": [1, 1],
+    "preview_palettes": "sources/preview-palettes.json",
+    "flyby_rows": [[17, 31, 59], [18, 31, 59], [19, 31, 59], [20, 31, 59], [21, 32, 59]],
+    "traffic_clear": [[25, 7, 35, 9], [34, 16, 26, 1]],
+    "traffic_rows": [[7, 25, 59], [8, 25, 59], [9, 25, 59], [10, 25, 59], [11, 25, 59], [12, 25, 59], [13, 34, 59], [14, 34, 59], [15, 34, 59], [16, 34, 59]],
+    "cars": {
+      "cyan": "../idle-v4/combined/cyan-car-sprite.png",
+      "magenta": "../idle-v4/combined/magenta-car-sprite.png",
+      "cyan-far": "../idle-v4/combined/cyan-far-car-sprite.png"
+    },
+    "traffic": {
+      "idle-flyby": [
+        {"sprite": "cyan-far", "lane": 8, "start_x": 18, "end_x": 65, "start_frame": 1, "end_frame": 36, "mirror": false},
+        {"sprite": "magenta", "lane": 12, "start_x": 65, "end_x": 18, "start_frame": 4, "end_frame": 29, "mirror": true},
+        {"sprite": "cyan", "lane": 10, "start_x": 18, "end_x": 65, "start_frame": 12, "end_frame": 38, "mirror": false},
+        {"sprite": "cyan-far", "lane": 16, "start_x": 65, "end_x": 28, "start_frame": 8, "end_frame": 25, "mirror": true}
+      ],
+      "idle-yawn": [
+        {"sprite": "magenta", "lane": 9, "start_x": 65, "end_x": 18, "start_frame": 1, "end_frame": 31, "mirror": true},
+        {"sprite": "cyan-far", "lane": 12, "start_x": 18, "end_x": 65, "start_frame": 3, "end_frame": 38, "mirror": false},
+        {"sprite": "cyan", "lane": 14, "start_x": 65, "end_x": 28, "start_frame": 9, "end_frame": 33, "mirror": true}
+      ],
+      "idle-message": [
+        {"sprite": "cyan", "lane": 8, "start_x": 18, "end_x": 65, "start_frame": 1, "end_frame": 30, "mirror": false},
+        {"sprite": "magenta", "lane": 11, "start_x": 65, "end_x": 18, "start_frame": 6, "end_frame": 38, "mirror": true},
+        {"sprite": "cyan-far", "lane": 16, "start_x": 28, "end_x": 65, "start_frame": 12, "end_frame": 34, "mirror": false}
+      ],
+      "idle-city": [
+        {"sprite": "magenta", "lane": 10, "start_x": 65, "end_x": 18, "start_frame": 2, "end_frame": 36, "mirror": true},
+        {"sprite": "cyan-far", "lane": 8, "start_x": 18, "end_x": 65, "start_frame": 9, "end_frame": 37, "mirror": false},
+        {"sprite": "cyan", "lane": 14, "start_x": 28, "end_x": 65, "start_frame": 5, "end_frame": 27, "mirror": false}
+      ]
+    },
+    "floor_pixels": [[[41, 23], [42, 23]], [[41, 26], [42, 26]], [[41, 29], [42, 29]]],
+    "elevator_path": [[49, 16], [49, 17], [49, 18], [49, 19], [49, 20], [49, 21], [49, 22], [49, 23], [49, 24], [49, 25], [49, 26], [49, 27], [49, 28], [49, 29], [49, 30], [49, 31], [49, 32]],
+    "elevator_visible": [[49, 16], [49, 17], [49, 18], [49, 19], [49, 20], [49, 21], [49, 22], [49, 23], [49, 24], [49, 25], [49, 26]]
+  },
+  "clips": [
+    {"id": "idle-flyby", "name": "Window flyby", "differences": ["The close rose hovercar passes behind Decker's actual head outline", "A cyan sweep crosses the rear monitor", "Four staggered background vehicles use distinct lanes and speeds"]},
+    {"id": "idle-yawn", "name": "Sleepy Decker", "differences": ["Decker closes their eye and yawns", "Only the two-pixel lamp bar warms to amber", "Background traffic uses a different three-vehicle pattern"]},
+    {"id": "idle-message", "name": "Incoming message", "differences": ["A larger ten-by-six envelope arrives without a notification dot", "A mint message header and rows scroll on the main monitor", "Three background vehicles use different lanes and timing"]},
+    {"id": "idle-city", "name": "Night city", "differences": ["A single lit elevator pixel descends along the tower and is hidden by the nearer building", "Three existing window rows briefly brighten", "Only the two-pixel lamp bar pulses through rainbow colors", "Background traffic follows a fourth distinct pattern"]}
+  ]
+}

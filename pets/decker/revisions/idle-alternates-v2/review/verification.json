@@ -1,0 +1,108 @@
+{
+  "passed": true,
+  "normal_idle_byte_identical": true,
+  "clips": [
+    {
+      "clip": "idle-flyby",
+      "frames": 40,
+      "unique_frames": 37,
+      "frame_duration_ms": 83,
+      "duration_ms": 3320,
+      "gif_delays_ms": [
+        80,
+        90
+      ],
+      "changes_in_each_layer": [
+        875,
+        469,
+        648
+      ],
+      "outside_layers_exact": true,
+      "canonical_endpoints": true,
+      "sprite_order": true,
+      "one_pass_traffic_verified": true,
+      "native_and_enlarged_gifs_agree": true
+    },
+    {
+      "clip": "idle-yawn",
+      "frames": 40,
+      "unique_frames": 37,
+      "frame_duration_ms": 83,
+      "duration_ms": 3320,
+      "gif_delays_ms": [
+        80,
+        90
+      ],
+      "changes_in_each_layer": [
+        108,
+        700,
+        640,
+        652
+      ],
+      "outside_layers_exact": true,
+      "canonical_endpoints": true,
+      "sprite_order": true,
+      "one_pass_traffic_verified": true,
+      "native_and_enlarged_gifs_agree": true
+    },
+    {
+      "clip": "idle-message",
+      "frames": 40,
+      "unique_frames": 37,
+      "frame_duration_ms": 83,
+      "duration_ms": 3320,
+      "gif_delays_ms": [
+        80,
+        90
+      ],
+      "changes_in_each_layer": [
+        2464,
+        5643,
+        653
+      ],
+      "outside_layers_exact": true,
+      "canonical_endpoints": true,
+      "sprite_order": true,
+      "one_pass_traffic_verified": true,
+      "native_and_enlarged_gifs_agree": true
+    },
+    {
+      "clip": "idle-city",
+      "frames": 40,
+      "unique_frames": 37,
+      "frame_duration_ms": 83,
+      "duration_ms": 3320,
+      "gif_delays_ms": [
+        80,
+        90
+      ],
+      "changes_in_each_layer": [
+        132,
+        20,
+        640,
+        638
+      ],
+      "outside_layers_exact": true,
+      "canonical_endpoints": true,
+      "sprite_order": true,
+      "one_pass_traffic_verified": true,
+      "native_and_enlarged_gifs_agree": true
+    }
+  ],
+  "lamp_bounded_to_two_columns": true,
+  "flyby_follows_head_outline": true,
+  "envelope_enlarged_without_badge": true,
+  "floors_on_existing_window_rows": true,
+  "envelope_offset": [
+    1,
+    1
+  ],
+  "elevator_single_pixel_and_occluded": true,
+  "four_distinct_traffic_patterns": true,
+  "overview": {
+    "frames": 40,
+    "duration_ms": 3320
+  },
+  "hardware_playback_tested": false,
+  "scheduling_implemented": false
+}

@@ -1,9 +1,11 @@
+use crate::assets::{Clip, Pack};
 use anyhow::{Context, Result, bail, ensure};
 use serde::{Deserialize, Serialize};
 use std::{
-    collections::BTreeMap,
+    collections::{BTreeMap, BTreeSet},
     fs,
     path::{Path, PathBuf},
+    sync::Arc,
 };
 
 pub const DEFAULT_PIPE: &str = r"\\.\pipe\pixoo-pet";
@@ -17,6 +19,7 @@ pub struct Config {
     pub dry_run: bool,
     pub device: DeviceConfig,
     pub animations: BTreeMap<String, String>,
+    pub idle_alternates: IdleAlternatesConfig,
     pub notification_forward: Vec<String>,
 }
 
@@ -29,8 +32,43 @@ impl Default for Config {
             dry_run: false,
             device: DeviceConfig::default(),
             animations: BTreeMap::new(),
+            idle_alternates: IdleAlternatesConfig::default(),
             notification_forward: Vec::new(),
         }
+    }
+}
+
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, deny_unknown_fields)]
+pub struct IdleAlternatesConfig {
+    pub animations: Vec<String>,
+    pub min_interval_ms: u64,
+    pub max_interval_ms: u64,
+    pub avoid_immediate_repeat: bool,
+}
+
+impl Default for IdleAlternatesConfig {
+    fn default() -> Self {
+        Self {
+            animations: Vec::new(),
+            min_interval_ms: 45_000,
+            max_interval_ms: 60_000,
+            avoid_immediate_repeat: true,
+        }
+    }
+}
+
+impl IdleAlternatesConfig {
+    pub fn validate(&self) -> Result<()> {
+        ensure!(self.min_interval_ms >= 100 && self.max_interval_ms <= 86_400_000
+            && self.min_interval_ms <= self.max_interval_ms,
+            "idle_alternates intervals must satisfy 100 <= min_interval_ms <= max_interval_ms <= 86400000");
+        let mut names = BTreeSet::new();
+        for name in &self.animations {
+            ensure!(!name.trim().is_empty(), "idle_alternates animation names must not be empty");
+            ensure!(names.insert(name), "duplicate idle_alternates animation: {name}");
+        }
+        Ok(())
     }
 }
 
@@ -163,6 +201,7 @@ impl Config {
             config.pack = path.parent().unwrap_or(Path::new(".")).join(&config.pack);
         }
         config.device.storage.validate()?;
+        config.idle_alternates.validate()?;
         if config.device.storage.cache_dir.is_relative() {
             config.device.storage.cache_dir = path.parent().unwrap_or(Path::new("."))
                 .join(&config.device.storage.cache_dir);
@@ -176,6 +215,23 @@ impl Config {
             Some(name) => Some(name),
             None => Some(state),
         }
+    }
+
+    pub fn idle_alternate_clips(&self, pack: &Pack) -> Result<Vec<Arc<Clip>>> {
+        self.idle_alternates.validate()?;
+        if self.idle_alternates.animations.is_empty() { return Ok(Vec::new()); }
+        let idle = self.mapping("idle").and_then(|name| pack.resolve(name, false))
+            .context("idle_alternates requires an enabled idle animation in the pack")?;
+        ensure!(idle.looping || idle.frames.len() == 1,
+            "idle_alternates requires a looping or single-frame normal idle animation");
+        let mut names = BTreeSet::new();
+        self.idle_alternates.animations.iter().map(|name| {
+            let clip = pack.resolve(name, false)
+                .with_context(|| format!("idle_alternates references missing animation: {name}"))?;
+            ensure!(clip.name != idle.name, "idle_alternates must differ from normal idle: {name}");
+            ensure!(names.insert(clip.name.clone()), "idle_alternates entries resolve to the same animation: {name}");
+            Ok(clip)
+        }).collect()
     }
 }
 
@@ -199,6 +255,24 @@ impl DeviceConfig {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn idle_alternate_defaults_and_invalid_settings() {
+        let config: Config = toml::from_str("").unwrap();
+        assert!(config.idle_alternates.animations.is_empty());
+        assert_eq!(config.idle_alternates.min_interval_ms, 45_000);
+        assert_eq!(config.idle_alternates.max_interval_ms, 60_000);
+        for text in [
+            "min_interval_ms = 0", "min_interval_ms = 60001", "max_interval_ms = 86400001",
+            "animations = ['']", "animations = ['one', 'one']",
+        ] {
+            let config: Config = toml::from_str(&format!("[idle_alternates]\n{text}\n")).unwrap();
+            assert!(config.idle_alternates.validate().is_err(), "{text}");
+        }
+        assert!(toml::from_str::<Config>("[idle_alternates]\ninterval_ms = 45000\n").is_err());
+        let config: Config = toml::from_str("[idle_alternates]\nanimations = ['one']\nmin_interval_ms = 1000\nmax_interval_ms = 1000\navoid_immediate_repeat = false\n").unwrap();
+        assert!(config.idle_alternates.validate().is_ok());
+    }
 
     #[test]
     fn omitted_transport_uses_stored_gifs_and_frames_remain_explicit() {

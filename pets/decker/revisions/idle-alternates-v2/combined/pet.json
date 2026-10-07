@@ -1,0 +1,176 @@
+{
+  "animations": {
+    "compacting": {
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "compacting-idle-sprite.png",
+        "type": "sprite_sheet"
+      },
+      "variants": {
+        "idle": "compacting-idle",
+        "working": "compacting-working"
+      }
+    },
+    "compacting-idle": {
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "compacting-idle-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "compacting-working": {
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "compacting-working-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "delegating": {
+      "entry": "delegating-start",
+      "exit": "delegating-finished",
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "delegating-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "delegating-finished": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "delegating-finished-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "delegating-start": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "delegating-start-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "finished": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "finished-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle": {
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "idle-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle-city": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "idle-city-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle-flyby": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "idle-flyby-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle-message": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "idle-message-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "idle-yawn": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "idle-yawn-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "interrupted": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 40,
+        "path": "interrupted-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "needs-input": {
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "needs-input-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "working": {
+      "entry": "working-enter",
+      "frame_duration_ms": 83,
+      "loop": true,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "working-sprite.png",
+        "type": "sprite_sheet"
+      }
+    },
+    "working-enter": {
+      "frame_duration_ms": 83,
+      "loop": false,
+      "source": {
+        "columns": 4,
+        "frame_count": 32,
+        "path": "working-enter-sprite.png",
+        "type": "sprite_sheet"
+      }
+    }
+  },
+  "background": "#000000",
+  "canvas_size": 64,
+  "default_animation": "idle",
+  "id": "decker-idle-alternates-v2-combined",
+  "schema_version": 1
+}

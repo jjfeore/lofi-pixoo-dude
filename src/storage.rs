@@ -57,7 +57,8 @@ fn encode_gif(frames: &[String], frame_ms: u32, looping: bool) -> Result<(Vec<u8
         if looping {
             encoder.set_repeat(gif::Repeat::Infinite)?;
         }
-        for (index, pixels) in indexed.buffer.chunks_exact(64 * 64).enumerate() {
+        let (indexed_frames, _) = indexed.buffer.as_chunks::<{ 64 * 64 }>();
+        for (index, pixels) in indexed_frames.iter().enumerate() {
             let next_cs = ((index as u64 + 1) * u64::from(frame_ms) + 5) / 10;
             let frame = gif::Frame {
                 width: 64,
@@ -86,6 +87,8 @@ fn reachable(config: &Config, pack: &Pack) -> BTreeSet<String> {
         }
     }
     pending.extend(pack.manifest.default_animation.iter().cloned());
+    pending.extend(config.idle_alternates.animations.iter()
+        .filter_map(|name| pack.resolve(name, false)).map(|clip| clip.name.clone()));
     let mut seen = BTreeSet::new();
     while let Some(name) = pending.pop() {
         if seen.insert(name.clone()) && let Some(clip) = pack.clips.get(&name) {
@@ -105,6 +108,7 @@ fn write_atomic(path: &Path, bytes: &[u8]) -> Result<()> {
 
 impl Catalog {
     pub fn prepare(config: &Config, pack: &Pack) -> Result<Self> {
+        config.idle_alternate_clips(pack)?;
         let storage = &config.device.storage;
         storage.validate()?;
         fs::create_dir_all(&storage.cache_dir)?;
@@ -375,6 +379,90 @@ mod tests {
             assert_eq!(total, duration);
             assert_eq!(reader.repeat(), if looping { gif::Repeat::Infinite } else { gif::Repeat::Finite(0) });
         }
+    }
+
+    #[test]
+    fn alternate_idle_clips_are_preloaded_only_when_configured() {
+        let mut alias = clip("alias", false);
+        Arc::get_mut(&mut alias).unwrap().variants.insert("idle".into(), "alternate".into());
+        let clips = [clip("idle", true), clip("alternate", false), alias, clip("unused", false)]
+            .into_iter().map(|clip| (clip.name.clone(), clip)).collect();
+        let pack = Pack {
+            manifest: Manifest { schema_version: 1, id: "test".into(), canvas_size: 64,
+                background: "#000000".into(), default_animation: Some("idle".into()), animations: BTreeMap::new() },
+            clips, encoded_bytes: 0,
+        };
+        let mut config = Config::default();
+        assert_eq!(reachable(&config, &pack), BTreeSet::from(["idle".into()]));
+        config.idle_alternates.animations = vec!["alternate".into()];
+        assert_eq!(reachable(&config, &pack), BTreeSet::from(["idle".into(), "alternate".into()]));
+        assert_eq!(config.idle_alternate_clips(&pack).unwrap()[0].name, "alternate");
+        config.idle_alternates.animations = vec!["alias".into()];
+        assert_eq!(reachable(&config, &pack), BTreeSet::from(["idle".into(), "alternate".into()]));
+        assert_eq!(config.idle_alternate_clips(&pack).unwrap()[0].name, "alternate");
+    }
+
+    #[test]
+    fn complete_idle_alternate_pack_preserves_approved_sources_and_encodes_native_gifs() {
+        // This trusted fixture is read directly without filesystem mutations.
+        // Production pack loading still validates/canonicalizes every source.
+        let revision = Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/pets/decker/revisions"));
+        let combined = revision.join("idle-alternates-v2/combined");
+        let previous = revision.join("delegation-v3/review");
+        let alternates = revision.join("idle-alternates-v2/review");
+        let value: Value = serde_json::from_slice(&fs::read(combined.join("pet.json")).unwrap()).unwrap();
+        let previous_value: Value = serde_json::from_slice(&fs::read(previous.join("pet.json")).unwrap()).unwrap();
+        let alternate_value: Value = serde_json::from_slice(&fs::read(alternates.join("pet.json")).unwrap()).unwrap();
+        let manifest: Manifest = serde_json::from_value(value.clone()).unwrap();
+        assert_eq!(manifest.animations.len(), 16);
+        assert_eq!(manifest.default_animation.as_deref(), Some("idle"));
+        let mut prepared_bytes = 0;
+        let mut clips = BTreeMap::new();
+        for (name, spec) in &manifest.animations {
+            let approved = if name.starts_with("idle-") { &alternate_value } else { &previous_value };
+            let approved_path = if name.starts_with("idle-") { &alternates } else { &previous };
+            assert_eq!(value["animations"][name], approved["animations"][name]);
+            let crate::assets::Source::SpriteSheet { path, columns, frame_count } = &spec.source else {
+                panic!("complete pack must use sprite sheets");
+            };
+            assert_eq!(fs::read(combined.join(path)).unwrap(), fs::read(approved_path.join(path)).unwrap());
+            assert_eq!(spec.frame_duration_ms, Some(83));
+            assert!((1..=40).contains(frame_count));
+            let sheet = image::open(combined.join(path)).unwrap().to_rgb8();
+            assert_eq!(sheet.dimensions(), (columns * 64, (*frame_count as u32).div_ceil(*columns) * 64));
+            let frames: Vec<_> = (0..*frame_count as u32).map(|index| {
+                let cell = image::imageops::crop_imm(&sheet, index % columns * 64, index / columns * 64, 64, 64).to_image();
+                STANDARD.encode(cell.as_raw())
+            }).collect();
+            prepared_bytes += frames.iter().map(String::len).sum::<usize>();
+            let (bytes, duration) = encode_gif(&frames, 83, spec.r#loop).unwrap();
+            let mut reader = gif::DecodeOptions::new().read_info(bytes.as_slice()).unwrap();
+            let mut count = 0;
+            let mut decoded_duration = 0;
+            while let Some(frame) = reader.read_next_frame().unwrap() {
+                assert_eq!((frame.width, frame.height), (64, 64));
+                assert!(frame.transparent.is_none());
+                decoded_duration += u64::from(frame.delay) * 10;
+                count += 1;
+            }
+            assert_eq!(count, *frame_count);
+            assert_eq!(decoded_duration, duration);
+            if name.starts_with("idle-") {
+                assert_eq!((count, duration), (40, 3320));
+                assert_eq!(reader.repeat(), gif::Repeat::Finite(0));
+            }
+            clips.insert(name.clone(), Arc::new(Clip { name: name.clone(), frames,
+                frame_ms: 83, looping: spec.r#loop, entry: spec.entry.clone(),
+                exit: spec.exit.clone(), variants: spec.variants.clone() }));
+        }
+        assert_eq!(prepared_bytes, 9_306_112);
+        assert!(prepared_bytes <= 16 * 1024 * 1024);
+        let pack = Pack { manifest, clips, encoded_bytes: prepared_bytes };
+        let mut config = Config::default();
+        config.idle_alternates.animations = ["idle-flyby", "idle-yawn", "idle-message", "idle-city"]
+            .into_iter().map(str::to_owned).collect();
+        assert_eq!(config.idle_alternate_clips(&pack).unwrap().len(), 4);
+        assert_eq!(reachable(&config, &pack).len(), 15);
     }
 
     #[test]

@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "previous_specs_preserved": true,
+  "all_sources_byte_identical": true,
+  "animations": [
+    {
+      "clip": "compacting",
+      "source": "delegation-v3",
+      "sha256": "5472ca10a5ed41ba51365ad588a5e5464d3ff9ac6489e6c8f02f66b8b0a19a37"
+    },
+    {
+      "clip": "compacting-idle",
+      "source": "delegation-v3",
+      "sha256": "5472ca10a5ed41ba51365ad588a5e5464d3ff9ac6489e6c8f02f66b8b0a19a37"
+    },
+    {
+      "clip": "compacting-working",
+      "source": "delegation-v3",
+      "sha256": "ace5322079232bd7efc596792915035c88e0dcc03b5a5e51f0fb1d9e08c29585"
+    },
+    {
+      "clip": "delegating",
+      "source": "delegation-v3",
+      "sha256": "7254ffd2287e85882a448351c6a09069653658681485c0bb162b1912b6c99851"
+    },
+    {
+      "clip": "delegating-finished",
+      "source": "delegation-v3",
+      "sha256": "7e4c2f103dbc9ed3756f0f5fcd2d0947b74ba3ce49138bd633e2c7eb7f2a90af"
+    },
+    {
+      "clip": "delegating-start",
+      "source": "delegation-v3",
+      "sha256": "59b420de1e8458b97058353a6e6e51b8ffbc446a2da59ee94efe0c558c089cda"
+    },
+    {
+      "clip": "finished",
+      "source": "delegation-v3",
+      "sha256": "a56b589d626dbe5f3080ab86ad6832b942587bb47f955bf4fec3f2ae82660bc6"
+    },
+    {
+      "clip": "idle",
+      "source": "delegation-v3",
+      "sha256": "91d425758564f2308a43ec936f87d8b94636a0debbe3137abe9d846435985f33"
+    },
+    {
+      "clip": "interrupted",
+      "source": "delegation-v3",
+      "sha256": "3cf69899a62619acd3ed46f2f36ace34f04b8c429c7d245dae258ba9f65cb145"
+    },
+    {
+      "clip": "needs-input",
+      "source": "delegation-v3",
+      "sha256": "e9f8fab36f54097fdf83a45bf76905548c527e80c4395d6c8827026317db2c01"
+    },
+    {
+      "clip": "working",
+      "source": "delegation-v3",
+      "sha256": "add02701affcb230e06bb4271543190894e779f59e0cb9b2e8f63572309db7c6"
+    },
+    {
+      "clip": "working-enter",
+      "source": "delegation-v3",
+      "sha256": "1a05fde589682a8776019b108a323360bf3a07ffd8f640a976bdb2e8301a31d8"
+    },
+    {
+      "clip": "idle-flyby",
+      "source": "idle-alternates-v2",
+      "sha256": "45658266d5f90e6fd5761c084a056444016434a3c9e1b63e5a249c94f30b1d5a"
+    },
+    {
+      "clip": "idle-yawn",
+      "source": "idle-alternates-v2",
+      "sha256": "0c464744f0b381c347e002e21f7f5655eb80176e8aaeef4c807bee176fca0953"
+    },
+    {
+      "clip": "idle-message",
+      "source": "idle-alternates-v2",
+      "sha256": "b21163e2fbc28e3220499e08ae0fa46136eef252a50474f8237d981ee3ef0a48"
+    },
+    {
+      "clip": "idle-city",
+      "source": "idle-alternates-v2",
+      "sha256": "3aa2373ac9e5a8e749ac47ebdc6c1a471c1430a1b9e24f6e05f3e701f6ba43f7"
+    }
+  ],
+  "prepared_base64_bytes": 9306112
+}

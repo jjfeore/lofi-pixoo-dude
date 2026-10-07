@@ -1,0 +1,1002 @@
+{
+  "approved_pack": "../delegation-v3/review",
+  "bridge_modified": false,
+  "clips": [
+    {
+      "all_pixels_outside_layers_preserved": true,
+      "changed_pixels": [
+        0,
+        0,
+        0,
+        0,
+        7,
+        7,
+        7,
+        14,
+        15,
+        24,
+        29,
+        37,
+        47,
+        57,
+        61,
+        69,
+        74,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        73,
+        68,
+        64,
+        55,
+        38,
+        29,
+        14,
+        11,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "differences": [
+        "A larger rose hovercar passes close to the window",
+        "A cyan sweep crosses the rear monitor"
+      ],
+      "duration_ms": 4000,
+      "first_and_last_match_idle": true,
+      "frames": 40,
+      "id": "idle-flyby",
+      "motion": [
+        {
+          "car_x": 68,
+          "frame": 0,
+          "idle_source": 0
+        },
+        {
+          "car_x": 68,
+          "frame": 1,
+          "idle_source": 0
+        },
+        {
+          "car_x": 68,
+          "frame": 2,
+          "idle_source": 1
+        },
+        {
+          "car_x": 68,
+          "frame": 3,
+          "idle_source": 2
+        },
+        {
+          "car_x": 67,
+          "frame": 4,
+          "idle_source": 3
+        },
+        {
+          "car_x": 65,
+          "frame": 5,
+          "idle_source": 4
+        },
+        {
+          "car_x": 63,
+          "frame": 6,
+          "idle_source": 4
+        },
+        {
+          "car_x": 61,
+          "frame": 7,
+          "idle_source": 5
+        },
+        {
+          "car_x": 59,
+          "frame": 8,
+          "idle_source": 6
+        },
+        {
+          "car_x": 58,
+          "frame": 9,
+          "idle_source": 7
+        },
+        {
+          "car_x": 56,
+          "frame": 10,
+          "idle_source": 8
+        },
+        {
+          "car_x": 54,
+          "frame": 11,
+          "idle_source": 9
+        },
+        {
+          "car_x": 52,
+          "frame": 12,
+          "idle_source": 9
+        },
+        {
+          "car_x": 50,
+          "frame": 13,
+          "idle_source": 10
+        },
+        {
+          "car_x": 49,
+          "frame": 14,
+          "idle_source": 11
+        },
+        {
+          "car_x": 47,
+          "frame": 15,
+          "idle_source": 12
+        },
+        {
+          "car_x": 45,
+          "frame": 16,
+          "idle_source": 13
+        },
+        {
+          "car_x": 43,
+          "frame": 17,
+          "idle_source": 13
+        },
+        {
+          "car_x": 41,
+          "frame": 18,
+          "idle_source": 14
+        },
+        {
+          "car_x": 39,
+          "frame": 19,
+          "idle_source": 15
+        },
+        {
+          "car_x": 38,
+          "frame": 20,
+          "idle_source": 16
+        },
+        {
+          "car_x": 36,
+          "frame": 21,
+          "idle_source": 17
+        },
+        {
+          "car_x": 34,
+          "frame": 22,
+          "idle_source": 18
+        },
+        {
+          "car_x": 32,
+          "frame": 23,
+          "idle_source": 18
+        },
+        {
+          "car_x": 30,
+          "frame": 24,
+          "idle_source": 19
+        },
+        {
+          "car_x": 29,
+          "frame": 25,
+          "idle_source": 20
+        },
+        {
+          "car_x": 27,
+          "frame": 26,
+          "idle_source": 21
+        },
+        {
+          "car_x": 25,
+          "frame": 27,
+          "idle_source": 22
+        },
+        {
+          "car_x": 23,
+          "frame": 28,
+          "idle_source": 22
+        },
+        {
+          "car_x": 21,
+          "frame": 29,
+          "idle_source": 23
+        },
+        {
+          "car_x": 20,
+          "frame": 30,
+          "idle_source": 24
+        },
+        {
+          "car_x": 18,
+          "frame": 31,
+          "idle_source": 25
+        },
+        {
+          "car_x": 16,
+          "frame": 32,
+          "idle_source": 26
+        },
+        {
+          "car_x": 14,
+          "frame": 33,
+          "idle_source": 27
+        },
+        {
+          "car_x": 12,
+          "frame": 34,
+          "idle_source": 27
+        },
+        {
+          "car_x": 10,
+          "frame": 35,
+          "idle_source": 28
+        },
+        {
+          "car_x": 9,
+          "frame": 36,
+          "idle_source": 29
+        },
+        {
+          "car_x": 7,
+          "frame": 37,
+          "idle_source": 30
+        },
+        {
+          "car_x": 5,
+          "frame": 38,
+          "idle_source": 31
+        },
+        {
+          "car_x": 3,
+          "frame": 39,
+          "idle_source": 0
+        }
+      ],
+      "name": "Window flyby",
+      "unique_frames": 36
+    },
+    {
+      "all_pixels_outside_layers_preserved": true,
+      "changed_pixels": [
+        0,
+        0,
+        0,
+        0,
+        67,
+        67,
+        67,
+        94,
+        94,
+        94,
+        94,
+        94,
+        97,
+        97,
+        97,
+        97,
+        97,
+        101,
+        101,
+        101,
+        101,
+        101,
+        101,
+        101,
+        97,
+        97,
+        97,
+        97,
+        97,
+        94,
+        94,
+        94,
+        94,
+        94,
+        67,
+        67,
+        0,
+        0,
+        0,
+        0
+      ],
+      "differences": [
+        "Decker closes their eye and yawns",
+        "The light behind Decker warms to amber and fades back"
+      ],
+      "duration_ms": 4000,
+      "first_and_last_match_idle": true,
+      "frames": 40,
+      "id": "idle-yawn",
+      "motion": [
+        {
+          "expression_stage": 0,
+          "frame": 0,
+          "idle_source": 0
+        },
+        {
+          "expression_stage": 0,
+          "frame": 1,
+          "idle_source": 0
+        },
+        {
+          "expression_stage": 0,
+          "frame": 2,
+          "idle_source": 1
+        },
+        {
+          "expression_stage": 0,
+          "frame": 3,
+          "idle_source": 2
+        },
+        {
+          "expression_stage": 0,
+          "frame": 4,
+          "idle_source": 3
+        },
+        {
+          "expression_stage": 0,
+          "frame": 5,
+          "idle_source": 4
+        },
+        {
+          "expression_stage": 0,
+          "frame": 6,
+          "idle_source": 4
+        },
+        {
+          "expression_stage": 1,
+          "frame": 7,
+          "idle_source": 5
+        },
+        {
+          "expression_stage": 1,
+          "frame": 8,
+          "idle_source": 6
+        },
+        {
+          "expression_stage": 1,
+          "frame": 9,
+          "idle_source": 7
+        },
+        {
+          "expression_stage": 1,
+          "frame": 10,
+          "idle_source": 8
+        },
+        {
+          "expression_stage": 1,
+          "frame": 11,
+          "idle_source": 9
+        },
+        {
+          "expression_stage": 2,
+          "frame": 12,
+          "idle_source": 9
+        },
+        {
+          "expression_stage": 2,
+          "frame": 13,
+          "idle_source": 10
+        },
+        {
+          "expression_stage": 2,
+          "frame": 14,
+          "idle_source": 11
+        },
+        {
+          "expression_stage": 2,
+          "frame": 15,
+          "idle_source": 12
+        },
+        {
+          "expression_stage": 2,
+          "frame": 16,
+          "idle_source": 13
+        },
+        {
+          "expression_stage": 3,
+          "frame": 17,
+          "idle_source": 13
+        },
+        {
+          "expression_stage": 3,
+          "frame": 18,
+          "idle_source": 14
+        },
+        {
+          "expression_stage": 3,
+          "frame": 19,
+          "idle_source": 15
+        },
+        {
+          "expression_stage": 3,
+          "frame": 20,
+          "idle_source": 16
+        },
+        {
+          "expression_stage": 3,
+          "frame": 21,
+          "idle_source": 17
+        },
+        {
+          "expression_stage": 3,
+          "frame": 22,
+          "idle_source": 18
+        },
+        {
+          "expression_stage": 3,
+          "frame": 23,
+          "idle_source": 18
+        },
+        {
+          "expression_stage": 2,
+          "frame": 24,
+          "idle_source": 19
+        },
+        {
+          "expression_stage": 2,
+          "frame": 25,
+          "idle_source": 20
+        },
+        {
+          "expression_stage": 2,
+          "frame": 26,
+          "idle_source": 21
+        },
+        {
+          "expression_stage": 2,
+          "frame": 27,
+          "idle_source": 22
+        },
+        {
+          "expression_stage": 2,
+          "frame": 28,
+          "idle_source": 22
+        },
+        {
+          "expression_stage": 1,
+          "frame": 29,
+          "idle_source": 23
+        },
+        {
+          "expression_stage": 1,
+          "frame": 30,
+          "idle_source": 24
+        },
+        {
+          "expression_stage": 1,
+          "frame": 31,
+          "idle_source": 25
+        },
+        {
+          "expression_stage": 1,
+          "frame": 32,
+          "idle_source": 26
+        },
+        {
+          "expression_stage": 1,
+          "frame": 33,
+          "idle_source": 27
+        },
+        {
+          "expression_stage": 0,
+          "frame": 34,
+          "idle_source": 27
+        },
+        {
+          "expression_stage": 0,
+          "frame": 35,
+          "idle_source": 28
+        },
+        {
+          "expression_stage": 0,
+          "frame": 36,
+          "idle_source": 29
+        },
+        {
+          "expression_stage": 0,
+          "frame": 37,
+          "idle_source": 30
+        },
+        {
+          "expression_stage": 0,
+          "frame": 38,
+          "idle_source": 31
+        },
+        {
+          "expression_stage": 0,
+          "frame": 39,
+          "idle_source": 0
+        }
+      ],
+      "name": "Sleepy Decker",
+      "unique_frames": 36
+    },
+    {
+      "all_pixels_outside_layers_preserved": true,
+      "changed_pixels": [
+        0,
+        0,
+        0,
+        0,
+        77,
+        77,
+        77,
+        77,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        286,
+        77,
+        0,
+        0,
+        0,
+        0
+      ],
+      "differences": [
+        "An envelope notification arrives on the rear monitor",
+        "A mint message header and rows scroll on the main monitor"
+      ],
+      "duration_ms": 4000,
+      "first_and_last_match_idle": true,
+      "frames": 40,
+      "id": "idle-message",
+      "motion": [
+        {
+          "frame": 0,
+          "idle_source": 0
+        },
+        {
+          "frame": 1,
+          "idle_source": 0
+        },
+        {
+          "frame": 2,
+          "idle_source": 1
+        },
+        {
+          "frame": 3,
+          "idle_source": 2
+        },
+        {
+          "frame": 4,
+          "idle_source": 3
+        },
+        {
+          "frame": 5,
+          "idle_source": 4
+        },
+        {
+          "frame": 6,
+          "idle_source": 4
+        },
+        {
+          "frame": 7,
+          "idle_source": 5
+        },
+        {
+          "frame": 8,
+          "idle_source": 6
+        },
+        {
+          "frame": 9,
+          "idle_source": 7
+        },
+        {
+          "frame": 10,
+          "idle_source": 8
+        },
+        {
+          "frame": 11,
+          "idle_source": 9
+        },
+        {
+          "frame": 12,
+          "idle_source": 9
+        },
+        {
+          "frame": 13,
+          "idle_source": 10
+        },
+        {
+          "frame": 14,
+          "idle_source": 11
+        },
+        {
+          "frame": 15,
+          "idle_source": 12
+        },
+        {
+          "frame": 16,
+          "idle_source": 13
+        },
+        {
+          "frame": 17,
+          "idle_source": 13
+        },
+        {
+          "frame": 18,
+          "idle_source": 14
+        },
+        {
+          "frame": 19,
+          "idle_source": 15
+        },
+        {
+          "frame": 20,
+          "idle_source": 16
+        },
+        {
+          "frame": 21,
+          "idle_source": 17
+        },
+        {
+          "frame": 22,
+          "idle_source": 18
+        },
+        {
+          "frame": 23,
+          "idle_source": 18
+        },
+        {
+          "frame": 24,
+          "idle_source": 19
+        },
+        {
+          "frame": 25,
+          "idle_source": 20
+        },
+        {
+          "frame": 26,
+          "idle_source": 21
+        },
+        {
+          "frame": 27,
+          "idle_source": 22
+        },
+        {
+          "frame": 28,
+          "idle_source": 22
+        },
+        {
+          "frame": 29,
+          "idle_source": 23
+        },
+        {
+          "frame": 30,
+          "idle_source": 24
+        },
+        {
+          "frame": 31,
+          "idle_source": 25
+        },
+        {
+          "frame": 32,
+          "idle_source": 26
+        },
+        {
+          "frame": 33,
+          "idle_source": 27
+        },
+        {
+          "frame": 34,
+          "idle_source": 27
+        },
+        {
+          "frame": 35,
+          "idle_source": 28
+        },
+        {
+          "frame": 36,
+          "idle_source": 29
+        },
+        {
+          "frame": 37,
+          "idle_source": 30
+        },
+        {
+          "frame": 38,
+          "idle_source": 31
+        },
+        {
+          "frame": 39,
+          "idle_source": 0
+        }
+      ],
+      "name": "Incoming message",
+      "unique_frames": 35
+    },
+    {
+      "all_pixels_outside_layers_preserved": true,
+      "changed_pixels": [
+        0,
+        0,
+        0,
+        0,
+        71,
+        71,
+        71,
+        71,
+        71,
+        76,
+        76,
+        76,
+        81,
+        81,
+        81,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        84,
+        82,
+        77,
+        77,
+        72,
+        72,
+        67,
+        0,
+        0,
+        0,
+        0
+      ],
+      "differences": [
+        "A lit elevator descends through a distant tower",
+        "Three building floors briefly light up",
+        "The light behind Decker pulses through rainbow colors"
+      ],
+      "duration_ms": 4000,
+      "first_and_last_match_idle": true,
+      "frames": 40,
+      "id": "idle-city",
+      "motion": [
+        {
+          "frame": 0,
+          "idle_source": 0,
+          "rainbow_phase": 0.0
+        },
+        {
+          "frame": 1,
+          "idle_source": 0,
+          "rainbow_phase": 0.0
+        },
+        {
+          "frame": 2,
+          "idle_source": 1,
+          "rainbow_phase": 0.0
+        },
+        {
+          "frame": 3,
+          "idle_source": 2,
+          "rainbow_phase": 0.0
+        },
+        {
+          "frame": 4,
+          "idle_source": 3,
+          "rainbow_phase": 0.03030303120613098
+        },
+        {
+          "frame": 5,
+          "idle_source": 4,
+          "rainbow_phase": 0.06060606241226196
+        },
+        {
+          "frame": 6,
+          "idle_source": 4,
+          "rainbow_phase": 0.09090909361839294
+        },
+        {
+          "frame": 7,
+          "idle_source": 5,
+          "rainbow_phase": 0.12121212482452393
+        },
+        {
+          "frame": 8,
+          "idle_source": 6,
+          "rainbow_phase": 0.1515151560306549
+        },
+        {
+          "frame": 9,
+          "idle_source": 7,
+          "rainbow_phase": 0.1818181872367859
+        },
+        {
+          "frame": 10,
+          "idle_source": 8,
+          "rainbow_phase": 0.21212121844291687
+        },
+        {
+          "frame": 11,
+          "idle_source": 9,
+          "rainbow_phase": 0.24242424964904785
+        },
+        {
+          "frame": 12,
+          "idle_source": 9,
+          "rainbow_phase": 0.27272728085517883
+        },
+        {
+          "frame": 13,
+          "idle_source": 10,
+          "rainbow_phase": 0.3030303120613098
+        },
+        {
+          "frame": 14,
+          "idle_source": 11,
+          "rainbow_phase": 0.3333333432674408
+        },
+        {
+          "frame": 15,
+          "idle_source": 12,
+          "rainbow_phase": 0.3636363744735718
+        },
+        {
+          "frame": 16,
+          "idle_source": 13,
+          "rainbow_phase": 0.39393940567970276
+        },
+        {
+          "frame": 17,
+          "idle_source": 13,
+          "rainbow_phase": 0.42424243688583374
+        },
+        {
+          "frame": 18,
+          "idle_source": 14,
+          "rainbow_phase": 0.4545454680919647
+        },
+        {
+          "frame": 19,
+          "idle_source": 15,
+          "rainbow_phase": 0.4848484992980957
+        },
+        {
+          "frame": 20,
+          "idle_source": 16,
+          "rainbow_phase": 0.5151515007019043
+        },
+        {
+          "frame": 21,
+          "idle_source": 17,
+          "rainbow_phase": 0.5454545617103577
+        },
+        {
+          "frame": 22,
+          "idle_source": 18,
+          "rainbow_phase": 0.5757575631141663
+        },
+        {
+          "frame": 23,
+          "idle_source": 18,
+          "rainbow_phase": 0.6060606241226196
+        },
+        {
+          "frame": 24,
+          "idle_source": 19,
+          "rainbow_phase": 0.6363636255264282
+        },
+        {
+          "frame": 25,
+          "idle_source": 20,
+          "rainbow_phase": 0.6666666865348816
+        },
+        {
+          "frame": 26,
+          "idle_source": 21,
+          "rainbow_phase": 0.6969696879386902
+        },
+        {
+          "frame": 27,
+          "idle_source": 22,
+          "rainbow_phase": 0.7272727489471436
+        },
+        {
+          "frame": 28,
+          "idle_source": 22,
+          "rainbow_phase": 0.7575757503509521
+        },
+        {
+          "frame": 29,
+          "idle_source": 23,
+          "rainbow_phase": 0.7878788113594055
+        },
+        {
+          "frame": 30,
+          "idle_source": 24,
+          "rainbow_phase": 0.8181818127632141
+        },
+        {
+          "frame": 31,
+          "idle_source": 25,
+          "rainbow_phase": 0.8484848737716675
+        },
+        {
+          "frame": 32,
+          "idle_source": 26,
+          "rainbow_phase": 0.8787878751754761
+        },
+        {
+          "frame": 33,
+          "idle_source": 27,
+          "rainbow_phase": 0.9090909361839294
+        },
+        {
+          "frame": 34,
+          "idle_source": 27,
+          "rainbow_phase": 0.939393937587738
+        },
+        {
+          "frame": 35,
+          "idle_source": 28,
+          "rainbow_phase": 0.9696969985961914
+        },
+        {
+          "frame": 36,
+          "idle_source": 29,
+          "rainbow_phase": 1.0
+        },
+        {
+          "frame": 37,
+          "idle_source": 30,
+          "rainbow_phase": 1.0
+        },
+        {
+          "frame": 38,
+          "idle_source": 31,
+          "rainbow_phase": 1.0
+        },
+        {
+          "frame": 39,
+          "idle_source": 0,
+          "rainbow_phase": 1.0
+        }
+      ],
+      "name": "Night city",
+      "unique_frames": 37
+    }
+  ],
+  "expression_registration": [
+    0,
+    0
+  ],
+  "frame_ms": 100,
+  "frames": 40,
+  "review_only": true
+}

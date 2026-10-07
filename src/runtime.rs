@@ -4,6 +4,7 @@ use crate::{
     device::{self, Ack, Target},
     engine::{Engine, Outcome},
     event::{Event, Kind},
+    idle::IdleSchedule,
     ipc,
     storage::Catalog,
 };
@@ -29,12 +30,13 @@ fn named(state: &str, engine: &Engine, config: &Config, pack: &Pack) -> Option<A
         .and_then(|name| pack.resolve(name, engine.busy()))
 }
 
-#[derive(Clone, Copy, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum Role {
     WorkEntry,
     DelegationEntry,
     DelegationExit,
     Reaction,
+    IdleAlternate,
 }
 
 struct Playback {
@@ -45,7 +47,11 @@ struct Playback {
 impl Playback {
     fn on_event(&mut self, outcome: &Outcome, engine: &Engine, config: &Config, pack: &Pack)
         -> Option<(Option<Arc<Clip>>, bool)> {
-        let chosen = base(engine, config, pack);
+        let chosen = base(engine, config, pack).or_else(|| {
+            // Even a missing higher-priority asset must end an idle vignette.
+            if self.role == Some(Role::IdleAlternate) { named("idle", engine, config, pack) }
+            else { None }
+        });
         let chosen_name = chosen.as_ref().map(|clip| clip.name.clone());
         let higher_priority = engine.candidates().iter()
             .filter(|state| matches!(**state, "needs-input" | "compacting"))
@@ -77,6 +83,7 @@ impl Playback {
             Some(Role::DelegationEntry) => engine.delegating(),
             Some(Role::DelegationExit) => !engine.delegating() && engine.busy(),
             Some(Role::Reaction) => !engine.busy(),
+            Some(Role::IdleAlternate) => engine.candidates()[0] == "idle",
             None => false,
         };
         if let Some(clip) = reaction {
@@ -121,6 +128,9 @@ fn acknowledge_playback(target: &Target, ack: Ack, deadline: &mut Option<Instant
 }
 
 pub async fn run(config: Config, pack: Pack) -> Result<()> {
+    let mut idle_schedule = IdleSchedule::new(&config, &pack)?;
+    let normal_idle = named("idle", &Engine::default(), &config, &pack)
+        .map(|clip| clip.name.clone());
     let catalog = if config.device.transport == Transport::StoredGif {
         Some(Arc::new(Catalog::prepare(&config, &pack)?))
     } else {
@@ -128,7 +138,8 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
     };
     let status = Arc::new(Mutex::new(json!({
         "pack":pack.manifest.id, "observation":"events received since bridge start",
-        "device":{"dry_run":config.dry_run}, "prepared_bytes":pack.encoded_bytes
+        "device":{"dry_run":config.dry_run}, "prepared_bytes":pack.encoded_bytes,
+        "process_id":std::process::id()
     })));
     let mut engine = Engine::default();
     let initial = base(&engine, &config, &pack).or_else(|| {
@@ -157,13 +168,21 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
         status.clone(),
     ));
     let mut deadline: Option<Instant> = None;
+    let mut acknowledged_serial = None;
     eprintln!(
         "bridge listening on {}; dry_run={}",
         config.pipe, config.dry_run
     );
     loop {
+        let now = Instant::now();
+        let normal_idle_ready = engine.candidates()[0] == "idle" && playback.role.is_none()
+            && normal_idle.as_deref().is_some_and(|name| target.key() == Some(name))
+            && acknowledged_serial == Some(target.serial);
+        idle_schedule.update(normal_idle_ready, now);
         status.lock().unwrap()["state"] = serde_json::to_value(engine.snapshot())?;
         status.lock().unwrap()["desired_clip"] = json!(target.key());
+        let playing_alternate = if playback.role == Some(Role::IdleAlternate) { target.key() } else { None };
+        status.lock().unwrap()["idle_alternates"] = idle_schedule.status(now, playing_alternate);
         let timer = async {
             if let Some(deadline) = deadline {
                 tokio::time::sleep_until(deadline).await;
@@ -171,7 +190,15 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
                 std::future::pending::<()>().await;
             }
         };
+        let idle_timer = async {
+            if let Some(deadline) = idle_schedule.deadline() {
+                tokio::time::sleep_until(deadline).await;
+            } else {
+                std::future::pending::<()>().await;
+            }
+        };
         tokio::select! {
+            biased; // Observed activity wins over an idle deadline ready in the same iteration.
             Some(event) = events_rx.recv() => {
                 let outcome = engine.apply(&event);
                 if matches!(event.kind, Kind::AgentStart | Kind::AgentStop) {
@@ -189,6 +216,7 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
                 }
             }
             Some(ack) = ack_rx.recv() => {
+                if ack.serial == target.serial { acknowledged_serial = Some(ack.serial); }
                 acknowledge_playback(&target, ack, &mut deadline);
             }
             _ = timer => {
@@ -196,6 +224,15 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
                 let next = playback.after_clip(&engine, &config, &pack, target.clip.as_ref());
                 target = Target {serial:target.serial+1,clip:next,single_play:false,created:Instant::now()};
                 target_tx.send_replace(target.clone());
+            }
+            _ = idle_timer => {
+                if normal_idle_ready && let Some(clip) = idle_schedule.take_due(Instant::now()) {
+                    eprintln!("idle alternate: {}", clip.name);
+                    playback.role = Some(Role::IdleAlternate);
+                    target = Target { serial:target.serial+1,clip:Some(clip),single_play:true,created:Instant::now() };
+                    deadline = None;
+                    target_tx.send_replace(target.clone());
+                }
             }
             result = &mut server => { result??; break; }
             result = &mut writer => { result??; break; }
@@ -283,6 +320,120 @@ mod tests {
         assert_eq!(signal(&mut playback, &mut engine, pack, Kind::Prompt, None), Some(("working-enter".into(), true)));
         assert_eq!(playback.after_clip(&engine, &Config::default(), pack, None).unwrap().name, "working");
         (playback, engine)
+    }
+
+    #[test]
+    fn idle_alternates_survive_idle_events_return_to_idle_and_yield_to_activity() {
+        let pack = delegation_pack(true);
+        for (kind, expected) in [(Kind::Prompt, "working-enter"), (Kind::Approval, "needs-input"),
+            (Kind::CompactStart, "compacting"), (Kind::AgentStart, "delegating-start")] {
+            let mut engine = Engine::default();
+            let mut playback = Playback { selected_base: Some("idle".into()), role: Some(Role::IdleAlternate) };
+            assert!(signal(&mut playback, &mut engine, &pack, Kind::SessionStart, None).is_none());
+            assert_eq!(playback.role, Some(Role::IdleAlternate));
+            assert_eq!(signal(&mut playback, &mut engine, &pack, kind, (kind == Kind::AgentStart).then_some("child"))
+                .unwrap().0, expected);
+            assert!(playback.role != Some(Role::IdleAlternate));
+        }
+        let mut playback = Playback { selected_base: Some("idle".into()), role: Some(Role::IdleAlternate) };
+        assert_eq!(playback.after_clip(&Engine::default(), &Config::default(), &pack, None).unwrap().name, "idle");
+        assert!(playback.role.is_none());
+    }
+
+    #[test]
+    fn missing_priority_assets_still_cancel_an_idle_alternate() {
+        let mut pack = delegation_pack(false);
+        pack.clips.remove("compacting");
+        let mut engine = Engine::default();
+        let mut playback = Playback { selected_base: Some("idle".into()), role: Some(Role::IdleAlternate) };
+        assert_eq!(signal(&mut playback, &mut engine, &pack, Kind::CompactStart, None), Some(("idle".into(), false)));
+        assert_eq!(engine.candidates()[0], "compacting");
+        assert!(playback.role.is_none());
+    }
+
+    #[tokio::test]
+    async fn deduplicated_idle_target_is_acknowledged_without_replaying_it() {
+        let pack = delegation_pack(false);
+        let first = Target { serial: 1, clip: Some(pack.clips["idle"].clone()), single_play: false, created: Instant::now() };
+        let (sender, receiver) = watch::channel(first.clone());
+        let (ack_sender, mut acks) = mpsc::channel(4);
+        let status = Arc::new(Mutex::new(json!({})));
+        let config = crate::config::DeviceConfig { transport: Transport::Frames, ..Default::default() };
+        let writer = tokio::spawn(device::writer(config, true, None, receiver, ack_sender, status));
+        assert_eq!(timeout(Duration::from_secs(1), acks.recv()).await.unwrap().unwrap().serial, 1);
+        sender.send_replace(Target { serial: 2, clip: Some(pack.clips["delegating"].clone()), single_play: true, created: Instant::now() });
+        sender.send_replace(Target { serial: 3, ..first });
+        assert_eq!(timeout(Duration::from_secs(1), acks.recv()).await.unwrap().unwrap().serial, 3);
+        writer.abort();
+    }
+
+    #[cfg(windows)]
+    #[tokio::test]
+    async fn live_controller_cycles_alternates_preempts_and_resets_after_compaction() {
+        async fn wait_for(pipe: &str, predicate: impl Fn(&serde_json::Value) -> bool) -> serde_json::Value {
+            let end = Instant::now() + Duration::from_secs(3);
+            loop {
+                let last = match ipc::send(pipe, ipc::Request::Status, 100).await {
+                    Ok(Some(state)) if predicate(&state) => return state,
+                    Ok(state) => format!("{state:?}"),
+                    Err(error) => format!("{error:#}"),
+                };
+                assert!(Instant::now() < end, "controller status wait expired: {last}");
+                sleep(Duration::from_millis(10)).await;
+            }
+        }
+        async fn emit(pipe: &str, kind: Kind, session: &str) {
+            ipc::send(pipe, ipc::Request::Event(Event {
+                kind, session_id: session.into(), turn_id: Some("turn".into()), agent_id: None,
+                tool_name: None, tool_use_id: None, observed_at_ms: 1,
+            }), 1000).await.unwrap();
+        }
+        let mut pack = delegation_pack(true);
+        for name in ["idle-one", "idle-two"] {
+            pack.clips.insert(name.into(), Arc::new(Clip {
+                name: name.into(), frames: vec!["frame-a".into(), "frame-b".into()], frame_ms: 200,
+                looping: true, entry: None, exit: None, variants: Default::default(),
+            }));
+        }
+        let config = Config {
+            dry_run: true,
+            device: crate::config::DeviceConfig { transport: Transport::Frames, ..Default::default() },
+            pipe: format!(r"\\.\pipe\pixoo-idle-test-{}-{}", std::process::id(), fastrand::u64(..)),
+            idle_alternates: crate::config::IdleAlternatesConfig {
+                animations: vec!["idle-one".into(), "idle-two".into()],
+                min_interval_ms: 250,
+                max_interval_ms: 250,
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+        let pipe = config.pipe.clone();
+        let bridge = tokio::spawn(run(config, pack));
+        let first = wait_for(&pipe, |s| s["idle_alternates"]["playing"].is_string()).await;
+        assert_eq!(first["state"]["logical_state"], "idle");
+        wait_for(&pipe, |s| s["device"]["last_clip"] == "idle" && s["idle_alternates"]["next_in_ms"].is_number()).await;
+        let second = wait_for(&pipe, |s| s["idle_alternates"]["playing"].is_string()).await;
+        assert_ne!(first["idle_alternates"]["playing"], second["idle_alternates"]["playing"]);
+        emit(&pipe, Kind::Prompt, "work").await;
+        wait_for(&pipe, |s| s["device"]["last_clip"] == "working").await;
+        sleep(Duration::from_millis(400)).await;
+        let working = wait_for(&pipe, |s| s["state"]["logical_state"] == "working").await;
+        assert!(working["idle_alternates"]["playing"].is_null());
+        assert!(working["idle_alternates"]["next_in_ms"].is_null());
+        emit(&pipe, Kind::Complete, "work").await;
+        let reaction = wait_for(&pipe, |s| s["device"]["last_clip"] == "finished").await;
+        assert!(reaction["idle_alternates"]["next_in_ms"].is_null());
+        wait_for(&pipe, |s| s["device"]["last_clip"] == "idle" && s["idle_alternates"]["next_in_ms"].is_number()).await;
+        emit(&pipe, Kind::CompactStart, "manual").await;
+        wait_for(&pipe, |s| s["device"]["last_clip"] == "compacting").await;
+        sleep(Duration::from_millis(400)).await;
+        let compacting = wait_for(&pipe, |s| s["state"]["logical_state"] == "compacting").await;
+        assert_eq!(compacting["state"]["working"], 0);
+        assert!(compacting["idle_alternates"]["next_in_ms"].is_null());
+        emit(&pipe, Kind::CompactEnd, "manual").await;
+        let idle = wait_for(&pipe, |s| s["device"]["last_clip"] == "idle" && s["idle_alternates"]["next_in_ms"].is_number()).await;
+        assert!(idle["idle_alternates"]["next_in_ms"].as_u64().unwrap() > 100);
+        bridge.abort();
     }
 
     #[test]

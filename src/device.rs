@@ -132,6 +132,15 @@ pub async fn writer(
             continue;
         };
         if !target.single_play && last_key.as_deref() == Some(&clip.name) {
+            // A cancelled one-shot can return to a loop that never stopped.
+            // Confirm the new target serial without replaying that same loop;
+            // the idle scheduler waits for this acknowledgement before arming.
+            if clip.looping || clip.frames.len() == 1 {
+                let _ = ack.send(Ack {
+                    serial: target.serial,
+                    playback_ends_at: Instant::now() + Duration::from_millis(clip.duration_ms()),
+                }).await;
+            }
             if rx.changed().await.is_err() {
                 return Ok(());
             }

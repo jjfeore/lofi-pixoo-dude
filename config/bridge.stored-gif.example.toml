@@ -1,6 +1,6 @@
 # Stored GIFs are also the default in bridge.example.toml and when transport is omitted.
 version = 1
-pack = "../pets/decker/revisions/delegation-v3/review"
+pack = "../pets/decker/revisions/idle-alternates-v2/combined"
 pipe = '\\.\pipe\pixoo-pet'
 dry_run = false
 notification_forward = []
@@ -26,3 +26,9 @@ settle_ms = 500
 
 [animations]
 # Empty strings disable a state; names otherwise default to the logical state.
+
+[idle_alternates]
+animations = ["idle-flyby", "idle-yawn", "idle-message", "idle-city"]
+min_interval_ms = 45000
+max_interval_ms = 60000
+avoid_immediate_repeat = true
