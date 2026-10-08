@@ -139,7 +139,8 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
     let status = Arc::new(Mutex::new(json!({
         "pack":pack.manifest.id, "observation":"events received since bridge start",
         "device":{"dry_run":config.dry_run}, "prepared_bytes":pack.encoded_bytes,
-        "process_id":std::process::id()
+        "process_id":std::process::id(),
+        "completion":{"received":0,"applied":0,"last_applied":null}
     })));
     let mut engine = Engine::default();
     let initial = base(&engine, &config, &pack).or_else(|| {
@@ -169,6 +170,8 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
     ));
     let mut deadline: Option<Instant> = None;
     let mut acknowledged_serial = None;
+    let mut completions_received = 0_u64;
+    let mut completions_applied = 0_u64;
     eprintln!(
         "bridge listening on {}; dry_run={}",
         config.pipe, config.dry_run
@@ -201,6 +204,18 @@ pub async fn run(config: Config, pack: Pack) -> Result<()> {
             biased; // Observed activity wins over an idle deadline ready in the same iteration.
             Some(event) = events_rx.recv() => {
                 let outcome = engine.apply(&event);
+                if event.kind == Kind::Complete {
+                    completions_received += 1;
+                    completions_applied += u64::from(outcome.terminal_applied);
+                    status.lock().unwrap()["completion"] = json!({
+                        "received":completions_received,"applied":completions_applied,
+                        "last_applied":outcome.terminal_applied,
+                        "last_had_turn_id":event.turn_id.is_some(),
+                    });
+                    eprintln!("completion event: applied={}; working={}; observed_children={}",
+                        outcome.terminal_applied, engine.snapshot().working,
+                        engine.snapshot().observed_children);
+                }
                 if matches!(event.kind, Kind::AgentStart | Kind::AgentStop) {
                     eprintln!(
                         "delegation event: {:?}; observed_children={}",
@@ -320,6 +335,28 @@ mod tests {
         assert_eq!(signal(&mut playback, &mut engine, pack, Kind::Prompt, None), Some(("working-enter".into(), true)));
         assert_eq!(playback.after_clip(&engine, &Config::default(), pack, None).unwrap().name, "working");
         (playback, engine)
+    }
+
+    #[test]
+    fn parent_completion_after_child_stop_plays_finished_then_returns_to_idle() {
+        let pack = delegation_pack(true);
+        let (mut playback, mut engine) = working_playback(&pack);
+        assert_eq!(signal(&mut playback, &mut engine, &pack, Kind::AgentStart, Some("helper")),
+            Some(("delegating-start".into(), true)));
+        assert_eq!(playback.after_clip(&engine, &Config::default(), &pack, None).unwrap().name,
+            "delegating");
+        assert_eq!(signal(&mut playback, &mut engine, &pack, Kind::AgentStop, Some("helper")),
+            Some(("delegating-finished".into(), true)));
+        assert!(engine.busy());
+        assert!(!engine.delegating());
+        assert_eq!(playback.after_clip(&engine, &Config::default(), &pack, None).unwrap().name,
+            "working");
+        assert_eq!(signal(&mut playback, &mut engine, &pack, Kind::Complete, None),
+            Some(("finished".into(), true)));
+        assert!(!engine.busy());
+        assert_eq!(playback.after_clip(&engine, &Config::default(), &pack, None).unwrap().name,
+            "idle");
+        assert!(signal(&mut playback, &mut engine, &pack, Kind::Complete, None).is_none());
     }
 
     #[test]

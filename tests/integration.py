@@ -149,6 +149,43 @@ class Fixture:
         return self.wait(lambda s: s.get("device", {}).get("last_clip") == name)
 
 
+@unittest.skipUnless(os.name == "nt", "Windows completion adapter")
+class CompletionNotifications(unittest.TestCase):
+    def test_delivery_failure_is_observable_and_preserves_the_existing_notifier(self):
+        root = Path(__file__).resolve().parents[1] / "local" / "test-tmp" / f"notify-{uuid.uuid4()}"
+        root.mkdir(parents=True)
+        try:
+            helper = root / "notifier.py"
+            helper.write_text("import pathlib,sys; pathlib.Path(sys.argv[1]).write_text(sys.argv[2],encoding='utf-8')")
+            payload = json.dumps({"type": "agent-turn-complete", "thread-id": "test-session",
+                                  "turn-id": "test-turn", "last-assistant-message": "private-test-message"})
+            for strict in (False, True):
+                output = root / f"forwarded-{strict}.json"
+                config = root / "bridge.toml"
+                forward = json.dumps([sys.executable, str(helper), str(output)])
+                pipe = rf"\\.\pipe\absent-notify-{uuid.uuid4()}"
+                config.write_text(f"version = 1\npack = 'unused'\npipe = '{pipe}'\n"
+                                  f"notification_forward = {forward}\n", encoding="utf-8")
+                args = ("--strict",) if strict else ()
+                result = cli("notify", "-c", config, *args, payload, check=False)
+                self.assertEqual(result.returncode == 0, not strict, result.stderr)
+                self.assertTrue(result.stderr)
+                if not strict:
+                    self.assertIn("bridge completion delivery failed", result.stderr)
+                self.assertNotIn("private-test-message", result.stderr)
+                deadline = time.monotonic() + 3
+                while time.monotonic() < deadline:
+                    if output.exists() and output.read_text(encoding="utf-8") == payload:
+                        break
+                    time.sleep(.02)
+                self.assertEqual(output.read_text(encoding="utf-8"), payload)
+        finally:
+            # This fixture contains only these flat test files, never a checkout.
+            for path in root.iterdir():
+                path.unlink()
+            root.rmdir()
+
+
 @unittest.skipUnless(os.name == "nt", "Windows named-pipe integration")
 class Integration(unittest.TestCase):
     def setUp(self):

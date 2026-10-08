@@ -1,10 +1,13 @@
-use crate::event::Event;
+use crate::event::{Event, Kind};
 #[cfg(not(windows))]
 use anyhow::bail;
 use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use std::sync::{Arc, Mutex};
+use std::{
+    future::Future,
+    sync::{Arc, Mutex},
+};
 use tokio::{
     io::{AsyncBufReadExt, AsyncReadExt, AsyncWriteExt, BufReader},
     sync::{Semaphore, mpsc},
@@ -23,6 +26,59 @@ const MAX_MESSAGE: u64 = 16 * 1024;
 pub enum Request {
     Event(Event),
     Status,
+}
+
+fn retryable(error: &anyhow::Error) -> bool {
+    error
+        .downcast_ref::<tokio::time::error::Elapsed>()
+        .is_some()
+        || error
+            .downcast_ref::<std::io::Error>()
+            .is_some_and(|error| {
+                matches!(
+                    error.kind(),
+                    std::io::ErrorKind::NotFound
+                        | std::io::ErrorKind::TimedOut
+                        | std::io::ErrorKind::WouldBlock
+                        | std::io::ErrorKind::BrokenPipe
+                        | std::io::ErrorKind::ConnectionReset
+                )
+            })
+}
+
+async fn deliver_event<F, Fut>(kind: Kind, mut attempt: F) -> Result<()>
+where
+    F: FnMut(u64) -> Fut,
+    Fut: Future<Output = Result<()>>,
+{
+    // Completion has no later tool event to repair a lost observation. Allow
+    // scheduling jitter with a combined IPC budget of at most 490 ms.
+    // Other synchronous hooks retain their short existing IPC budget.
+    let (attempts, budget_ms) = if kind == Kind::Complete {
+        (3, 150)
+    } else {
+        (1, 50)
+    };
+    for index in 0..attempts {
+        match attempt(budget_ms).await {
+            Err(error) if index + 1 < attempts && retryable(&error) => {
+                tokio::time::sleep(Duration::from_millis(20)).await;
+            }
+            result => return result,
+        }
+    }
+    unreachable!()
+}
+
+pub async fn send_event(pipe: &str, event: &Event) -> Result<()> {
+    // Reuse the exact observation on retry. The engine's terminal fences make
+    // replay safe if delivery succeeded but its acknowledgement was delayed.
+    deliver_event(event.kind, |budget_ms| async move {
+        send(pipe, Request::Event(event.clone()), budget_ms)
+            .await
+            .map(|_| ())
+    })
+    .await
 }
 
 #[cfg(windows)]
@@ -122,4 +178,60 @@ pub async fn send(pipe: &str, request: Request, budget_ms: u64) -> Result<Option
 #[cfg(not(windows))]
 pub async fn send(_: &str, _: Request, _: u64) -> Result<Option<Value>> {
     bail!("named-pipe forwarding requires Windows")
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::io::{Error, ErrorKind};
+
+    #[tokio::test]
+    async fn completion_retries_a_transient_failure_and_stops_on_success() {
+        let mut budgets = Vec::new();
+        deliver_event(Kind::Complete, |budget| {
+            budgets.push(budget);
+            std::future::ready(if budgets.len() == 1 {
+                Err(Error::from(ErrorKind::TimedOut).into())
+            } else { Ok(()) })
+        }).await.unwrap();
+        assert_eq!(budgets, [150, 150]);
+    }
+
+    #[tokio::test]
+    async fn completion_retries_contextual_tokio_deadline_errors() {
+        let elapsed = timeout(Duration::ZERO, std::future::pending::<()>()).await.unwrap_err();
+        let mut failure = Some(anyhow::Error::new(elapsed).context("IPC deadline exceeded"));
+        let mut attempts = 0;
+        deliver_event(Kind::Complete, |_| {
+            attempts += 1;
+            std::future::ready(failure.take().map_or(Ok(()), Err))
+        }).await.unwrap();
+        assert_eq!(attempts, 2);
+    }
+
+    #[tokio::test]
+    async fn completion_retries_are_bounded_and_preserve_the_error() {
+        let mut attempts = 0;
+        let error = deliver_event(Kind::Complete, |_| {
+            attempts += 1;
+            std::future::ready(Err(Error::from(ErrorKind::BrokenPipe).into()))
+        }).await.unwrap_err();
+        assert_eq!(attempts, 3);
+        assert_eq!(error.downcast_ref::<Error>().unwrap().kind(), ErrorKind::BrokenPipe);
+    }
+
+    #[tokio::test]
+    async fn permission_failures_and_synchronous_hooks_do_not_retry() {
+        for (kind, failure, budget) in [(Kind::Complete, ErrorKind::PermissionDenied, 150),
+            (Kind::Prompt, ErrorKind::TimedOut, 50)] {
+            let mut attempts = 0;
+            let error = deliver_event(kind, |actual_budget| {
+                attempts += 1;
+                assert_eq!(actual_budget, budget);
+                std::future::ready(Err(Error::from(failure).into()))
+            }).await.unwrap_err();
+            assert_eq!(attempts, 1);
+            assert_eq!(error.downcast_ref::<Error>().unwrap().kind(), failure);
+        }
+    }
 }

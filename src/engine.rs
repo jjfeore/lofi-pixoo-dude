@@ -27,6 +27,7 @@ pub struct Outcome {
     pub entered_delegation: bool,
     pub finished_delegation: bool,
     pub reaction: Option<&'static str>,
+    pub terminal_applied: bool,
 }
 
 #[derive(Serialize)]
@@ -106,6 +107,7 @@ impl Engine {
         }
         let matches = session.turn.as_deref().is_none_or(|id| id == turn);
         let mut reaction = None;
+        let mut terminal_applied = false;
         match event.kind {
             Kind::Prompt => {
                 if session.turn.as_deref() != Some(turn) || !session.running {
@@ -162,6 +164,7 @@ impl Engine {
                     session.terminals.pop_front();
                 }
                 if matches {
+                    terminal_applied = true;
                     session.turn = Some(turn.into());
                     session.running = false;
                     session.approvals.clear();
@@ -185,6 +188,7 @@ impl Engine {
             entered_delegation: !was_delegating && self.delegating(),
             finished_delegation: event.kind == Kind::AgentStop && was_delegating && !self.delegating(),
             reaction,
+            terminal_applied,
         }
     }
 }
@@ -250,6 +254,21 @@ mod tests {
         engine.apply(&event(Kind::CompactStart, "a", "work", 4));
         engine.apply(&event(Kind::CompactEnd, "a", "work", 5));
         assert_eq!(engine.candidates(), ["working"]);
+    }
+    #[test]
+    fn completion_disposition_distinguishes_applied_stale_and_duplicate_events() {
+        let mut engine = Engine::default();
+        engine.apply(&event(Kind::Prompt, "a", "current", 10));
+        assert!(!engine.apply(&event(Kind::Complete, "a", "old", 20)).terminal_applied);
+        assert!(engine.busy());
+        assert!(engine.apply(&event(Kind::Complete, "a", "current", 30)).terminal_applied);
+        assert!(!engine.busy());
+        let duplicate = engine.apply(&event(Kind::Complete, "a", "current", 30));
+        assert!(!duplicate.terminal_applied);
+        assert!(duplicate.reaction.is_none());
+        engine.apply(&event(Kind::Prompt, "a", "next", 40));
+        assert!(!engine.apply(&event(Kind::Complete, "a", "current", 30)).terminal_applied);
+        assert!(engine.busy());
     }
     #[test]
     fn child_stop_does_not_end_parent() {

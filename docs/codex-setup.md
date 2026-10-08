@@ -47,6 +47,10 @@ notify = ['C:\pixoo\pixoo-pet.exe', 'notify', '--config', 'C:\pixoo\local\bridge
 
 Codex appends the original notification JSON as one argument; the adapter forwards that argument to the previous notifier and sends only normalized lifecycle metadata to the bridge. Never put the Pixoo adapter itself into `notification_forward`, which would recurse. Completion uses the [official notifier](https://learn.chatgpt.com/docs/config-file/config-advanced#notifications); Stop handlers can request continuation and are not treated as final completion.
 
+The adapter sends to the bridge before launching the preserved notifier. Completion delivery retries transient pipe failures at most three times, with a 150 ms budget per attempt and 20 ms between attempts. Permission failures are not retried. Normal `notify` calls still return harmless success on a delivery failure, but report it on stderr; add `--strict` when diagnosing delivery to get a failing exit code. Notification contents are never included in these diagnostics.
+
+Bridge status includes `completion.received`, `completion.applied`, and `completion.last_applied`. These count notifications received since bridge startup and those matching the session's current turn. A duplicate or stale notification can be received without being applied. If work stays visible after Codex finishes, a missing receipt points to the notifier/pipe path; a receipt with `last_applied = false` points to duplicate or mismatched turn metadata. An applied completion may leave Decker working when another observed chat is active. The bridge log records the completion disposition and aggregate work/child counts without conversation content or identifiers.
+
 ## Hook scope and cost
 
 SessionStart, SessionEnd, UserPromptSubmit and Interrupt always provide core bookkeeping. PreCompact/PostCompact and SubagentStart/SubagentStop are generated only when their mapped clips exist. Needs-input artwork adds PermissionRequest and narrowly matched PostToolUse resumption handlers. Generate setup again after adding/removing these optional clips.

@@ -62,6 +62,9 @@ enum Command {
     Notify {
         #[arg(short, long)]
         config: PathBuf,
+        /// Report malformed notifications or failed bridge delivery as an error.
+        #[arg(long)]
+        strict: bool,
         notification: String,
     },
     /// Query the running bridge.
@@ -208,7 +211,7 @@ async fn execute(cli: Cli) -> Result<()> {
                     }
                 };
                 if let Some(event) = Event::normalize(&serde_json::from_str(&input)?)? {
-                    ipc::send(&pipe, ipc::Request::Event(event), 50).await?;
+                    ipc::send_event(&pipe, &event).await?;
                 }
                 Ok::<(), anyhow::Error>(())
             }
@@ -221,9 +224,19 @@ async fn execute(cli: Cli) -> Result<()> {
         }
         Command::Notify {
             config,
+            strict,
             notification,
         } => {
             let config = Config::load(&config)?;
+            // Prioritize the terminal observation, then launch the preserved
+            // notifier even if bridge delivery failed.
+            let delivery = async {
+                let value = serde_json::from_str(&notification)?;
+                if let Some(event) = Event::normalize(&value)? {
+                    ipc::send_event(&config.pipe, &event).await?;
+                }
+                Ok::<(), anyhow::Error>(())
+            }.await;
             let forwarding = config.notification_forward;
             if let Some(program) = forwarding.first() {
                 let mut command = std::process::Command::new(program);
@@ -242,11 +255,11 @@ async fn execute(cli: Cli) -> Result<()> {
                     eprintln!("existing completion notifier could not be launched");
                 }
             }
-            let value = serde_json::from_str(&notification);
-            if let Ok(value) = value
-                && let Ok(Some(event)) = Event::normalize(&value)
-            {
-                let _ = ipc::send(&config.pipe, ipc::Request::Event(event), 50).await;
+            if strict {
+                delivery?;
+            } else if let Err(error) = delivery {
+                // Error context contains no notification or conversation text.
+                eprintln!("bridge completion delivery failed: {error:#}");
             }
         }
         Command::Status { pipe } => {
