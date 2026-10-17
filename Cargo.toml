@@ -12,7 +12,7 @@ clap = { version = "4", default-features = false, features = ["std", "derive", "
 fastrand = "2"
 gif = "0.14"
 image = { version = "0.25", default-features = false, features = ["png", "gif", "jpeg", "webp"] }
-reqwest = { version = "0.13", default-features = false, features = ["json"] }
+reqwest = { version = "0.13", default-features = false, features = ["json", "native-tls"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tokio = { version = "1", features = ["rt", "net", "io-util", "time", "sync", "macros", "signal"] }
@@ -20,7 +20,7 @@ toml = "0.9"
 toml_edit = "0.25"
 
 [target.'cfg(windows)'.dependencies]
-windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Security", "Win32_Security_Authorization", "Win32_System_Threading"] }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Security", "Win32_Security_Authorization", "Win32_System_Threading", "Win32_NetworkManagement_IpHelper"] }
 
 [dev-dependencies]
 tempfile = "3"

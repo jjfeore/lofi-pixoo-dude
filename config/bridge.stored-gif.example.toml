@@ -24,6 +24,12 @@ bind = "0.0.0.0:8787"
 download_timeout_ms = 15000
 settle_ms = 500
 
+# Optional automatic IP recovery; find your actual identity with pixoo-pet discover.
+# [device.discovery]
+# enabled = true
+# device_id = 300000000
+# mac_address = "78:42:1c:00:00:00"
+
 [animations]
 # Empty strings disable a state; names otherwise default to the logical state.
 

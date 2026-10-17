@@ -1,9 +1,11 @@
 mod assets;
 mod config;
 mod device;
+mod discovery;
 mod engine;
 mod event;
 mod ipc;
+mod lan;
 mod idle;
 mod runtime;
 mod setup;
@@ -31,6 +33,8 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
+    /// List Pixoo identities and addresses from Divoom's same-LAN discovery service; changes nothing.
+    Discover,
     /// Run the persistent bridge; Ctrl+C stops it.
     Run {
         #[arg(short, long)]
@@ -179,6 +183,10 @@ async fn main() {
 
 async fn execute(cli: Cli) -> Result<()> {
     match cli.command {
+        Command::Discover => {
+            let devices = discovery::Recovery::new()?.list().await?;
+            println!("{}", serde_json::to_string_pretty(&devices)?);
+        }
         Command::Run { config, dry_run } => {
             let mut config = Config::load(&config)?;
             config.dry_run |= dry_run;

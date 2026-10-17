@@ -85,6 +85,9 @@ pub struct DeviceConfig {
     pub playback_start_delay_ms: u64,
     pub timeout_ms: u64,
     pub max_frames: usize,
+    pub discovery: DiscoveryConfig,
+    #[serde(skip)]
+    pub config_path: Option<PathBuf>,
 }
 
 impl Default for DeviceConfig {
@@ -100,7 +103,41 @@ impl Default for DeviceConfig {
             playback_start_delay_ms: 0,
             timeout_ms: 3000,
             max_frames: 40,
+            discovery: DiscoveryConfig::default(),
+            config_path: None,
         }
+    }
+}
+
+#[derive(Clone, Default, Debug, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(default, deny_unknown_fields)]
+pub struct DiscoveryConfig {
+    pub enabled: bool,
+    pub device_id: Option<u64>,
+    pub mac_address: Option<String>,
+}
+
+impl DiscoveryConfig {
+    pub fn validate(&self) -> Result<()> {
+        ensure!(self.device_id != Some(0), "discovery.device_id must be positive");
+        if let Some(mac) = &self.mac_address {
+            ensure!(Self::normalize_mac(mac).is_some(), "invalid discovery.mac_address");
+        }
+        ensure!(!self.enabled || self.device_id.is_some() || self.mac_address.is_some(),
+            "enabled discovery requires device_id or mac_address to identify the same Pixoo");
+        Ok(())
+    }
+
+    pub fn normalize_mac(mac: &str) -> Option<String> {
+        if !mac.bytes().all(|c| c.is_ascii_hexdigit() || matches!(c, b':' | b'-')) { return None; }
+        let compact: String = mac.chars().filter(|c| !matches!(c, ':' | '-')).collect();
+        (compact.len() == 12).then(|| compact.to_ascii_lowercase())
+    }
+
+    pub fn identity(&self) -> Option<String> {
+        if !self.enabled { return None; }
+        Some(format!("{}:{}", self.device_id.map(|id| id.to_string()).unwrap_or_default(),
+            self.mac_address.as_deref().and_then(Self::normalize_mac).unwrap_or_default()))
     }
 }
 
@@ -201,6 +238,8 @@ impl Config {
             config.pack = path.parent().unwrap_or(Path::new(".")).join(&config.pack);
         }
         config.device.storage.validate()?;
+        config.device.discovery.validate()?;
+        config.device.config_path = Some(fs::canonicalize(path).context("resolve bridge config path")?);
         config.idle_alternates.validate()?;
         if config.device.storage.cache_dir.is_relative() {
             config.device.storage.cache_dir = path.parent().unwrap_or(Path::new("."))

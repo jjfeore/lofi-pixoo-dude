@@ -1,4 +1,4 @@
-use crate::{assets::Clip, config::{DeviceConfig, Transport}, storage::{self, Catalog}};
+use crate::{assets::Clip, config::{DeviceConfig, Transport}, discovery::{self, Recovery}, storage::{self, Catalog}};
 use anyhow::{Context, Result, ensure};
 use serde_json::{Value, json};
 use std::sync::Arc;
@@ -12,6 +12,13 @@ pub struct Device {
     config: DeviceConfig,
     url: String,
 }
+
+#[derive(Debug)]
+pub struct InvalidResponse;
+impl std::fmt::Display for InvalidResponse {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { f.write_str("invalid Pixoo API response") }
+}
+impl std::error::Error for InvalidResponse {}
 
 impl Device {
     pub fn new(config: DeviceConfig) -> Result<Self> {
@@ -46,9 +53,10 @@ impl Device {
             bytes.extend_from_slice(&chunk);
         }
         let response: Value =
-            serde_json::from_slice(&bytes).context("invalid Pixoo JSON response")?;
+            serde_json::from_slice(&bytes).context(InvalidResponse)?;
+        let error_code = response.get("error_code").and_then(Value::as_i64).context(InvalidResponse)?;
         ensure!(
-            response.get("error_code").and_then(Value::as_i64) == Some(0),
+            error_code == 0,
             "Pixoo rejected command (error_code={})",
             response.get("error_code").unwrap_or(&Value::Null)
         );
@@ -86,8 +94,49 @@ pub struct Ack {
     pub playback_ends_at: Instant,
 }
 
+async fn changed_or_disconnected(rx: &mut watch::Receiver<Target>, device: Option<&Device>, monitor: bool,
+    interval: Duration) -> Result<bool> {
+    loop {
+        tokio::select! {
+            change = rx.changed() => return Ok(change.is_ok()),
+            _ = sleep(interval), if monitor && device.is_some() => {
+                device.unwrap().command(json!({"Command":"Channel/GetIndex"})).await?;
+            }
+        }
+    }
+}
+
+async fn preload(config: &mut DeviceConfig, catalog: &Catalog, device: &mut Option<Device>,
+    recovery: &mut Recovery, status: &Arc<std::sync::Mutex<Value>>) -> Result<()> {
+    let mut retry_ms = 500;
+    loop {
+        match storage::sync(config, catalog, false, Some(status)).await {
+            Ok(_) => return Ok(()),
+            Err(error) => {
+                status.lock().unwrap()["storage"] = json!({"phase":"failed", "error":format!("{error:#}")});
+                eprintln!("GIF preload failed: {error:#}; retrying with bounded backoff");
+                if discovery::connection_failure(&error) && recovery.recover(config, status).await {
+                    *device = Some(Device::new(config.clone())?);
+                    retry_ms = 500;
+                    continue;
+                }
+                sleep(Duration::from_millis(retry_ms)).await;
+                retry_ms = (retry_ms * 2).min(30_000);
+            }
+        }
+    }
+}
+
+async fn recover_connection(error: &anyhow::Error, config: &mut DeviceConfig, device: &mut Option<Device>,
+    catalog: Option<&Catalog>, recovery: &mut Recovery, status: &Arc<std::sync::Mutex<Value>>) -> Result<bool> {
+    if !discovery::connection_failure(error) || !recovery.recover(config, status).await { return Ok(false); }
+    *device = Some(Device::new(config.clone())?);
+    if let Some(catalog) = catalog { preload(config, catalog, device, recovery, status).await?; }
+    Ok(true)
+}
+
 pub async fn writer(
-    config: DeviceConfig,
+    mut config: DeviceConfig,
     dry_run: bool,
     catalog: Option<Arc<Catalog>>,
     mut rx: watch::Receiver<Target>,
@@ -95,7 +144,9 @@ pub async fn writer(
     status: Arc<std::sync::Mutex<Value>>,
 ) -> Result<()> {
     ensure!(config.transport != Transport::StoredGif || catalog.is_some(), "stored GIF catalog missing");
-    let device = if dry_run {
+    let mut recovery = Recovery::new()?;
+    status.lock().unwrap()["connection"] = json!({"address":config.address,"automatic_discovery":config.discovery.enabled});
+    let mut device = if dry_run {
         None
     } else {
         Some(Device::new(config.clone())?)
@@ -104,18 +155,7 @@ pub async fn writer(
         if dry_run {
             status.lock().unwrap()["storage"] = json!({"phase":"dry-run", "files":catalog.files.len()});
         } else {
-            let mut retry_ms = 500;
-            loop {
-                match storage::sync(&config, catalog, false, Some(&status)).await {
-                    Ok(_) => break,
-                    Err(error) => {
-                        status.lock().unwrap()["storage"] = json!({"phase":"failed", "error":format!("{error:#}")});
-                        eprintln!("GIF preload failed: {error:#}; retrying with bounded backoff");
-                        sleep(Duration::from_millis(retry_ms)).await;
-                        retry_ms = (retry_ms * 2).min(30_000);
-                    }
-                }
-            }
+            preload(&mut config, catalog, &mut device, &mut recovery, &status).await?;
         }
     }
     let mut brightness_set = false;
@@ -123,12 +163,25 @@ pub async fn writer(
     let mut last_switch = Instant::now() - Duration::from_millis(config.switch_interval_ms);
     let mut retry_ms = 500;
     let mut one_shot_end: Option<Instant> = None;
+    let mut wait_for_change = false;
     loop {
+        if wait_for_change {
+            match changed_or_disconnected(&mut rx, device.as_ref(), config.discovery.enabled, discovery::HEALTH_INTERVAL).await {
+                Ok(false) => return Ok(()),
+                Ok(true) => {},
+                Err(error) => {
+                    status.lock().unwrap()["device"] = json!({"dry_run":false,"healthy":false,"error":format!("{error:#}")});
+                    eprintln!("Pixoo health check failed: {error:#}");
+                    recover_connection(&error, &mut config, &mut device, catalog.as_deref(), &mut recovery, &status).await?;
+                    last_key = None;
+                    brightness_set = false;
+                }
+            }
+        }
+        wait_for_change = false;
         let target = rx.borrow_and_update().clone();
         let Some(clip) = &target.clip else {
-            if rx.changed().await.is_err() {
-                return Ok(());
-            }
+            wait_for_change = true;
             continue;
         };
         if !target.single_play && last_key.as_deref() == Some(&clip.name) {
@@ -141,9 +194,7 @@ pub async fn writer(
                     playback_ends_at: Instant::now() + Duration::from_millis(clip.duration_ms()),
                 }).await;
             }
-            if rx.changed().await.is_err() {
-                return Ok(());
-            }
+            wait_for_change = true;
             continue;
         }
         if target.single_play && target.created.elapsed() > Duration::from_secs(10) {
@@ -153,9 +204,7 @@ pub async fn writer(
                     playback_ends_at: Instant::now(),
                 })
                 .await;
-            if rx.changed().await.is_err() {
-                return Ok(());
-            }
+            wait_for_change = true;
             continue;
         }
         // A scheduled return after a one-shot must not be held behind ordinary
@@ -218,6 +267,7 @@ pub async fn writer(
         };
         match result {
             Ok(playback_started_at) => {
+                recovery.connected();
                 let upload_ms = last_switch.elapsed().as_millis();
                 last_key = Some(clip.name.clone());
                 last_switch = Instant::now();
@@ -231,6 +281,9 @@ pub async fn writer(
                 }
                 {
                     let mut state = status.lock().unwrap();
+                    state["connection"]["address"] = json!(config.address);
+                    state["connection"]["phase"] = json!("connected");
+                    if let Some(connection) = state["connection"].as_object_mut() { connection.remove("discovery_error"); }
                     state["device"] = json!({"dry_run":dry_run,"last_clip":clip.name,"healthy":true,
                         "transport":config.transport.name(), "selection_ms":upload_ms});
                     if catalog.is_some() {
@@ -254,8 +307,13 @@ pub async fn writer(
             }
             Err(error) => {
                 status.lock().unwrap()["device"] =
-                    json!({"dry_run":dry_run,"healthy":false,"error":error.to_string()});
-                eprintln!("device unavailable; retrying with bounded backoff");
+                    json!({"dry_run":dry_run,"healthy":false,"error":format!("{error:#}")});
+                eprintln!("device unavailable: {error:#}; retrying with bounded backoff");
+                if recover_connection(&error, &mut config, &mut device, catalog.as_deref(), &mut recovery, &status).await? {
+                    brightness_set = false;
+                    retry_ms = 500;
+                    continue;
+                }
                 tokio::select! {
                     _ = sleep(Duration::from_millis(retry_ms)) => {},
                     change = rx.changed() => { if change.is_err() { return Ok(()); } }
@@ -264,8 +322,36 @@ pub async fn writer(
                 continue;
             }
         }
-        if rx.changed().await.is_err() {
-            return Ok(());
-        }
+        wait_for_change = true;
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use tokio::{net::TcpListener, time::timeout};
+
+    #[tokio::test]
+    async fn unchanged_loop_detects_disconnect_without_an_event_or_display_write() {
+        let listener = TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let address = listener.local_addr().unwrap().to_string();
+        drop(listener);
+        let device = Device::new(DeviceConfig { address, timeout_ms: 100, ..Default::default() }).unwrap();
+        let (_sender, mut receiver) = watch::channel(Target { serial: 1, clip: None, single_play: false, created: Instant::now() });
+        let result = timeout(Duration::from_secs(2),
+            changed_or_disconnected(&mut receiver, Some(&device), true, Duration::from_millis(5))).await.unwrap();
+        assert!(discovery::connection_failure(&result.unwrap_err()));
+        assert_eq!(receiver.borrow().serial, 1);
+    }
+
+    #[tokio::test]
+    async fn disabled_monitor_waits_for_state_changes_and_closed_watch_exits() {
+        let (sender, mut receiver) = watch::channel(Target { serial: 1, clip: None, single_play: false, created: Instant::now() });
+        assert!(timeout(Duration::from_millis(20),
+            changed_or_disconnected(&mut receiver, None, false, Duration::from_millis(1))).await.is_err());
+        sender.send_replace(Target { serial: 2, clip: None, single_play: false, created: Instant::now() });
+        assert!(changed_or_disconnected(&mut receiver, None, false, Duration::from_millis(1)).await.unwrap());
+        drop(sender);
+        assert!(!changed_or_disconnected(&mut receiver, None, false, Duration::from_millis(1)).await.unwrap());
     }
 }

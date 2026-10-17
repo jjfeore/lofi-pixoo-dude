@@ -2,6 +2,27 @@
 
 See [the example](../config/bridge.example.toml). The bridge reads TOML once at startup; restart it after edits. Unknown fields and invalid bounds are rejected. An IP/hostname reservation on your router can keep `address` stable.
 
+## Automatic address recovery
+
+The live bridge can recover when DHCP gives the same Pixoo a new IP. Run `pixoo-pet.exe discover` to list device IDs, MAC addresses, hardware types and current addresses through [Divoom's same-LAN service](https://app.divoom-gz.com/Device/ReturnSameLANDevice). Then enable recovery with the identity of your own display:
+
+```toml
+[device.discovery]
+enabled = true
+device_id = 300000000 # replace with your display's DeviceId
+mac_address = '78:42:1c:00:00:00' # replace with its DeviceMac
+```
+
+Recovery is off by default. At least one identity field is required; cloud discovery matches every supplied identity field. After two connection failures the bridge requests discovery, accepts exactly one matching private IPv4 device with supported hardware, and checks its local API before switching. It preserves an explicitly configured HTTP port. Failed or ambiguous discovery leaves the existing address in place and uses the normal bounded retry loop. Discovery attempts are limited to one per 30 seconds. A read-only health check every 30 seconds also detects disconnection while a clip is looping, without replaying healthy clips.
+
+On recovery the running state engine stays active and the writer resumes the latest requested clip. The bridge atomically updates only `device.address` in the source TOML, preserving comments and unrelated settings. It refuses to overwrite intervening address/identity edits. If saving fails, playback can still reconnect in memory; `connection.config_saved` and `connection.save_error` report the limitation. Status also exposes `connection.address`, recovery phase and any discovery error. `probe` and `discover` are read-only commands; only the live bridge performs automatic address recovery.
+
+The cloud request requires Internet access and Divoom must list the device on the same public network. If the service fails, lists no match, or still reports the old IP, Windows falls back to local MAC discovery when `mac_address` is configured. It checks the IPv4 neighbor table, makes at most 254 TCP connection attempts on one connected private subnet segment (no more than 24 in flight, 500 ms each), then checks the neighbor table again. Only addresses whose MAC matches the saved display receive Pixoo API requests or the local token. Multiple reachable matches are rejected. The scan covers one `/24`, or the actual subnet when smaller; unusually large or ambiguous LANs may require manual configuration. `connection.source` distinguishes `divoom-service` and `local-mac` recovery.
+
+The service receives no local token, artwork, file paths or Codex content. Existing fixed-address configurations and dry runs do not make discovery requests. The device must reconnect to Wi-Fi before either discovery method can help. This feature does not discover hardware 96's different API or repair damaged GIF files.
+
+Stored-GIF receipts now record the pinned identity. After an IP change, receipts for that same identity and device folder are reused, avoiding a complete re-upload. An identity change or an unrecognized endpoint invalidates the receipts. Receipts still prove completed transfers rather than storage contents; use `sync-gifs --force` when the device's stored files need repair.
+
 | Field | Default / purpose |
 | --- | --- |
 | version | 1 |

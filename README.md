@@ -24,6 +24,8 @@ Copy the example config into a private local directory and set `device.address` 
 
 Keep the bridge running. Install the generated hooks and completion adapter following [Codex setup](docs/codex-setup.md). Existing hooks and any completion notifier must be preserved. Closing the bridge leaves the panel's current content in place; hook emitters remain harmless when the bridge is unavailable. The Divoom app can select another channel after shutdown.
 
+For recovery after an IP change, run `pixoo-pet.exe discover` and configure `[device.discovery]` with your Pixoo's device ID and/or MAC address. The live bridge can verify the same display at its new address, reconnect without restarting the state engine, and save the address for future launches. See [automatic address recovery](docs/configuration.md#automatic-address-recovery) for setup and service limitations.
+
 ## Install or update Codex integration
 
 [Stored GIF playback](docs/stored-gifs.md) is the default, including when `device.transport` is omitted. The standard example uses the complete alternate-idle pack with all delegation-v3 lifecycle clips and immediate filename selection. Set `device.transport = "frames"` explicitly to use the older per-switch RGB upload mode. The owner verified repeated idle/working recall with instant switches and no visible loading on this display; other devices still need a playback check.

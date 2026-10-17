@@ -165,6 +165,8 @@ struct Receipts {
     version: u32,
     endpoint: String,
     directory: String,
+    #[serde(default)]
+    device_identity: Option<String>,
     // Exact bytes, rather than a weak checksum, decide whether to upsert again.
     files: BTreeMap<String, String>,
 }
@@ -301,9 +303,16 @@ pub async fn sync(config: &DeviceConfig, catalog: &Catalog, force: bool, status:
             Err(error) => return Err(error.into()),
         }
     };
-    if receipts.version != 1 || receipts.endpoint != endpoint || receipts.directory != config.storage.directory {
-        receipts = Receipts { version: 1, endpoint, directory: config.storage.directory.clone(), files: BTreeMap::new() };
+    let identity = config.discovery.identity();
+    let original_metadata = (receipts.endpoint.clone(), receipts.device_identity.clone());
+    let same_device = identity.is_some() && receipts.device_identity == identity;
+    let identity_changed = receipts.device_identity.is_some() && identity.is_some() && receipts.device_identity != identity;
+    if receipts.version != 1 || identity_changed || (receipts.endpoint != endpoint && !same_device) || receipts.directory != config.storage.directory {
+        receipts = Receipts { version: 1, endpoint: endpoint.clone(), directory: config.storage.directory.clone(),
+            device_identity: identity.clone(), files: BTreeMap::new() };
     }
+    receipts.endpoint = endpoint;
+    receipts.device_identity = identity;
     if force && receipt_path.exists() {
         write_atomic(&receipt_path, &serde_json::to_vec(&receipts)?)?;
     }
@@ -315,6 +324,9 @@ pub async fn sync(config: &DeviceConfig, catalog: &Catalog, force: bool, status:
         } else { true }
     }).collect();
     if pending.is_empty() {
+        if original_metadata != (receipts.endpoint.clone(), receipts.device_identity.clone()) {
+            write_atomic(&receipt_path, &serde_json::to_vec(&receipts)?)?;
+        }
         if let Some(status) = status { status.lock().unwrap()["storage"] = json!({"phase":"ready", "summary":report}); }
         return Ok(report);
     }
@@ -675,6 +687,29 @@ mod tests {
                 .into_iter().map(|clip| (clip.name.clone(), clip)).collect(),
             encoded_bytes: 0,
         }
+    }
+
+    #[tokio::test]
+    async fn same_pinned_device_reuses_receipts_after_ip_change_but_new_identity_does_not() {
+        let root = tempfile::tempdir().unwrap();
+        let mock = MockDevice::start().await;
+        let mut config = mock.config(root.path());
+        config.device.discovery.enabled = true;
+        config.device.discovery.device_id = Some(42);
+        let catalog = Catalog::prepare(&config, &test_pack()).unwrap();
+        let first = sync(&config.device, &catalog, false, None).await.unwrap();
+        let original = config.device.address.clone();
+        config.device.address = "192.168.1.250".into();
+        let before = mock.calls.lock().unwrap().len();
+        let moved = sync(&config.device, &catalog, false, None).await.unwrap();
+        assert_eq!((moved.upserted, moved.unchanged), (0, first.upserted));
+        assert_eq!(mock.calls.lock().unwrap().len(), before);
+        let receipt: Receipts = serde_json::from_slice(&fs::read(root.path().join("device-transfers.json")).unwrap()).unwrap();
+        assert_eq!(receipt.endpoint, "http://192.168.1.250/post");
+        config.device.address = original;
+        config.device.discovery.device_id = Some(43);
+        let replaced = sync(&config.device, &catalog, false, None).await.unwrap();
+        assert_eq!(replaced.upserted, first.upserted);
     }
 
     #[tokio::test]
